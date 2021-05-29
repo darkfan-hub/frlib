@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ViewStyle.linear"
+    android:background="@color/color_white"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/iv_empty_icon"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="94dp"
+        android:scaleType="fitXY"
+        tools:src="@drawable/frlib_icon_net_error"/>
+
+    <TextView
+        android:id="@+id/tv_empty_text"
+        style="@style/Text"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/color_66"
+        android:textSize="17sp"
+        tools:text="@string/frlib_text_empty_text"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_empty_retry"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginTop="20dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:visibility="gone"
+        tools:text="@string/frlib_text_retry"/>
+</LinearLayout>

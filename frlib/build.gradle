@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply from: '../common_build.gradle'
+
+static String getCurrentTime() {
+    Date date = new Date()
+    return date.format("MMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
+}
+
+android {
+
+    defaultConfig {
+        versionCode 1
+        versionName '1.0.0'
+        applicationId 'com.android.frlib'
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+
+        multiDexEnabled true
+
+        manifestPlaceholders = [
+                app_name: "FrLib",
+        ]
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            //集成开发模式下排除debug文件夹中的所有Java文件
+            release {
+                java {
+                    exclude 'dev/**'
+                }
+                resources {
+                }
+            }
+
+            debug {
+                java {
+                    exclude 'dev/**'
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "APP_DEBUG", "false"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "boolean", "APP_DEBUG", "true"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def name = buildType.name
+            def time = getCurrentTime()
+            def fileName
+            fileName = "${applicationId}-" + "${name}-${time}-v" + "${versionName}" + ".apk"
+            outputFileName = fileName
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation project(':resources')
+
+    debugImplementation rootProject.ext.libs['dokitx']
+    releaseImplementation rootProject.ext.libs['dokitx-no-op']
+
+    implementation rootProject.ext.libs['arouter-api']
+    kapt rootProject.ext.libs['arouter-compiler']
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frlib_text_retry">立即重试</string>
+    <string name="frlib_text_empty_text">这里什么也没有~</string>
+    <string name="frlib_text_empty_error">哎呀，出错了~</string>
+    <string name="frlib_text_empty_net_error">哎呀，没有网络了~</string>
+    <string name="frlib_text_origin_image">查看原图</string>
+    <string name="frlib_text_header_update">上次更新 MM-dd HH:mm</string>
+</resources>

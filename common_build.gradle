@@ -1,0 +1,65 @@
+/*if (isBuildModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}*/
+apply plugin: 'kotlin-android'
+// apply plugin: 'kotlin-android-extensions'
+// parcelize 序列化
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.android['compileSdkVersion']
+    buildToolsVersion rootProject.ext.android['buildToolsVersion']
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android['minSdkVersion']
+        targetSdkVersion rootProject.ext.android['targetSdkVersion']
+        testInstrumentationRunner rootProject.ext.tests['androidJUnitRunner']
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dexOptions {
+        //最大堆内存
+        javaMaxHeapSize "6g"  //注意内存是自己电脑内存大小配置
+        //是否支持大工程模式
+        jumboMode = true
+        //预编译
+        preDexLibraries = true
+        //线程数
+        threadCount = 8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    // 引入kotlin库
+    implementation rootProject.ext.kotlins
+
+    // 导入Androidx
+    implementation rootProject.ext.androidx['appcompat']
+    implementation rootProject.ext.androidx['core-ktx']
+    implementation rootProject.ext.androidx['material']
+    implementation rootProject.ext.androidx['constraint-layout']
+    implementation rootProject.ext.androidx['multidex']
+
+    // 导入jetpack
+    implementation rootProject.ext.jetpack['lifecycle-viewmodel']
+
+    // 引入单元测试库
+    testImplementation rootProject.ext.tests['junit']
+    androidTestImplementation rootProject.ext.tests['test-ext']
+    androidTestImplementation rootProject.ext.tests['test-espresso']
+}

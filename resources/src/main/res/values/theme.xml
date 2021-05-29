@@ -1,0 +1,13 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="FrLib" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_transparent</item>
+        <item name="colorPrimaryVariant">@color/color_transparent</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:overScrollHeader">@color/color_transparent</item>
+        <item name="android:overScrollFooter">@color/color_transparent</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+</resources>

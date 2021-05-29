@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 标题栏 -->
+    <declare-styleable name="TitleBar">
+        <!-- 标题栏背景 图片或颜色, 默认白色 -->
+        <attr name="titleBarColor" format="color" />
+        <!-- 填充状态栏, 默认true -->
+        <attr name="fillStatusBar" format="boolean" />
+        <!-- 状态栏颜色, 默认白色-->
+        <attr name="statusBarColor" format="color" />
+        <!-- 标题栏高度, 默认44dp -->
+        <attr name="titleBarHeight" format="dimension" />
+        <!-- 显示标题栏分割线, 默认true -->
+        <attr name="showBottomLine" format="boolean" />
+        <!-- 标题栏分割线颜色, 默认#dddddd -->
+        <attr name="bottomLineColor" format="color" />
+        <!-- 底部阴影高度 showBottomLine = false时有效 -->
+        <attr name="bottomShadowHeight" format="dimension" />
+
+        <!-- 左边视图类型 -->
+        <attr name="leftType">
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="imageButton" value="2" />
+            <enum name="customView" value="3" />
+        </attr>
+        <!-- TextView 文字, 对应leftType = textView -->
+        <attr name="leftText" format="string" />
+        <!-- TextView 颜色, 对应leftType = textView -->
+        <attr name="leftTextColor" format="color" />
+        <!-- TextView 字体大小, 对应leftType = textView -->
+        <attr name="leftTextSize" format="dimension" />
+        <!-- TextView 左边图片, 对应leftType = textView -->
+        <attr name="leftDrawable" format="reference" />
+        <!-- TextView 左边padding, 对应leftType = textView -->
+        <attr name="leftDrawablePadding" format="dimension" />
+        <!-- ImageView 资源, 对应leftType = imageButton -->
+        <attr name="leftImageResource" format="reference" />
+        <!-- 左边自定义布局, 对应lleftType = customView -->
+        <attr name="leftCustomView" format="reference" />
+
+        <!-- 右边视图类型 -->
+        <attr name="rightType">
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="imageButton" value="2" />
+            <enum name="customView" value="3" />
+        </attr>
+        <!-- TextView 文字, 对应rightType = textView -->
+        <attr name="rightText" format="string|reference" />
+        <!-- TextView 颜色, 对应rightType = textView -->
+        <attr name="rightTextColor" format="color" />
+        <!-- TextView 字体大小, 对应rightType = textView -->
+        <attr name="rightTextSize" format="dimension" />
+        <!-- ImageView 资源, 对应rightType = imageButton -->
+        <attr name="rightImageResource" format="reference" />
+        <!-- 右边自定义布局, 对应rightType = customView -->
+        <attr name="rightCustomView" format="reference" />
+
+        <!-- 中间视图类型 -->
+        <attr name="centerType">
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="customView" value="3" />
+            <enum name="searchView" value="4" />
+        </attr>
+        <attr name="centerSearchRightType">
+            <enum name="none" value="0" />
+            <enum name="voice" value="5" />
+            <enum name="delete" value="6" />
+        </attr>
+        <!-- TextView 文字, 对应centerType = textView -->
+        <attr name="centerText" format="string|reference" />
+        <!-- TextView 颜色, 对应centerType = textView -->
+        <attr name="centerTextColor" format="color" />
+        <!-- TextView 字体大小, 对应centerType = textView -->
+        <attr name="centerTextSize" format="dimension" />
+        <!-- TextView 跑马灯效果, 默认打开, 对应centerType = textView -->
+        <attr name="centerTextMarquee" format="boolean" />
+        <!-- 子标题TextView 文字, 对应centerType = textView -->
+        <attr name="centerSubText" format="string" />
+        <!-- 子标题TextView 颜色, 对应centerType = textView -->
+        <attr name="centerSubTextColor" format="color" />
+        <!-- 子标题TextView 字体大小, 对应centerType = textView -->
+        <attr name="centerSubTextSize" format="dimension" />
+        <!-- 搜索输入框是否可输入 -->
+        <attr name="centerSearchEditable" format="boolean" />
+        <!-- 搜索框背景 -->
+        <attr name="centerSearchBg" format="reference" />
+        <!-- 搜索输入框提示文字 -->
+        <attr name="centerSearchHint" format="string" />
+        <!-- 搜索框icon -->
+        <attr name="centerSearchLeftIcon" format="reference" />
+        <!-- 中间自定义布局, 对应centerType = customView -->
+        <attr name="centerCustomView" format="reference" />
+    </declare-styleable>
+
+    <!-- 圆角图片 -->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <!-- 九宫格图片 -->
+    <declare-styleable name="NineGridImageView">
+        <attr name="singleImgSize" format="dimension" />
+        <attr name="imgGap" format="dimension" />
+        <attr name="maxSize" format="integer" />
+        <attr name="needPlus" format="boolean" />
+        <attr name="showStyle" format="enum">
+            <enum name="grid" value="0" />
+            <enum name="fill" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!-- 阴影 -->
+    <declare-styleable name="ShadowLayout">
+        <!-- 1、关于阴影 -->
+        <!--阴影：是否要显示阴影，可能有只想用shape和selector功能，不想要阴影-->
+        <attr name="hl_shadowHidden" format="boolean" />
+        <!--阴影：阴影颜色-->
+        <attr name="hl_shadowColor" format="color" />
+        <!--阴影：阴影的扩散范围(也可以理解为扩散程度)-->
+        <attr name="hl_shadowLimit" format="dimension" />
+        <!--控件区域是否对称，默认是对称。不对称的话，那么控件区域随着阴影区域走-->
+        <attr name="hl_shadowSymmetry" format="boolean" />
+        <!--阴影：x轴的偏移量-->
+        <attr name="hl_shadowOffsetX" format="dimension" />
+        <!--阴影：y轴的偏移量-->
+        <attr name="hl_shadowOffsetY" format="dimension" />
+        <!--阴影：左边是否隐藏阴影-->
+        <attr name="hl_shadowHiddenLeft" format="boolean" />
+        <!--阴影：右边是否隐藏阴影-->
+        <attr name="hl_shadowHiddenRight" format="boolean" />
+        <!--阴影：上边是否隐藏阴影-->
+        <attr name="hl_shadowHiddenTop" format="boolean" />
+        <!--阴影：下面是否隐藏阴影-->
+        <attr name="hl_shadowHiddenBottom" format="boolean" />
+
+        <!-- 2、关于圆角 -->
+        <!--圆角：统一大小，其中包括了阴影，shape、背景图、stroke边框圆角-->
+        <attr name="hl_cornerRadius" format="dimension" />
+        <!--圆角：左上圆角。设置后会忽略hl_cornerRadius的值-->
+        <attr name="hl_cornerRadius_leftTop" format="dimension" />
+        <!--圆角：右上圆角。同上-->
+        <attr name="hl_cornerRadius_rightTop" format="dimension" />
+        <!--圆角：左下圆角。同上-->
+        <attr name="hl_cornerRadius_leftBottom" format="dimension" />
+        <!--圆角：右下圆角。同上-->
+        <attr name="hl_cornerRadius_rightBottom" format="dimension" />
+
+        <!-- 3、关于shape及selector -->
+        <!-- shape及selector样式：pressed、sectored -->
+        <attr name="hl_shapeMode">
+            <enum name="pressed" value="1" />
+            <enum name="selected" value="2" />
+            <enum name="ripple" value="3" />
+        </attr>
+
+        <!-- 为false的默认背景，可单独使用-->
+        <attr name="hl_layoutBackground" format="reference|color" />
+        <!-- 为true的默认背景，必须搭配hl_layoutBackground属性使用。否则报错-->
+        <attr name="hl_layoutBackground_true" format="reference|color" />
+
+        <!-- stroke样式，stroke的宽度-->
+        <attr name="hl_strokeWith" format="dimension" />
+        <!-- 为false时，默认的stoke颜色值，可单独使用-->
+        <attr name="hl_strokeColor" format="color" />
+        <!-- 为true时，默认的stoke颜色值，必须搭配hl_strokeColor属性使用。否则报错-->
+        <attr name="hl_strokeColor_true" format="color" />
+
+        <!-- 这里最终舍弃了系统clickable的方案，因为系统系统主动设置setOnClickListener后，会主动设置成true,所以这里采用自定义 -->
+        <attr name="clickable" format="boolean" />
+        <!-- hl_clickable为false时，要展示的图片或颜色-->
+        <attr name="hl_layoutBackground_clickFalse" format="reference|color" />
+
+        <!-- 4、关于填充的渐变色 -->
+        <!-- 要知道，如果设置了渐变色。那么将以渐变色为主。hl_layoutBackground属性将无效 -->
+        <!-- 渐变的起始颜色 -->
+        <attr name="hl_startColor" format="color" />
+        <!-- 渐变的中间颜色 -->
+        <attr name="hl_centerColor" format="color" />
+        <!-- 渐变的终止颜色 -->
+        <attr name="hl_endColor" format="color" />
+        <!-- 渐变角度，默认值为0-->
+        <attr name="hl_angle" format="integer" />
+
+        <!-- 5、绑定一个TextView，在点击按钮时，有可能有颜色变化 -->
+        <attr name="hl_bindTextView" format="reference" />
+        <attr name="hl_textColor" format="color" />
+        <attr name="hl_textColor_true" format="color" />
+        <attr name="hl_text" format="string" />
+        <attr name="hl_text_true" format="string" />
+    </declare-styleable>
+
+    <!--网格控件-->
+    <declare-styleable name="AutoGridView">
+        <!--网格图的类型-->
+        <attr name="agv_mode">
+            <!--类似QQ空间、微信朋友圈的九宫格类型网格图-->
+            <enum name="nine" value="0" />
+            <!--依次显示网格的普通类型网格图-->
+            <enum name="normal" value="1" />
+        </attr>
+        <!--网格的行数-->
+        <attr name="agv_row" format="integer" />
+        <!--网格的列数-->
+        <attr name="agv_column" format="integer" />
+        <!--item 的高度-->
+        <attr name="agv_item_height" format="dimension" />
+        <!--item 之间的横向间距-->
+        <attr name="agv_horizontal_space" format="dimension" />
+        <!--item 之间的纵向间距-->
+        <attr name="agv_vertical_space" format="dimension" />
+        <!--九宫格模式下，单个 item 时，item 的宽与 parent 的可用总宽的比-->
+        <attr name="agv_nines_widthper" format="float" />
+        <!--九宫格模式下，单个 item 时，item 的高与 parent 的可用总宽的比-->
+        <attr name="agv_nines_heightper" format="float" />
+    </declare-styleable>
+</resources>

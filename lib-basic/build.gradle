@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply from: '../common_build.gradle'
+
+android {
+
+    // 开启dataBinding
+    dataBinding {
+        enabled = true
+    }
+
+    // 开启viewBinding
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    api project(':lib-utils')
+
+    // network
+    api rootProject.ext.network['retrofit']
+    api rootProject.ext.network['converter-gson']
+    api rootProject.ext.network['converter-scalars']
+    api rootProject.ext.network['okhttp']
+    api rootProject.ext.network['okhttp-urlconnection']
+    api rootProject.ext.network['logging-interceptor']
+    // live event bus
+    api rootProject.ext.libs['eventbus-live']
+    // json 解析
+    implementation rootProject.ext.libs['gson']
+    implementation rootProject.ext.libs['fastjson']
+    // mmvk
+    implementation rootProject.ext.libs['mmkv']
+    // 沉浸式状态栏
+    implementation rootProject.ext.libs['immersionbar']
+    implementation rootProject.ext.libs['immersionbar-ktx']
+    // 日志打印
+    implementation rootProject.ext.libs['timber']
+    // 侧滑
+    implementation rootProject.ext.libs['smart-swipe']
+    implementation rootProject.ext.libs['smart-swipex']
+    // 添加ARouter依赖, common包下只需要api, 不需要路由
+    implementation rootProject.ext.libs['arouter-api']
+
+    // recyclerview helper
+    api rootProject.ext.views['recyclerview-helper']
+    // 下拉刷新, 上拉加载
+    api rootProject.ext.views['refresh']
+    api rootProject.ext.views['refresh-header-classics']
+    api rootProject.ext.views['refresh-footer-classics']
+    // popup 弹窗
+    implementation rootProject.ext.views['popup']
+    // 图片选择
+    implementation rootProject.ext.libs['picture-selector']
+    implementation rootProject.ext.libs['gpuimage']
+    // 使用glide加载图片
+    implementation rootProject.ext.libs['glide']
+    kapt rootProject.ext.libs['glide-compiler']
+    // rxjava and rxandroid
+    implementation rootProject.ext.libs['rxjava']
+    implementation rootProject.ext.libs['rxandroid']
+}

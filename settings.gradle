@@ -1,0 +1,5 @@
+include ':resources'
+include ':frlib'
+include ':lib-basic'
+include ':lib-utils'
+rootProject.name = "FrLib"
