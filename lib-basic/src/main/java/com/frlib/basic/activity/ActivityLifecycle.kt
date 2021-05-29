@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentManager
 import com.frlib.basic.app.AppManager
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.config.ConfigModule
+import com.frlib.basic.ext.statusBarStyle
 import com.frlib.basic.fragment.FragmentLifecycle
+import com.frlib.basic.immersion.ImmersionBar
 import timber.log.Timber
 
 /**
@@ -28,6 +30,17 @@ class ActivityLifecycle(
             activity.setupActivityComponent(appComponent)
 
             registerFragmentCallbacks(activity)
+        }
+
+        if (activity.javaClass.isAnnotationPresent(ImmersionBar::class.java)) {
+            val immersionBar = activity.javaClass.getAnnotation(ImmersionBar::class.java)
+            if (immersionBar != null) {
+                activity.statusBarStyle(
+                    statusBarColor = immersionBar.statusBarColor,
+                    statusBarDarkFont = immersionBar.statusBarDarkFont,
+                    fitsSystemWindows = immersionBar.fitsSystemWindows
+                )
+            }
         }
     }
 

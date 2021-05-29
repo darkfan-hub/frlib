@@ -1,5 +1,7 @@
 package com.frlib.basic.ext
 
+import android.app.Activity
+import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 
@@ -33,4 +35,32 @@ fun SmartRefreshLayout.init(
     this.setRefreshHeader(refreshHeader)
     this.setOnRefreshListener { refreshBlock() }
     this.setOnLoadMoreListener { loadMoreBlock() }
+}
+
+/**
+ * 沉浸式状态栏全屏
+ */
+fun Activity.fullScreen() {
+    ImmersionBar.with(this)
+        .fullScreen(true)
+        .init()
+}
+
+/**
+ * 沉浸式状态栏默认样式
+ */
+fun Activity.statusBarStyle(
+    statusBarColor: String = "#00000000",
+    navigationBarColor: String = "#00000000",
+    statusBarDarkFont: Boolean = true,
+    navigationBarDarkIcon: Boolean = true,
+    fitsSystemWindows: Boolean = false
+) {
+    ImmersionBar.with(this)
+        .statusBarColor(if (statusBarColor.startsWith("#")) statusBarColor else "#$statusBarColor")
+        .statusBarDarkFont(statusBarDarkFont)
+        .fitsSystemWindows(fitsSystemWindows)
+        .navigationBarColor(navigationBarColor)
+        .navigationBarDarkIcon(navigationBarDarkIcon)
+        .init()
 }

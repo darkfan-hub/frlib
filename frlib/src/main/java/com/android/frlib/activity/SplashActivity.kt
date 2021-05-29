@@ -5,6 +5,7 @@ import com.android.frlib.R
 import com.android.frlib.databinding.FrlibActivitySplshBinding
 import com.frlib.basic.activity.AbstractActivity
 import com.frlib.basic.defaultpages.Pages
+import com.frlib.basic.immersion.ImmersionBar
 import com.frlib.basic.vm.BaseViewModel
 
 /**
@@ -12,6 +13,7 @@ import com.frlib.basic.vm.BaseViewModel
  * @date 26/05/2021 17:33
  * @desc app 开屏页
  */
+@ImmersionBar
 class SplashActivity : AbstractActivity<FrlibActivitySplshBinding, BaseViewModel>() {
 
     override fun layoutId(): Int = R.layout.frlib_activity_splsh
