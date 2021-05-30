@@ -28,11 +28,6 @@ interface IFragment {
     fun initView(savedInstanceState: Bundle?)
 
     /**
-     * 初始化缺省页
-     */
-    fun initDefaultPages()
-
-    /**
      * 初始化数据
      */
     fun initData()

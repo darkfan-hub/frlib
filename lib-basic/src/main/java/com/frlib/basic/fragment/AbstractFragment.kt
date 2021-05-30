@@ -225,6 +225,8 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
 
     override fun useDefaultPages(): Boolean = true
 
+    override fun useEventBus(): Boolean = false
+
     override fun onDestroy() {
         super.onDestroy()
         dataLoaded = false
