@@ -138,6 +138,12 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     }
 
     override fun emptyData() {
+        if (!listAdapter.hasEmptyView() && !useDefaultPages()) {
+            listAdapter.setEmptyView(emptyView)
+        }
+
+        changeRecyclePadding(true)
+        listAdapter.setList(null)
     }
 
     override fun headerViewLayoutId(): Int? = -1

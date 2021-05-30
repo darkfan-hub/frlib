@@ -172,7 +172,18 @@ abstract class AbstractFrListView<T>(
      * 空数据
      */
     override fun emptyData() {
+        if (!listAdapter.hasEmptyView()) {
+            listAdapter.setEmptyView(emptyView())
+        }
+
+        changeRecyclePadding(true)
+        listAdapter.setList(null)
     }
+
+    /**
+     * 空页面
+     */
+    abstract fun emptyView(): View
 
     /**
      * 刷新header
