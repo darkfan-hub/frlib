@@ -48,6 +48,8 @@ abstract class AbstractFrListView<T>(
     }
 
     private fun initView() {
+        addView(binding.root)
+
         setTitleBar()
         setSmartRefreshLayout()
         setRecyclerView()
@@ -165,7 +167,14 @@ abstract class AbstractFrListView<T>(
      * 修改recycler view的内间距，处理一些细节需求
      */
     override fun changeRecyclePadding(isEmpty: Boolean) {
-        recyclerView.setPadding(if (isEmpty) 0 else context.dp2px(10f))
+        recyclerView.setPadding(if (isEmpty) 0 else recyclePadding())
+    }
+
+    /**
+     * 修改recycler 内间距
+     */
+    open fun recyclePadding(): Int {
+        return context.dp2px(10f)
     }
 
     /**
