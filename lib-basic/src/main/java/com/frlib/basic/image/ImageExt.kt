@@ -1,6 +1,7 @@
 package com.frlib.basic.image
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
@@ -21,9 +22,13 @@ import com.luck.picture.lib.listener.OnResultCallbackListener
  * @desc 图片ktx扩展
  */
 
+inline fun ImageView.displayImage(url: String) {
+    displayImage(this.context, url, null)
+}
+
 inline fun ImageView.displayImage(
     url: String,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable
 ) {
     displayImage(this.context, url, placeholder)
 }
@@ -31,9 +36,15 @@ inline fun ImageView.displayImage(
 inline fun ImageView.displayImage(
     context: Context,
     url: String,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable?
 ) {
-    val options = RequestOptions().placeholder(placeholder).centerCrop()
+    val options = RequestOptions()
+    if (placeholder == null) {
+        options.placeholder(R.drawable.frlib_iamge_placeholder)
+    } else {
+        options.placeholder(placeholder)
+    }
+    options.centerCrop()
 
     Glide.with(context)
         .load(url)
@@ -43,8 +54,15 @@ inline fun ImageView.displayImage(
 
 inline fun ImageView.displayRadiusImage(
     url: String,
+    radius: Int
+) {
+    displayRadiusImage(this.context, url, radius, null)
+}
+
+inline fun ImageView.displayRadiusImage(
+    url: String,
     radius: Int,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable
 ) {
     displayRadiusImage(this.context, url, radius, placeholder)
 }
@@ -53,9 +71,15 @@ inline fun ImageView.displayRadiusImage(
     context: Context,
     url: String,
     radius: Int,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable?
 ) {
-    val options = RequestOptions().placeholder(placeholder).transform(
+    val options = RequestOptions()
+    if (placeholder == null) {
+        options.placeholder(R.drawable.frlib_iamge_placeholder)
+    } else {
+        options.placeholder(placeholder)
+    }
+    options.transform(
         CenterCrop(),
         RoundedCornersTransformation(
             radius,
@@ -70,9 +94,13 @@ inline fun ImageView.displayRadiusImage(
         .into(this)
 }
 
+inline fun ImageView.displayCircleImage(url: String) {
+    displayCircleImage(this.context, url, null)
+}
+
 inline fun ImageView.displayCircleImage(
     url: String,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable
 ) {
     displayCircleImage(this.context, url, placeholder)
 }
@@ -80,12 +108,15 @@ inline fun ImageView.displayCircleImage(
 inline fun ImageView.displayCircleImage(
     context: Context,
     url: String,
-    placeholder: Int = R.drawable.frlib_iamge_placeholder
+    placeholder: Drawable?
 ) {
-    val options = RequestOptions().placeholder(placeholder).transform(
-        CenterCrop(),
-        CircleCrop()
-    )
+    val options = RequestOptions()
+    if (placeholder == null) {
+        options.placeholder(R.drawable.frlib_iamge_placeholder)
+    } else {
+        options.placeholder(placeholder)
+    }
+    options.transform(CenterCrop(), CircleCrop())
 
     Glide.with(context)
         .load(url)

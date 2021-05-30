@@ -1,5 +1,6 @@
 package com.frlib.basic.binding
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.frlib.basic.image.displayCircleImage
@@ -11,11 +12,11 @@ import com.frlib.basic.image.displayCircleImage
  */
 
 @BindingAdapter(value = ["imageUrl", "placeholder"])
-fun bindImage(imageView: ImageView, imageUrl: String, placeholder: Int) {
+fun bindImage(imageView: ImageView, imageUrl: String, placeholder: Drawable) {
     imageView.displayCircleImage(imageUrl, placeholder = placeholder)
 }
 
 @BindingAdapter(value = ["circleUrl", "placeholder"])
-fun bindCircleImage(imageView: ImageView, circleUrl: String, placeholder: Int) {
+fun bindCircleImage(imageView: ImageView, circleUrl: String, placeholder: Drawable) {
     imageView.displayCircleImage(circleUrl, placeholder = placeholder)
 }
