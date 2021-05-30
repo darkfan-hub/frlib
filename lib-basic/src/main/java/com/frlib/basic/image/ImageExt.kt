@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.frlib.basic.R
 import com.frlib.basic.image.transformations.RoundedCornersTransformation
@@ -61,6 +62,29 @@ inline fun ImageView.displayRadiusImage(
             0,
             RoundedCornersTransformation.CornerType.ALL
         )
+    )
+
+    Glide.with(context)
+        .load(url)
+        .apply(options)
+        .into(this)
+}
+
+inline fun ImageView.displayCircleImage(
+    url: String,
+    placeholder: Int = R.drawable.frlib_iamge_placeholder
+) {
+    displayCircleImage(this.context, url, placeholder)
+}
+
+inline fun ImageView.displayCircleImage(
+    context: Context,
+    url: String,
+    placeholder: Int = R.drawable.frlib_iamge_placeholder
+) {
+    val options = RequestOptions().placeholder(placeholder).transform(
+        CenterCrop(),
+        CircleCrop()
     )
 
     Glide.with(context)
