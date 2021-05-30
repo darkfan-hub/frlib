@@ -1,6 +1,7 @@
 package com.frlib.basic.app
 
 import android.app.Application
+import android.view.View
 import androidx.collection.LruCache
 import com.frlib.basic.net.IRepositoryManager
 import com.google.gson.Gson
@@ -41,6 +42,21 @@ interface IAppComponent {
      * 下拉刷新头
      */
     fun refreshHeader(): RefreshHeader
+
+    /**
+     * 缺省页-空数据状态
+     */
+    fun emptyDataView(): View
+
+    /**
+     * 缺省页-错误状态
+     */
+    fun emptyErrorView(): View
+
+    /**
+     * 缺省页-网络错误状态
+     */
+    fun emptyNetErrorView(): View
 
     /**
      * Json 序列化库

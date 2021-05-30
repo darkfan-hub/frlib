@@ -14,6 +14,7 @@ class GlobalConfig(
     val cacheRootDir: String,
     val fileRootDir: String,
     val refreshConfig: IRefreshConfig?,
+    val emptyPagesConfig: IEmptyPagesConfig?,
     val gsonConfig: IGsonConfig?,
     val okHttpConfig: IOkHttpConfig?,
     val retrofitConfig: IRetrofitConfig?,
@@ -33,6 +34,7 @@ class GlobalConfig(
         builder.cacheRootDir,
         builder.fileRootDir,
         builder.refreshConfig,
+        builder.emptyPagesConfig,
         builder.gsonConfig,
         builder.okHttpConfig,
         builder.retrofitConfig,
@@ -54,6 +56,9 @@ class GlobalConfig(
 
         /** 下拉刷新配置 */
         var refreshConfig: IRefreshConfig? = null
+
+        /** 缺省页配置 */
+        var emptyPagesConfig: IEmptyPagesConfig? = null
 
         /** gson配置 */
         var gsonConfig: IGsonConfig? = null

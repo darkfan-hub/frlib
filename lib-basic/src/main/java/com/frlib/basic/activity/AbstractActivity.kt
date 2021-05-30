@@ -55,11 +55,7 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     }
 
     open val emptyView: View by lazy {
-        EmptyView.build {
-            context = self
-            icon = R.drawable.frlib_icon_empty
-            text = string(R.string.frlib_text_empty_text)
-        }
+        appComponent.emptyDataView()
     }
 
     /** 缺省页-错误状态 */
@@ -70,11 +66,7 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     }
 
     open val errorView: View by lazy {
-        EmptyView.build {
-            context = self
-            icon = R.drawable.frlib_icon_waring
-            text = string(R.string.frlib_text_empty_error)
-        }
+        appComponent.emptyErrorView()
     }
 
     /** 缺省页-网络错误状态 */
@@ -85,11 +77,7 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     }
 
     open val netErrorView: View by lazy {
-        EmptyView.build {
-            context = self
-            icon = R.drawable.frlib_icon_net_error
-            text = string(R.string.frlib_text_empty_net_error)
-        }
+        appComponent.emptyNetErrorView()
     }
 
     /** 缺省页-成功状态 */

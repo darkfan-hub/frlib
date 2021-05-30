@@ -1,6 +1,7 @@
 package com.frlib.basic.app
 
 import android.app.Application
+import android.view.View
 import androidx.collection.LruCache
 import com.frlib.basic.R
 import com.frlib.basic.cache.CacheFactory
@@ -9,6 +10,8 @@ import com.frlib.basic.net.HttpClient
 import com.frlib.basic.net.IRepositoryManager
 import com.frlib.basic.net.RepositoryManagerImpl
 import com.frlib.basic.net.RequestInterceptor
+import com.frlib.basic.views.EmptyView
+import com.frlib.utils.ext.string
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -52,6 +55,42 @@ class AppComponentImpl(
             ClassicsHeader(application).setTimeFormat(timeFormat)
         } else {
             globalConfig.refreshConfig.refreshHeader(application)
+        }
+    }
+
+    override fun emptyDataView(): View {
+        return if (globalConfig.emptyPagesConfig == null) {
+            EmptyView.build {
+                context = application
+                icon = R.drawable.frlib_icon_empty
+                text = application.string(R.string.frlib_text_empty_text)
+            }
+        } else {
+            globalConfig.emptyPagesConfig.emptyDataView(application)
+        }
+    }
+
+    override fun emptyErrorView(): View {
+        return if (globalConfig.emptyPagesConfig == null) {
+            EmptyView.build {
+                context = application
+                icon = R.drawable.frlib_icon_waring
+                text = application.string(R.string.frlib_text_empty_error)
+            }
+        } else {
+            globalConfig.emptyPagesConfig.errorView(application)
+        }
+    }
+
+    override fun emptyNetErrorView(): View {
+        return if (globalConfig.emptyPagesConfig == null) {
+            EmptyView.build {
+                context = application
+                icon = R.drawable.frlib_icon_net_error
+                text = application.string(R.string.frlib_text_empty_net_error)
+            }
+        } else {
+            globalConfig.emptyPagesConfig.netErrorView(application)
         }
     }
 

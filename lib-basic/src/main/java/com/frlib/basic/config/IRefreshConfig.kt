@@ -9,5 +9,8 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader
  * @desc 下拉刷新配置
  */
 interface IRefreshConfig {
+    /**
+     * 刷新头部
+     */
     fun refreshHeader(context: Context): RefreshHeader
 }
