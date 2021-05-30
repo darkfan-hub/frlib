@@ -7,10 +7,9 @@
 
     <ImageView
         android:id="@+id/iv_empty_icon"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="94dp"
-        android:scaleType="fitXY"
         tools:src="@drawable/frlib_icon_net_error"/>
 
     <TextView
@@ -26,9 +25,9 @@
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="34dp"
-        android:layout_marginTop="20dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
+        android:layout_marginTop="30dp"
+        android:paddingHorizontal="39dp"
+        android:paddingVertical="5dp"
         android:visibility="gone"
         tools:text="@string/frlib_text_retry"/>
 </LinearLayout>
