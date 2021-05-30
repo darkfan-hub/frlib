@@ -86,6 +86,11 @@ class EmptyView(
 
         lateinit var context: Context
 
+        @JvmName("setContext1")
+        fun setContext(context: Context) {
+            this.context = context
+        }
+
         fun build() = EmptyView(this)
     }
 }
