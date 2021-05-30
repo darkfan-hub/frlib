@@ -306,7 +306,7 @@ public class TitleBar extends RelativeLayout {
             searchHintText = array.getString(R.styleable.TitleBar_centerSearchHint);
             centerSearchEditable = array.getBoolean(R.styleable.TitleBar_centerSearchEditable, true);
             centerSearchBgResource = array.getResourceId(R.styleable.TitleBar_centerSearchBg, R.drawable.frlib_bg_ovl_solide_f6_radius_3);
-            centerSearchLeftResource = array.getResourceId(R.styleable.TitleBar_centerSearchLeftIcon, R.drawable.frlib_icon_titlebar_search);
+            centerSearchLeftResource = array.getResourceId(R.styleable.TitleBar_centerSearchLeftIcon, R.drawable.frlib_icon_search);
             centerSearchRightType = array.getInt(R.styleable.TitleBar_centerSearchRightType, BarType.NONE.ordinal());
         } else if (centerType == BarType.CUSTOM.ordinal()) {
             centerViewId = array.getResourceId(R.styleable.TitleBar_centerCustomView, 0);
@@ -575,7 +575,7 @@ public class TitleBar extends RelativeLayout {
             searchRightIcon.setId(View.generateViewId());
             searchRightIcon.setImageResource(centerSearchRightType == BarType.VOICE.ordinal()
                     ? R.drawable.frlib_icon_titlebar_voice
-                    : R.drawable.frlib_icon_titlebar_delete);
+                    : R.drawable.frlib_icon_search_delete);
             LayoutParams searchIconRightParams = new LayoutParams(size15, size15);
             searchIconRightParams.addRule(RelativeLayout.CENTER_VERTICAL);
             searchIconRightParams.addRule(RelativeLayout.ALIGN_PARENT_END);

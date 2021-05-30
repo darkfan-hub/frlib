@@ -18,7 +18,7 @@
         android:layout_alignParentRight="true"
         android:clickable="true"
         android:padding="2dp"
-        android:src="@drawable/frlib_icon_titlebar_delete"
+        android:src="@drawable/frlib_icon_search_delete"
         android:visibility="gone"
         tools:visibility="visible" />
 </RelativeLayout>
