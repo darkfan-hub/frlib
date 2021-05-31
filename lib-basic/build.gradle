@@ -18,6 +18,8 @@ dependencies {
 
     api project(':lib-utils')
 
+    // jetpack
+    api rootProject.ext.jetpack['work-ktx']
     // network
     api rootProject.ext.network['retrofit']
     api rootProject.ext.network['converter-gson']

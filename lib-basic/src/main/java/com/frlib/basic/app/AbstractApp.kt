@@ -2,9 +2,11 @@ package com.frlib.basic.app
 
 import android.app.Application
 import android.content.Context
+import androidx.work.Configuration
 import com.frlib.basic.activity.ActivityLifecycle
 import com.frlib.basic.config.ConfigModule
 import com.frlib.basic.config.GlobalConfig
+import com.frlib.utils.BuildConfig
 import com.frlib.utils.SysUtil
 
 /**
@@ -12,7 +14,22 @@ import com.frlib.utils.SysUtil
  * @date 26/05/2021 11:20
  * @desc 框架Application基类
  */
-abstract class AbstractApp : Application(), IApp {
+abstract class AbstractApp : Application(), IApp, Configuration.Provider {
+
+    /**
+     * Worker自定义配置
+     */
+    override fun getWorkManagerConfiguration(): Configuration {
+        return if (BuildConfig.DEBUG) {
+            Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.DEBUG)
+                .build()
+        } else {
+            Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.ERROR)
+                .build()
+        }
+    }
 
     private lateinit var application: Application
     private lateinit var appComponent: IAppComponent

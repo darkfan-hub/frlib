@@ -3,6 +3,7 @@ package com.frlib.basic.app
 import android.app.Application
 import android.view.View
 import androidx.collection.LruCache
+import androidx.work.WorkManager
 import com.frlib.basic.net.IRepositoryManager
 import com.google.gson.Gson
 import com.scwang.smart.refresh.layout.api.RefreshHeader
@@ -94,10 +95,9 @@ interface IAppComponent {
     fun extras(): LruCache<String, Any>
 
     /**
-     * 返回一个全局公用的线程池,适用于大多数异步需求。
-     * 避免多个线程池创建带来的资源消耗。
+     * 使用Worker处理在后台处理耗时任务
      *
-     * @return [ExecutorService]
+     * @return [WorkManager]
      */
-    fun executorService(): ExecutorService
+    fun workManager(): WorkManager
 }

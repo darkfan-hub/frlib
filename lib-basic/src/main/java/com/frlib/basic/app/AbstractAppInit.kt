@@ -1,10 +1,13 @@
 package com.frlib.basic.app
 
 import android.app.Activity
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.billy.android.swipe.SmartSwipeBack
 import com.frlib.basic.activity.IActivity
 import com.frlib.basic.helper.MmkvHelper
+import com.frlib.basic.work.AppInitWork
 import timber.log.Timber
 
 /**
@@ -46,5 +49,8 @@ abstract class AbstractAppInit : IAppInit {
     }
 
     override fun threadInit(app: IApp) {
+        val initWork = OneTimeWorkRequestBuilder<AppInitWork>()
+            .build()
+        app.appComponent().workManager().enqueue(initWork)
     }
 }

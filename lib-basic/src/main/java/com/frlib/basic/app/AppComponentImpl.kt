@@ -3,6 +3,7 @@ package com.frlib.basic.app
 import android.app.Application
 import android.view.View
 import androidx.collection.LruCache
+import androidx.work.WorkManager
 import com.frlib.basic.R
 import com.frlib.basic.cache.CacheFactory
 import com.frlib.basic.config.GlobalConfig
@@ -20,7 +21,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.ExecutorService
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -181,8 +181,8 @@ class AppComponentImpl(
         return extras!!
     }
 
-    override fun executorService(): ExecutorService {
-        TODO("Not yet implemented")
+    override fun workManager(): WorkManager {
+        return WorkManager.getInstance(application)
     }
 
     class Builder {
