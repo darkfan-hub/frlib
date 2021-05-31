@@ -141,7 +141,7 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
      * 修改recycler 内间距
      */
     open fun recyclePadding(): Int {
-        return context.dp2px(10f)
+        return selfContext.dp2px(10f)
     }
 
     override fun emptyData() {
