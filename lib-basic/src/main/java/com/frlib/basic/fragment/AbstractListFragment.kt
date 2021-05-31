@@ -9,7 +9,6 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.frlib.basic.R
 import com.frlib.basic.adapter.BaseAdapter
 import com.frlib.basic.databinding.FrlibFragmentListBinding
-import com.frlib.basic.ext.init
 import com.frlib.basic.views.RecyclerViewDivider
 import com.frlib.basic.views.TitleBar
 import com.frlib.basic.vm.BaseListViewModel
@@ -152,6 +151,8 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
         changeRecyclePadding(true)
         listAdapter.setList(null)
     }
+
+    override fun useDefaultPages(): Boolean = false
 
     override fun headerViewLayoutId(): Int? = -1
 

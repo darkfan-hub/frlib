@@ -108,6 +108,13 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
     private fun setDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): View {
+        dataBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
+        return dataBinding.root
+    }
+
+    /*private fun setDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): View {
         val useDataBinding = RefGenericSuperclass.findActualType(javaClass, ViewDataBinding::class.java)
         return if (useDataBinding) {
             dataBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
@@ -115,7 +122,7 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
         } else {
             inflater.inflate(layoutId(), container, false)
         }
-    }
+    }*/
 
     /**
      * 页面布局id
