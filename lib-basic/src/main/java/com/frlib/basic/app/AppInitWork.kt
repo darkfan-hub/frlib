@@ -1,9 +1,9 @@
-package com.frlib.basic.work
+package com.frlib.basic.app
 
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.frlib.basic.app.IApp
+import com.frlib.basic.config.AppConstants
 import com.frlib.basic.mobleinfo.AppInfoHelper
 import timber.log.Timber
 
@@ -23,7 +23,7 @@ class AppInitWork(
             val appComponent = app.appComponent()
             val info = AppInfoHelper.packageInfo(context)
             Timber.i("$info")
-            appComponent.extras().put("appInfo", info)
+            appComponent.extras().put(AppConstants.EXTRAS_KEY_APP_INFO, info)
         }
         return Result.success()
     }

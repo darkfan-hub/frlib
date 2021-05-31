@@ -7,6 +7,9 @@ package com.frlib.basic.config
  */
 object AppConstants {
 
+    /** 缓存key APP信息 */
+    const val EXTRAS_KEY_APP_INFO = "app_info"
+
     /** 双击时间间隔 */
     @JvmField
     var double_click_time = 500
