@@ -9,19 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.frlib.basic.R
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.defaultpages.DefaultPages
 import com.frlib.basic.defaultpages.DefaultPagesContainer
 import com.frlib.basic.defaultpages.Pages
 import com.frlib.basic.defaultpages.state.EmptyState
 import com.frlib.basic.defaultpages.state.SuccessState
-import com.frlib.basic.vm.BaseViewModel
-import com.frlib.basic.vm.ViewModelFactory
 import com.frlib.basic.ref.RefGenericSuperclass
 import com.frlib.basic.toast.FrToasty
-import com.frlib.basic.views.EmptyView
-import com.frlib.utils.ext.string
+import com.frlib.basic.vm.BaseViewModel
+import com.frlib.basic.vm.ViewModelFactory
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
 
@@ -201,6 +198,9 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
             initData()
             dataLoaded = true
         }
+    }
+
+    override fun initData() {
     }
 
     override fun defaultPages(): DefaultPagesContainer {
