@@ -1,5 +1,7 @@
 package com.frlib.basic.ref;
 
+import com.frlib.basic.fragment.AbstractListFragment;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -12,6 +14,10 @@ public class RefGenericSuperclass {
 
     public static boolean findActualType(Class<?> cls, Class<?> actualType) {
         Type superclass = cls.getGenericSuperclass();
+        if (superclass instanceof AbstractListFragment) {
+            superclass = ((Class<?> )superclass).getGenericSuperclass();
+        }
+
         if (superclass instanceof ParameterizedType) {
             Type[] actualTypes = ((ParameterizedType) superclass).getActualTypeArguments();
             for (Type type : actualTypes) {
