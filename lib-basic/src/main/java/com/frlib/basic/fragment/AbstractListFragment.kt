@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.frlib.basic.R
 import com.frlib.basic.adapter.BaseAdapter
 import com.frlib.basic.databinding.FrlibFragmentListBinding
+import com.frlib.basic.ext.init
 import com.frlib.basic.views.RecyclerViewDivider
 import com.frlib.basic.views.TitleBar
 import com.frlib.basic.vm.BaseListViewModel
