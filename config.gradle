@@ -109,6 +109,10 @@ ext {
             'banner'                 : 'io.github.youth5201314:banner:2.2.1',
             // https://github.com/li-xiaojun/XPopup
             'popup'                  : 'com.github.li-xiaojun:XPopup:2.3.4',
+            // https://github.com/lygttpod/SuperTextView
+            'superText1'             : 'com.github.lygttpod:SuperTextView:2.4.6',
+            // https://github.com/chenBingX/SuperTextView
+            'superText2'             : 'com.github.chenBingX:SuperTextView:3.2.5'
     ]
 
     libs = [

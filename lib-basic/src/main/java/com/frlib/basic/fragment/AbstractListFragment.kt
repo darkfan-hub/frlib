@@ -98,7 +98,7 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     }
 
     override fun initData() {
-        viewModel.refresh(showDialog = true)
+        viewModel.refresh()
     }
 
     override fun layoutManager(): RecyclerView.LayoutManager {
