@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -73,13 +74,7 @@ inline fun ImageView.displayRadiusImage(
     radius: Int,
     placeholder: Drawable?
 ) {
-    val options = RequestOptions()
-    if (placeholder == null) {
-        options.placeholder(R.drawable.frlib_iamge_placeholder)
-    } else {
-        options.placeholder(placeholder)
-    }
-    options.transform(
+    val options = RequestOptions().transform(
         CenterCrop(),
         RoundedCornersTransformation(
             radius,
@@ -91,6 +86,7 @@ inline fun ImageView.displayRadiusImage(
     Glide.with(context)
         .load(url)
         .apply(options)
+        .thumbnail(glideRequestBuilder(context, options, placeholder))
         .into(this)
 }
 
@@ -110,18 +106,25 @@ inline fun ImageView.displayCircleImage(
     url: String,
     placeholder: Drawable?
 ) {
-    val options = RequestOptions()
-    if (placeholder == null) {
-        options.placeholder(R.drawable.frlib_iamge_placeholder)
-    } else {
-        options.placeholder(placeholder)
-    }
-    options.transform(CenterCrop(), CircleCrop())
+    val options = RequestOptions().transform(CenterCrop(), CircleCrop())
 
     Glide.with(context)
         .load(url)
         .apply(options)
+        .thumbnail(glideRequestBuilder(context, options, placeholder))
         .into(this)
+}
+
+fun glideRequestBuilder(
+    context: Context,
+    options: RequestOptions,
+    placeholder: Drawable?
+): RequestBuilder<Drawable> {
+    return if (placeholder == null) {
+        Glide.with(context).load(R.drawable.frlib_iamge_placeholder).apply(options)
+    } else {
+        Glide.with(context).load(placeholder).apply(options)
+    }
 }
 
 /**

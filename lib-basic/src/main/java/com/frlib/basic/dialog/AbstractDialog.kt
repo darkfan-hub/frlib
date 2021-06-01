@@ -23,9 +23,8 @@ abstract class AbstractDialog : DialogFragment() {
         Timber.i("$dialogTag  ------>  onAttach")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Timber.i("$dialogTag  ------>  onCreateView")
-        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         initDialog()
         return inflater.inflate(layoutId(), container, false)
     }
@@ -33,7 +32,7 @@ abstract class AbstractDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("$dialogTag  ------>  onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(view)
     }
 
     /**
@@ -42,13 +41,12 @@ abstract class AbstractDialog : DialogFragment() {
     open fun initDialog() {
         dialog?.window?.apply {
             // 去掉dialog默认的padding
-            decorView.setPadding(0, 0, 0, 0)
+            decorView.setPadding(dialogHorizontalMargin(), 0, dialogHorizontalMargin(), 0)
             val params = attributes
             params.width = dialogWidth()
             params.height = dialogHeight()
             params.gravity = dialogGravity()
             attributes = params
-            setWindowAnimations(dialogAnimations())
         }
     }
 
@@ -76,7 +74,7 @@ abstract class AbstractDialog : DialogFragment() {
      * 显示对话框
      */
     fun showDialog(fm: FragmentManager) {
-        setStyle(STYLE_NORMAL, R.style.Dialog)
+        setStyle(STYLE_NORMAL, dialogStyle())
         show(fm, dialogTag)
     }
 
@@ -102,6 +100,13 @@ abstract class AbstractDialog : DialogFragment() {
     }
 
     /**
+     * 对话框水平外间距
+     */
+    open fun dialogHorizontalMargin(): Int {
+        return 0
+    }
+
+    /**
      * 对话框高
      */
     open fun dialogHeight(): Int {
@@ -111,11 +116,11 @@ abstract class AbstractDialog : DialogFragment() {
     /**
      * 对话框动画
      */
-    open fun dialogAnimations(): Int {
+    open fun dialogStyle(): Int {
         return R.style.anim_bottom_to_bottom
     }
 
     abstract fun layoutId(): Int
 
-    abstract fun initView()
+    abstract fun initView(view: View)
 }

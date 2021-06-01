@@ -38,7 +38,7 @@ dependencies {
     implementation rootProject.ext.libs['immersionbar']
     implementation rootProject.ext.libs['immersionbar-ktx']
     // 日志打印
-    implementation rootProject.ext.libs['timber']
+    api rootProject.ext.libs['timber']
     // 侧滑
     implementation rootProject.ext.libs['smart-swipe']
     implementation rootProject.ext.libs['smart-swipex']
@@ -62,4 +62,6 @@ dependencies {
     // rxjava and rxandroid
     implementation rootProject.ext.libs['rxjava']
     implementation rootProject.ext.libs['rxandroid']
+    // auto size
+    api rootProject.ext.libs['autosize']
 }

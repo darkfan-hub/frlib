@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.billy.android.swipe.SmartSwipeBack
 import com.frlib.basic.activity.IActivity
 import com.frlib.basic.helper.MmkvHelper
+import me.jessyan.autosize.AutoSize
 import timber.log.Timber
 
 /**
@@ -25,6 +26,9 @@ abstract class AbstractAppInit : IAppInit {
 
             Timber.plant(Timber.DebugTree())
         }
+
+        // auto size
+        AutoSize.initCompatMultiProcess(app.appComponent().application())
 
         // 默认初始化mmkv
         MmkvHelper.initialize(app.appComponent().application())

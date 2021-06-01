@@ -51,7 +51,7 @@ fun Activity.fullScreen() {
  */
 fun Activity.statusBarStyle(
     statusBarColor: String = "#00000000",
-    navigationBarColor: String = "#00000000",
+    navigationBarColor: String = "#FFFFFFFF",
     statusBarDarkFont: Boolean = true,
     navigationBarDarkIcon: Boolean = true,
     fitsSystemWindows: Boolean = false

@@ -59,14 +59,29 @@
     </style>
 
     <style name="Dialog" parent="@style/Theme.AppCompat.Dialog">
-        <item name="android:windowCloseOnTouchOutside">true</item>
+        <!-- 无边框 -->
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">false</item>
+        <!-- 浮在 Activity 之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowFullscreen">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <!-- 遮盖层 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Base.Theme.AppCompat.Light.Dialog.Alert 特有的属性，用于指定默认宽度，这里需要禁用 -->
+        <item name="android:windowMinWidthMajor">0dp</item>
+        <item name="android:windowMinWidthMinor">0dp</item>
+        <!-- 解决 ActionBar 占位导致 Dialog 无法全屏显示的问题 -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- ActionMode 覆盖 Actionbar，不顶下来 -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="anim_bottom_to_bottom" parent="Dialog">

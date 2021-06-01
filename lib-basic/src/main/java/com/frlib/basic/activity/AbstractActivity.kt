@@ -1,5 +1,6 @@
 package com.frlib.basic.activity
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ import com.frlib.basic.views.EmptyView
 import com.frlib.utils.ext.string
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
+import me.jessyan.autosize.AutoSizeCompat
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -195,5 +197,24 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     override fun onDestroy() {
         super.onDestroy()
         lifecycle.removeObserver(viewModel)
+    }
+
+    /** auto size 相关*/
+    /*override fun isBaseOnWidth(): Boolean {
+        return false
+    }
+
+    override fun getSizeInDp(): Float {
+        return sizeInDp()
+    }*/
+
+    open fun sizeInHeightDp(): Float {
+        return 812f
+    }
+
+    override fun getResources(): Resources {
+        AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
+        AutoSizeCompat.autoConvertDensity(super.getResources(), sizeInHeightDp(), false)
+        return super.getResources()
     }
 }

@@ -175,6 +175,8 @@ ext {
             'markdown'               : 'com.zzhoujay.markdown:markdown:1.0.5',
             // https://github.com/JakeWharton/DiskLruCache 缓存
             'disk-lrucache'          : 'com.jakewharton:disklrucache:2.0.2',
+            // https://developers.weixin.qq.com/doc/oplatform/Downloads/Android_Resource.html
+            'wechat-sdk'             : 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     ]
 
     kotlins = kotlin.values()
