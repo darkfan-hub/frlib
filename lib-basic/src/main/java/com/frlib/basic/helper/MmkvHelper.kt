@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Parcelable
 import com.frlib.utils.ext.invalid
 import com.tencent.mmkv.MMKV
+import timber.log.Timber
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -37,6 +38,19 @@ class MmkvHelper private constructor(context: Context) {
     init {
         MMKV.initialize(context)
         mmkv = MMKV.defaultMMKV()!!
+    }
+
+    fun put(key: String, value: Any) {
+        when (value) {
+            is String -> mmkv.encode(key, value)
+            is Float -> mmkv.encode(key, value)
+            is Boolean -> mmkv.encode(key, value)
+            is Int -> mmkv.encode(key, value)
+            is Long -> mmkv.encode(key, value)
+            is Double -> mmkv.encode(key, value)
+            is ByteArray -> mmkv.encode(key, value)
+            else -> Timber.e("mmkv save value error! $key --> $value")
+        }
     }
 
     fun <T : Parcelable> put(key: String, t: T) {

@@ -19,16 +19,16 @@ import java.io.FileOutputStream
  */
 object MediaUtil {
 
-    fun saveMediaImage(context: Context, dir: String, bitmap: Bitmap) {
-        val displayName = "${TimeUtil.getNowTimeMills()}"
-        if (SysUtil.isAndroid10()) {
+    fun saveMediaImage(context: Context, dir: String, bitmap: Bitmap): String {
+        val displayName = "frexport${TimeUtil.getNowTimeMills()}"
+        return if (SysUtil.isAndroid10()) {
             saveMediaImageAndroidQ(context, dir, displayName, bitmap)
         } else {
             saveMediaImageOther(context, dir, displayName, bitmap)
         }
     }
 
-    private fun saveMediaImageAndroidQ(context: Context, dir: String, displayName: String, bitmap: Bitmap) {
+    private fun saveMediaImageAndroidQ(context: Context, dir: String, displayName: String, bitmap: Bitmap): String {
         val path = "${Environment.DIRECTORY_PICTURES}/${dir}"
 
         val resolver = context.contentResolver
@@ -42,7 +42,7 @@ object MediaUtil {
             )
         val newImageDetails = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, displayName)
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
             if (SysUtil.isAndroid10()) {
                 put(MediaStore.Images.Media.IS_PENDING, 1)
                 put(MediaStore.Images.Media.RELATIVE_PATH, path)
@@ -60,9 +60,11 @@ object MediaUtil {
             }
             resolver.update(uri, newImageDetails, null, null)
         }
+
+        return "sdcard/$path/${displayName}.jpg"
     }
 
-    private fun saveMediaImageOther(context: Context, dir: String, displayName: String, bitmap: Bitmap) {
+    private fun saveMediaImageOther(context: Context, dir: String, displayName: String, bitmap: Bitmap): String {
         val path =
             "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath}/${dir}"
         val imageFile = File(path.mkdirs(), "${displayName}.jpg")
@@ -73,9 +75,10 @@ object MediaUtil {
         CloseUtil.closeIO(ops)
         context.sendBroadcast(
             Intent(
-                Intent.ACTION_MEDIA_MOUNTED,
-                Uri.parse("file://${imageFile.absolutePath}")
+                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(imageFile)
             )
         )
+        return "sdcard/$path/${displayName}.jpg"
     }
 }

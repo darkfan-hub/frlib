@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -96,10 +97,25 @@ object ImageUtil {
      * @param height view高
      * @return drawable
      */
-    fun view2Bitmap(view: View, width: Int, height: Int): Bitmap {
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+    fun view2Bitmap(view: View, x: Int, y: Int, width: Int, height: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        view.layout(0, 0, width, height)
+        canvas.drawColor(Color.WHITE)
+        view.layout(x, y, (x + width), (y + height))
+        view.draw(canvas)
+        return bitmap
+    }
+
+    /**
+     * view转bitmap
+     *
+     * @param view view对象
+     * @return drawable
+     */
+    fun view2Bitmap(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        canvas.drawColor(Color.WHITE)
         view.draw(canvas)
         return bitmap
     }

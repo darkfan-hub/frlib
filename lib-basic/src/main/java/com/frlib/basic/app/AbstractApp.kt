@@ -6,6 +6,7 @@ import androidx.work.Configuration
 import com.frlib.basic.activity.ActivityLifecycle
 import com.frlib.basic.config.ConfigModule
 import com.frlib.basic.config.GlobalConfig
+import com.frlib.basic.helper.MmkvHelper
 import com.frlib.utils.BuildConfig
 import com.frlib.utils.SysUtil
 
@@ -56,6 +57,11 @@ abstract class AbstractApp : Application(), IApp, Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         application = this
+        if (SysUtil.isMainProcess(application)) {
+            // 优先异步初始化MmkvHelper
+            MmkvHelper.initialize(application)
+        }
+
         appComponent = AppComponentImpl.build {
             app = application
             globalConfig = globalConfig(application)
@@ -63,7 +69,9 @@ abstract class AbstractApp : Application(), IApp, Configuration.Provider {
 
         appComponent.extras().put(ConfigModule::javaClass.name, configModule())
 
-        init()
+        if (SysUtil.isMainProcess(appComponent().application())) {
+            appInit().mainInit(this)
+        }
 
         // 注册activity生命周期监听
         activityLifecycle = ActivityLifecycle(appComponent)
@@ -71,6 +79,10 @@ abstract class AbstractApp : Application(), IApp, Configuration.Provider {
         activityLifecycleList.forEach {
             registerActivityLifecycleCallbacks(it)
         }
+
+        appInit().allInit(this)
+
+        appInit().threadInit(this)
     }
 
     private fun globalConfig(context: Context): GlobalConfig {
@@ -88,14 +100,4 @@ abstract class AbstractApp : Application(), IApp, Configuration.Provider {
     }
 
     override fun appComponent(): IAppComponent = appComponent
-
-    private fun init() {
-        appInit().allInit(this)
-
-        if (SysUtil.isMainProcess(appComponent().application())) {
-            appInit().mainInit(this)
-        }
-
-        appInit().threadInit(this)
-    }
 }

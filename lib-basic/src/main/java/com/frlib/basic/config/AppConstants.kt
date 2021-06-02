@@ -7,6 +7,10 @@ package com.frlib.basic.config
  */
 object AppConstants {
 
+    /** app host 相关 */
+    const val KEY_HOST_TAG = "key_host_tag"
+    const val KEY_HOST_URL = "key_host_url"
+
     /** 缓存key APP信息 */
     const val EXTRAS_KEY_APP_INFO = "app_info"
 
