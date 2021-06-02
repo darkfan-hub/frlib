@@ -76,8 +76,8 @@ open class BaseViewModel(
     }
 
     /** 协逞线程切换 */
-    private fun launchUI(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch { block() }
-    private fun launchSync(block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Dispatchers.IO).launch { block() }
+    fun launchUI(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch { block() }
+    fun launchSync(block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Dispatchers.IO).launch { block() }
 
     /**
      * 异步线程调用耗时操作并在主线程返回结果
@@ -89,6 +89,9 @@ open class BaseViewModel(
             Timber.e("${throwable.code} -------> ${throwable.errMsg}")
         },
         complete: () -> Unit = {
+            if (showLoading) {
+                hideLoading()
+            }
             Timber.d("${block.hashCode()} completed! ")
         },
         showLoading: Boolean = true

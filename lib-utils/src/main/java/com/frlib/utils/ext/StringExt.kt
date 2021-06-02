@@ -1,5 +1,8 @@
 package com.frlib.utils.ext
 
+import com.frlib.utils.EncryptUtil
+import java.util.*
+
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
  * @date 08/04/2021 19:06
@@ -36,4 +39,8 @@ fun String?.trimString(): String {
  */
 fun String?.length(): Int {
     return this?.length ?: 0
+}
+
+fun String.md5(): String {
+    return EncryptUtil.encryptMD5ToString(this).toLowerCase(Locale.getDefault())
 }
