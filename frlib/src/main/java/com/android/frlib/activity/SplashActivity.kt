@@ -23,9 +23,7 @@ class SplashActivity : AbstractActivity<FrlibActivitySplshBinding, BaseViewModel
 
     override fun initData() {
         super.initData()
-        viewModel.defaultPages(Pages.EMPTY)
-        viewModel.toast("123")
-        viewModel.showLoading()
+
     }
 
     override fun useDefaultPages(): Boolean = false

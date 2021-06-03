@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        style="@style/ViewStyle.match"
-        android:background="@color/color_1bad65"/>
+    <LinearLayout
+        style="@style/ViewStyle.linear"
+        android:background="@color/color_f4"
+        android:gravity="start">
+
+        <com.frlib.basic.views.form.SuperFormView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:formLeftText="电话"
+            app:formMinHeight="54dp"
+            app:formMustFill="true"
+            app:formMustText="&#42;"
+            app:formRightEditEnable="true"
+            app:formRightTextInputType="phone"
+            app:formRightTextMaxSize="11"
+            app:formRightIconMargin="15dp"
+            app:formRightHintText="收件人电话号"
+            app:formLeftTextSize="17sp"
+            app:formRightIcon="@drawable/frlib_icon_arrow_right"
+            app:formRightTextMargin="5dp"/>
+    </LinearLayout>
 </layout>

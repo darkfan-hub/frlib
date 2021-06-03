@@ -67,3 +67,10 @@ fun Drawable.tintIcon(@ColorInt tintColor: Int): Drawable {
 fun Context.dp2px(dp: Float): Int {
     return ConvertUtil.dp2px(this, dp)
 }
+
+/**
+ * 单位转换, sp转px
+ */
+fun Context.sp2Px(dp: Float): Int {
+    return ConvertUtil.sp2px(this, dp)
+}
