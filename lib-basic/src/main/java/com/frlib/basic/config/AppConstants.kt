@@ -11,6 +11,12 @@ object AppConstants {
     const val KEY_HOST_TAG = "key_host_tag"
     const val KEY_HOST_URL = "key_host_url"
 
+    /** app token */
+    const val KEY_TOKEN = "token"
+
+    /** app 登录状态 */
+    const val KEY_LOGGED_IN = "logged_in"
+
     /** 缓存key APP信息 */
     const val EXTRAS_KEY_APP_INFO = "app_info"
 

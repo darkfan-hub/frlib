@@ -24,6 +24,8 @@ import com.frlib.utils.ext.*
  */
 abstract class AbstractFormView : ISuperFormView {
 
+    private var leftText: AppCompatTextView? = null
+
     override fun formLeftView(context: Context, ta: TypedArray): View {
         val minHeight = ta.getDimensionPixelSize(R.styleable.SuperFormView_formMinHeight, context.dp2px(54f))
 
@@ -61,7 +63,7 @@ abstract class AbstractFormView : ISuperFormView {
                 Gravity.CENTER,
                 ta.getColor(
                     R.styleable.SuperFormView_formMustTextColor,
-                    context.color(R.color.color_f64541)
+                    context.color(R.color.color_cc)
                 ),
                 ta.getDimensionPixelSize(R.styleable.SuperFormView_formMustTextSize, context.sp2Px(17f))
             )
@@ -81,7 +83,7 @@ abstract class AbstractFormView : ISuperFormView {
 
         // 左侧文字
         if (ta.hasValue(R.styleable.SuperFormView_formLeftText)) {
-            val leftText = createText(
+            leftText = createText(
                 context,
                 ta.getString(R.styleable.SuperFormView_formLeftText).invalid(),
                 Gravity.CENTER,
@@ -103,11 +105,15 @@ abstract class AbstractFormView : ISuperFormView {
 
             leftTextParams.marginStart = ta.getDimensionPixelSize(R.styleable.SuperFormView_formLeftTextMargin, context.dp2px(2f))
 
-            leftText.layoutParams = leftTextParams
-            leftView.addView(leftText)
+            leftText!!.layoutParams = leftTextParams
+            leftView.addView(leftText!!)
         }
 
         return leftView
+    }
+
+    fun setLeftText(text: String) {
+        leftText?.text = text
     }
 
     open fun createIcon(context: Context, isCircle: Boolean, url: String?, drawable: Drawable?): AppCompatImageView {

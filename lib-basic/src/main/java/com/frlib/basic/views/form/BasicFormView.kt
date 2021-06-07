@@ -76,8 +76,8 @@ class BasicFormView : AbstractFormView() {
         )
         // 文本输入类型
         when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 0)) {
-            0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
-            1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER
+            /*0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
+            1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER*/
             2 -> rightEditText.inputType = InputType.TYPE_CLASS_PHONE
         }
         // 文本位置
@@ -85,6 +85,11 @@ class BasicFormView : AbstractFormView() {
         changeEditGravity(editGravity)
         // 文本是否可点击
         val enable = ta.getBoolean(R.styleable.SuperFormView_formRightEditEnable, false)
+        if (!enable) {
+            rightEditText.isFocusable = false
+            rightEditText.isFocusableInTouchMode = false
+            rightEditText.keyListener = null
+        }
         rightEditText.isEnabled = enable
         // 文本最大字符
         val maxSize = ta.getInteger(R.styleable.SuperFormView_formRightTextMaxSize, 30)
@@ -119,6 +124,8 @@ class BasicFormView : AbstractFormView() {
         } else {
             rightEditParams.addRule(RelativeLayout.ALIGN_PARENT_END)
         }
+        rightEditParams.marginEnd =
+            ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightTextMargin, context.dp2px(10f))
         rightEditText.layoutParams = rightEditParams
 
         rightView.addView(rightEditText)
@@ -139,7 +146,22 @@ class BasicFormView : AbstractFormView() {
         }
     }
 
-    override fun setRightText(text: String) {
+    fun setRightText(text: String) {
         rightEditText.setText(text)
+    }
+
+    fun setRightHintText(text: String) {
+        rightEditText.hint = text
+    }
+
+    /**
+     * 添加右侧文字输入监听
+     */
+    fun addRightTextChangedListener(watcher: TextWatcher) {
+        rightEditText.addTextChangedListener(watcher)
+    }
+
+    fun getRightText(): String {
+        return rightEditText.text.toString().invalid()
     }
 }

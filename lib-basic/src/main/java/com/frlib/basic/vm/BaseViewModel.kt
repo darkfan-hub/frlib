@@ -89,9 +89,6 @@ open class BaseViewModel(
             Timber.e("${throwable.code} -------> ${throwable.errMsg}")
         },
         complete: () -> Unit = {
-            if (showLoading) {
-                hideLoading()
-            }
             Timber.d("${block.hashCode()} completed! ")
         },
         showLoading: Boolean = true
@@ -114,7 +111,12 @@ open class BaseViewModel(
                     toast(error.errMsg)
                     error(error)
                 },
-                { complete() })
+                {
+                    if (showLoading) {
+                        hideLoading()
+                    }
+                    complete()
+                })
         }
     }
 

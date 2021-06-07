@@ -99,9 +99,19 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
     }
 
     private int marginHorizontal = 0;
+    private int leftMargin = 0;
+    private int rightMargin = 0;
 
     public void setMarginHorizontal(int marginHorizontal) {
         this.marginHorizontal = marginHorizontal;
+    }
+
+    public void setLeftMargin(int margin) {
+        this.leftMargin = margin;
+    }
+
+    public void setRightMargin(int margin) {
+        this.rightMargin = margin;
     }
 
     /**
@@ -187,7 +197,7 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
                 mDrawable.draw(canvas);
             }
             if (mPaint != null) {
-                canvas.drawRect(x + marginHorizontal, y, width - marginHorizontal, height, mPaint);
+                canvas.drawRect(x + marginHorizontal + leftMargin, y, width - marginHorizontal - rightMargin, height, mPaint);
             }
         }
     }

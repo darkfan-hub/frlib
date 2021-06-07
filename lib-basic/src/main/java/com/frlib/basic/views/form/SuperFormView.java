@@ -3,12 +3,14 @@ package com.frlib.basic.views.form;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.frlib.basic.R;
+import com.frlib.utils.ext.ResourcesExtKt;
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -17,6 +19,10 @@ import com.frlib.basic.R;
  */
 public class SuperFormView extends RelativeLayout {
 
+    /**
+     * 表单view
+     */
+    private final ISuperFormView formView;
     /**
      * 表单右侧视图
      */
@@ -47,7 +53,6 @@ public class SuperFormView extends RelativeLayout {
 
         int formStyle = ta.getInt(R.styleable.SuperFormView_formStyle, 0);
         // 表单view
-        ISuperFormView formView;
         if (formStyle == 0) {
             formView = new BasicFormView();
         } else {
@@ -57,6 +62,23 @@ public class SuperFormView extends RelativeLayout {
         addView(formView.formLeftView(context, ta));
         formRightView = formView.formRightView(context, ta);
         addView(formRightView);
+
+        // 下划线
+        boolean showBottomLine = ta.getBoolean(R.styleable.SuperFormView_formShowBottomLine, true);
+        if (showBottomLine) {
+            View lineView = new View(context);
+            int lineColor = ta.getColor(R.styleable.SuperFormView_formBottomLineColor, ResourcesExtKt.color(context, R.color.color_f4));
+            lineView.setBackgroundColor(lineColor);
+            int lineHeight = ta.getDimensionPixelSize(R.styleable.SuperFormView_formBottomLineHeight, ResourcesExtKt.dp2px(context, 1f));
+            LayoutParams lineParams = new LayoutParams(LayoutParams.MATCH_PARENT, lineHeight);
+            lineParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            int leftMargin = ta.getDimensionPixelSize(R.styleable.SuperFormView_formBottomLineMarginLeft, 0);
+            int rightMargin = ta.getDimensionPixelSize(R.styleable.SuperFormView_formBottomLineMarginRight, 0);
+            lineParams.setMarginStart(leftMargin);
+            lineParams.setMarginEnd(rightMargin);
+            lineView.setLayoutParams(lineParams);
+            addView(lineView);
+        }
         ta.recycle();
     }
 
@@ -67,6 +89,61 @@ public class SuperFormView extends RelativeLayout {
      */
     public View formRightView() {
         return formRightView;
+    }
+
+    /**
+     * 设置右侧文字
+     *
+     * @param text 文字
+     */
+    public void setLeftText(String text) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).setLeftText(text);
+        }
+    }
+
+    /**
+     * 获取右侧文字
+     *
+     * @return 右侧文字
+     */
+    public String getRightText() {
+        if (formView instanceof BasicFormView) {
+            return ((BasicFormView) formView).getRightText();
+        }
+
+        return "";
+    }
+
+    /**
+     * 设置右侧文字
+     *
+     * @param text 文字
+     */
+    public void setRightText(String text) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).setRightText(text);
+        }
+    }
+
+    /**
+     * 设置右侧提示文字
+     *
+     * @param text 文字
+     */
+    public void setRightHintText(String text) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).setRightHintText(text);
+        }
+    }
+
+    /**
+     * 添加右侧文字输入监听
+     */
+    public void addRightTextChangedListener(TextWatcher watcher) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).addRightTextChangedListener(watcher);
+        }
     }
 
     /**

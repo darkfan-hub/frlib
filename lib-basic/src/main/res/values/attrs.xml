@@ -253,7 +253,7 @@
         <attr name="formLeftIconUrl" format="string"/>
         <attr name="formLeftIconCircle" format="boolean"/>
         <!-- 左侧icon左边距, 默认10dp -->
-        <attr name="formLeftIconMargin" format="reference"/>
+        <attr name="formLeftIconMargin" format="dimension"/>
         <!-- 是否显示必填, 默认显示 -->
         <attr name="formMustFill" format="boolean"/>
         <attr name="formMustText" format="string"/>
@@ -312,5 +312,18 @@
         <attr name="formRightTextMargin" format="dimension"/>
         <!-- 右侧自定义视图 -->
         <attr name="formRightCustomView" format="reference"/>
+        <!-- 右侧自定义视图 宽 -->
+        <attr name="formRightCustomViewWidth" format="dimension"/>
+
+        <!-- 表单下划线, 默认显示 -->
+        <attr name="formShowBottomLine" format="boolean"/>
+        <!-- 表单下划线高度, 默认1dp -->
+        <attr name="formBottomLineHeight" format="dimension"/>
+        <!-- 表单下划线颜色, 默认#F4F4F4 -->
+        <attr name="formBottomLineColor" format="color"/>
+        <!-- 表单下划线左边距, 默认0dp -->
+        <attr name="formBottomLineMarginLeft" format="dimension"/>
+        <!-- 表单下划线右边距, 默认0dp -->
+        <attr name="formBottomLineMarginRight" format="dimension"/>
     </declare-styleable>
 </resources>

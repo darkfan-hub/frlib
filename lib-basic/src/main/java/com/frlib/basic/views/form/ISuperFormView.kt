@@ -20,9 +20,4 @@ interface ISuperFormView {
      * 表单右侧view
      */
     fun formRightView(context: Context, ta: TypedArray): View
-
-    /**
-     * 设置右边文本
-     */
-    fun setRightText(text: String)
 }

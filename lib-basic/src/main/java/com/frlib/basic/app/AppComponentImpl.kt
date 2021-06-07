@@ -7,6 +7,7 @@ import androidx.work.WorkManager
 import com.frlib.basic.R
 import com.frlib.basic.cache.CacheFactory
 import com.frlib.basic.config.GlobalConfig
+import com.frlib.basic.gson.*
 import com.frlib.basic.net.HttpClient
 import com.frlib.basic.net.IRepositoryManager
 import com.frlib.basic.net.RepositoryManagerImpl
@@ -15,10 +16,12 @@ import com.frlib.basic.views.EmptyView
 import com.frlib.utils.ext.string
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.internal.bind.TypeAdapters
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -100,6 +103,19 @@ class AppComponentImpl(
             synchronized(AppComponentImpl) {
                 if (gson == null) {
                     val builder = GsonBuilder()
+                        // 添加adapter
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(String::class.java, StringTypeAdapter()))
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(Boolean::class.java, BooleanTypeAdapter()))
+                        .registerTypeAdapterFactory(
+                            TypeAdapters.newFactory(
+                                BigDecimal::class.java,
+                                BigDecimalTypeAdapter()
+                            )
+                        )
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(Double::class.java, DoubleTypeAdapter()))
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(Float::class.java, FloatTypeAdapter()))
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(Int::class.java, IntegerTypeAdapter()))
+                        .registerTypeAdapterFactory(TypeAdapters.newFactory(Long::class.java, LongTypeAdapter()))
                         // 支持序列化null的参数
                         .serializeNulls()
                         // 支持将序列化key为object的map,默认只能序列化key为string的map

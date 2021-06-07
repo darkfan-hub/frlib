@@ -12,7 +12,7 @@ import com.frlib.basic.lifecycle.SingleLiveEvent
  * @desc list view model 基类
  */
 abstract class BaseListViewModel<T>(
-    val appComponent: IAppComponent
+    appComponent: IAppComponent
 ) : BaseViewModel(appComponent) {
 
     val queryMap = HashMap<String, Any>()

@@ -338,7 +338,7 @@ public class TitleBar extends RelativeLayout {
         rlMain = new RelativeLayout(context);
         rlMain.setId(View.generateViewId());
         rlMain.setBackgroundColor(titleBarColor);
-        int bottomLineHeight = Math.max(1, UIUtil.dp2px(context, 0.4f));
+        int bottomLineHeight = Math.max(1, UIUtil.dp2px(context, 1f));
         titleBarHeight = showBottomLine
                 ? titleBarHeight - bottomLineHeight
                 : titleBarHeight;
