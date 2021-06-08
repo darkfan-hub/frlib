@@ -67,7 +67,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <!-- 背景透明 -->
         <item name="android:windowBackground">@color/color_transparent</item>
-        <!-- 遮盖层 -->
+        <!-- 去除黑色边框的关键设置项 遮盖层 -->
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
@@ -82,14 +82,16 @@
         <!-- ActionMode 覆盖 Actionbar，不顶下来 -->
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.3</item>
     </style>
 
-    <style name="anim_bottom_to_bottom" parent="Dialog">
+    <style name="anim_bottom_to_bottom" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/bottom_sheet_slide_in</item>
         <item name="android:windowExitAnimation">@anim/bottom_sheet_slide_out</item>
     </style>
 
-    <style name="anim_fade" parent="Dialog">
+    <style name="anim_fade" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/anim_fade_in</item>
         <item name="android:windowExitAnimation">@anim/anim_fade_out</item>
     </style>

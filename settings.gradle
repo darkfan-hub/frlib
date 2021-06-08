@@ -1,5 +1,6 @@
-include ':resources'
 include ':frlib'
+include ':resources'
 include ':lib-basic'
+include ':lib-picker'
 include ':lib-utils'
 rootProject.name = "FrLib"

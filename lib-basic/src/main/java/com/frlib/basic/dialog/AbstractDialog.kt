@@ -40,7 +40,9 @@ abstract class AbstractDialog : DialogFragment() {
      */
     open fun initDialog() {
         dialog?.window?.apply {
-            // 去掉dialog默认的padding
+            // 设置动画
+            setWindowAnimations(dialogAnim())
+            // 设置dialog padding
             decorView.setPadding(dialogHorizontalMargin(), 0, dialogHorizontalMargin(), 0)
             val params = attributes
             params.width = dialogWidth()
@@ -114,9 +116,16 @@ abstract class AbstractDialog : DialogFragment() {
     }
 
     /**
-     * 对话框动画
+     * 对话框样式
      */
     open fun dialogStyle(): Int {
+        return R.style.Dialog
+    }
+
+    /**
+     * 对话框动画
+     */
+    open fun dialogAnim(): Int {
         return R.style.anim_bottom_to_bottom
     }
 
