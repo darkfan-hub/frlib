@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 
 fun Context.storage(callback: IPermissionCallback) {
     XXPermissions.with(this)
-        .permission(Permission.MANAGE_EXTERNAL_STORAGE)
+        .permission(Permission.Group.STORAGE)
         .request(object : OnPermissionCallback {
             override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
                 if (all) {
@@ -33,7 +33,7 @@ fun Context.storage(callback: IPermissionCallback) {
 
 fun Fragment.storage(callback: IPermissionCallback) {
     XXPermissions.with(this)
-        .permission(Permission.MANAGE_EXTERNAL_STORAGE)
+        .permission(Permission.Group.STORAGE)
         .request(object : OnPermissionCallback {
             override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
                 if (all) {

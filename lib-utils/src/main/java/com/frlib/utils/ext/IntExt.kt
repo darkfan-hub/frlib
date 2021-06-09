@@ -17,3 +17,14 @@ val RMB_DECIMAL by lazy {
 fun Int.cent2Yuan(): String {
     return BigDecimal(this).divide(RMB_DECIMAL).toString()
 }
+
+/**
+ * 粉丝数格式化
+ */
+fun Int.fansCountFormat(): String {
+    return if (this < 10000) {
+        this.toString()
+    } else {
+        "${this / 10000}w+"
+    }
+}
