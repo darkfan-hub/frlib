@@ -71,6 +71,7 @@ public class WheelView extends View {
      * 选项的文字大小
      */
     private int textSize;
+    private int textOutSize;
     private int maxTextWidth;
     private int maxTextHeight;
     private int textXOffset;
@@ -78,6 +79,7 @@ public class WheelView extends View {
      * 每行高度
      */
     private float itemHeight;
+    private int wheelHeight;
 
     /**
      * 字体样式，默认是等宽字体
@@ -87,6 +89,8 @@ public class WheelView extends View {
     private int textColorCenter;
     private int dividerColor;
     private int dividerWidth;
+    private int dividerPaddingStart;
+    private int dividerPaddingEnd;
 
     // 条目间距倍数
     private float lineSpacingMultiplier = 1.6F;
@@ -162,7 +166,11 @@ public class WheelView extends View {
             textColorCenter = a.getColor(R.styleable.WheelView_wheelview_textColorCenter, 0xFF2a2a2a);
             dividerColor = a.getColor(R.styleable.WheelView_wheelview_dividerColor, 0xFFd5d5d5);
             dividerWidth = a.getDimensionPixelSize(R.styleable.WheelView_wheelview_dividerWidth, 2);
+            dividerPaddingStart = a.getDimensionPixelSize(R.styleable.WheelView_wheelview_dividerPaddingStart, 0);
+            dividerPaddingEnd = a.getDimensionPixelSize(R.styleable.WheelView_wheelview_dividerPaddingEnd, 0);
             textSize = a.getDimensionPixelOffset(R.styleable.WheelView_wheelview_textSize, textSize);
+            wheelHeight = a.getDimensionPixelOffset(R.styleable.WheelView_wheelview_height, 0);
+            textOutSize = a.getDimensionPixelOffset(R.styleable.WheelView_wheelview_textOutSize, textSize);
             lineSpacingMultiplier = a.getFloat(R.styleable.WheelView_wheelview_lineSpacingMultiplier, lineSpacingMultiplier);
             a.recycle();//回收内存
         }
@@ -199,7 +207,7 @@ public class WheelView extends View {
         paintOuterText.setColor(textColorOut);
         paintOuterText.setAntiAlias(true);
         paintOuterText.setTypeface(typeface);
-        paintOuterText.setTextSize(textSize);
+        paintOuterText.setTextSize(textOutSize);
 
         paintCenterText = new Paint();
         paintCenterText.setColor(textColorCenter);
@@ -262,7 +270,7 @@ public class WheelView extends View {
         }
         paintCenterText.getTextBounds("\u661F\u671F", 0, 2, rect); // 星期的字符编码（以它为标准高度）
         maxTextHeight = rect.height() + 2;
-        itemHeight = lineSpacingMultiplier * maxTextHeight;
+        itemHeight = Math.max(lineSpacingMultiplier * maxTextHeight, wheelHeight);
     }
 
     public void smoothScroll(ACTION action) {//平滑滚动的实现
@@ -438,8 +446,8 @@ public class WheelView extends View {
                 startX = 10;
             }
             endX = measuredWidth - startX;
-            canvas.drawLine(startX, firstLineY, endX, firstLineY, paintIndicator);
-            canvas.drawLine(startX, secondLineY, endX, secondLineY, paintIndicator);
+            canvas.drawLine((startX + dividerPaddingStart), firstLineY, (endX - dividerPaddingEnd), firstLineY, paintIndicator);
+            canvas.drawLine((startX + dividerPaddingStart), secondLineY, (endX - dividerPaddingEnd), secondLineY, paintIndicator);
         } else if (dividerType == DividerType.CIRCLE) {
             //分割线为圆圈形状
             paintIndicator.setStyle(Paint.Style.STROKE);
@@ -459,8 +467,8 @@ public class WheelView extends View {
             float radius = Math.max((endX - startX), itemHeight) / 1.8f;
             canvas.drawCircle(measuredWidth / 2f, measuredHeight / 2f, radius, paintIndicator);
         } else {
-            canvas.drawLine(0.0F, firstLineY, measuredWidth, firstLineY, paintIndicator);
-            canvas.drawLine(0.0F, secondLineY, measuredWidth, secondLineY, paintIndicator);
+            canvas.drawLine(dividerPaddingStart, firstLineY, (measuredWidth - dividerPaddingEnd), firstLineY, paintIndicator);
+            canvas.drawLine(dividerPaddingStart, secondLineY, (measuredWidth - dividerPaddingEnd), secondLineY, paintIndicator);
         }
 
         //只显示选中项Label文字的模式，并且Label文字不为空，则进行绘制
@@ -798,7 +806,6 @@ public class WheelView extends View {
     }
 
     public void setTextColorOut(int textColorOut) {
-
         this.textColorOut = textColorOut;
         paintOuterText.setColor(this.textColorOut);
     }

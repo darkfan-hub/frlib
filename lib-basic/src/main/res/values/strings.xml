@@ -7,4 +7,10 @@
     <string name="frlib_text_origin_image">查看原图</string>
     <string name="frlib_text_header_update">上次更新 MM-dd HH:mm</string>
     <string name="frlib_text_must_fill">*</string>
+
+    <string name="frlib_text_take_photo">拍照</string>
+    <string name="frlib_text_select_photo">从手机相册选择</string>
+    <string name="frlib_text_confirm">确认</string>
+    <string name="frlib_text_cancel">取消</string>
+    <string name="frlib_text_cancel_select_photo">取消选择图片</string>
 </resources>

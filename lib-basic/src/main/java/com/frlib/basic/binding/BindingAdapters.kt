@@ -8,7 +8,7 @@ import com.frlib.basic.image.displayImage
 import com.frlib.basic.image.displayRadiusImage
 import com.frlib.utils.ext.dp2px
 import com.frlib.utils.ext.drawable
-import com.frlib.utils.ext.length
+import com.frlib.utils.ext.invalid
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -23,21 +23,15 @@ fun bindImage(imageView: ImageView, imageRes: Int) {
 
 @BindingAdapter(value = ["imageUrl", "placeholder"])
 fun bindImage(imageView: ImageView, imageUrl: String?, placeholder: Drawable) {
-    if (imageUrl.length() > 0) {
-        imageView.displayImage(imageUrl!!, placeholder = placeholder)
-    }
+    imageView.displayImage(imageUrl.invalid(), placeholder = placeholder)
 }
 
 @BindingAdapter(value = ["imageUrl", "radius", "placeholder"])
 fun bindRadiusImage(imageView: ImageView, imageUrl: String?, radius: Int, placeholder: Drawable) {
-    if (imageUrl.length() > 0) {
-        imageView.displayRadiusImage(imageUrl!!, imageView.context.dp2px(radius.toFloat()), placeholder = placeholder)
-    }
+    imageView.displayRadiusImage(imageUrl.invalid(), imageView.context.dp2px(radius.toFloat()), placeholder = placeholder)
 }
 
 @BindingAdapter(value = ["circleUrl", "placeholder"])
 fun bindCircleImage(imageView: ImageView, circleUrl: String?, placeholder: Drawable) {
-    if (circleUrl.length() > 0) {
-        imageView.displayCircleImage(circleUrl!!, placeholder = placeholder)
-    }
+    imageView.displayCircleImage(circleUrl.invalid(), placeholder = placeholder)
 }

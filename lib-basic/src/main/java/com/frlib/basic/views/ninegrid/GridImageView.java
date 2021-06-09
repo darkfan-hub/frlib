@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import androidx.appcompat.widget.AppCompatImageView;
+import timber.log.Timber;
 
 /**
  * @author Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -26,7 +27,7 @@ public class GridImageView extends AppCompatImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
+        /*switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Drawable drawable = getDrawable();
                 if (drawable != null) {
@@ -42,7 +43,7 @@ public class GridImageView extends AppCompatImageView {
                 break;
             default:
                 break;
-        }
+        }*/
 
         return super.onTouchEvent(event);
     }
