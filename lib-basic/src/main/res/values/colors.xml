@@ -4,7 +4,8 @@
     <color name="color_transparent25">#40000000</color>
 
     <color name="color_white">#FFFFFFFF</color>
-    <color name="color_white_95">#F2FFFFFF</color>
+    <color name="color_white50">#80FFFFFF</color>
+    <color name="color_white95">#F2FFFFFF</color>
     <color name="color_black">#FF000000</color>
     <color name="color_black30">#4D000000</color>
     <color name="color_black50">#80000000</color>

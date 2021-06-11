@@ -1,11 +1,14 @@
 package com.frlib.basic.vm
 
+import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
+import com.frlib.basic.R
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.config.AppConstants
 import com.frlib.basic.data.entity.BasicApiEntity
 import com.frlib.basic.defaultpages.Pages
+import com.frlib.basic.lifecycle.SingleLiveEvent
 import com.frlib.basic.net.ERROR
 import com.frlib.basic.net.ResponseThrowable
 import com.frlib.basic.net.handleException
@@ -21,8 +24,14 @@ import timber.log.Timber
  * @desc
  */
 open class BaseViewModel(
-    private val appComponent: IAppComponent
-) : AndroidViewModel(appComponent.application()), LifecycleObserver {
+    application: Application
+) : AndroidViewModel(application), LifecycleObserver {
+
+    open lateinit var appComponent: IAppComponent
+
+    fun setupAppComponent(appComponent: IAppComponent) {
+        this.appComponent = appComponent
+    }
 
     val defUI: UIChange by lazy { UIChange() }
 
@@ -64,15 +73,15 @@ open class BaseViewModel(
     /**
      * 显示loading
      */
-    fun showLoading() {
-        defUI.loading.postValue(true)
+    fun showLoading(title: String = appComponent.application().string(R.string.frlib_text_loading)) {
+        defUI.showLoading.postValue(title)
     }
 
     /**
      * 隐藏loading
      */
     fun hideLoading() {
-        defUI.loading.postValue(false)
+        defUI.hideLoading.call()
     }
 
     /** 协逞线程切换 */
@@ -188,7 +197,8 @@ open class BaseViewModel(
 
     class UIChange {
         val toast by lazy { MutableLiveData<String>() }
-        val loading by lazy { MutableLiveData<Boolean>() }
+        val showLoading by lazy { MutableLiveData<String>() }
+        val hideLoading by lazy { SingleLiveEvent<Void>() }
         val defaultPages by lazy { MutableLiveData<Pages>() }
     }
 }

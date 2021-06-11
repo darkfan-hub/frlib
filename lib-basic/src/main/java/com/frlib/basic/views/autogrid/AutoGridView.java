@@ -165,6 +165,9 @@ public class AutoGridView extends ViewGroup {
                 if (mCacheBin == null) {
                     mCacheBin = new HashMap<>();
                 }
+                if (mCacheTypeBin == null) {
+                    mCacheTypeBin = new ArrayList<>();
+                }
                 for (int i = 0, len = mCacheTypeBin.size(); i < len; i++) {
                     String key = mCacheTypeBin.get(i);
                     List<SoftReference<View>> views = mCacheBin.get(key);

@@ -28,6 +28,7 @@ import timber.log.Timber
 class BasicFormView : AbstractFormView() {
 
     private lateinit var rightEditText: AppCompatEditText
+    private lateinit var rightEditTopView: View
 
     override fun formRightView(context: Context, ta: TypedArray): View {
         val minHeight = ta.getDimensionPixelSize(R.styleable.SuperFormView_formMinHeight, context.dp2px(54f))
@@ -75,9 +76,9 @@ class BasicFormView : AbstractFormView() {
             ta.getColor(R.styleable.SuperFormView_formRightHintTextColor, context.color(R.color.color_cc))
         )
         // 文本输入类型
-        when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 0)) {
-            /*0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
-            1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER*/
+        when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 3)) {
+            0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
+            1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER
             2 -> rightEditText.inputType = InputType.TYPE_CLASS_PHONE
         }
         // 文本位置
@@ -127,8 +128,11 @@ class BasicFormView : AbstractFormView() {
         rightEditParams.marginEnd =
             ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightTextMargin, context.dp2px(10f))
         rightEditText.layoutParams = rightEditParams
-
         rightView.addView(rightEditText)
+
+        rightEditTopView = View(context)
+        rightEditTopView.layoutParams = rightEditParams
+        rightView.addView(rightEditTopView)
         return rightView
     }
 
@@ -161,7 +165,24 @@ class BasicFormView : AbstractFormView() {
         rightEditText.addTextChangedListener(watcher)
     }
 
+    /**
+     * 移除右侧文字输入监听
+     */
+    fun removeRightTextChangedListener(watcher: TextWatcher) {
+        rightEditText.removeTextChangedListener(watcher)
+    }
+
     fun getRightText(): String {
         return rightEditText.text.toString().invalid()
+    }
+
+    fun setClickCallback(callback: View.OnClickListener) {
+        if (!editEnable()) {
+            rightEditTopView.setOnClickListener(callback)
+        }
+    }
+
+    fun editEnable(): Boolean {
+        return rightEditText.isEnabled
     }
 }

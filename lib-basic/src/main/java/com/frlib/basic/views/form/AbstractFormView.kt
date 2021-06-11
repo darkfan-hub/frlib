@@ -24,6 +24,7 @@ import com.frlib.utils.ext.*
  */
 abstract class AbstractFormView : ISuperFormView {
 
+    private var leftIcon: AppCompatImageView? = null
     private var leftText: AppCompatTextView? = null
 
     override fun formLeftView(context: Context, ta: TypedArray): View {
@@ -36,21 +37,22 @@ abstract class AbstractFormView : ISuperFormView {
         var iconId = 0
         if (ta.hasValue(R.styleable.SuperFormView_formLeftIcon) || ta.hasValue(R.styleable.SuperFormView_formLeftIconUrl)) {
             val circleImage = ta.getBoolean(R.styleable.SuperFormView_formLeftIconCircle, false)
-            val icon = createIcon(
+            leftIcon = createIcon(
                 context,
                 circleImage,
                 ta.getString(R.styleable.SuperFormView_formLeftIconUrl),
                 ta.getDrawable(R.styleable.SuperFormView_formLeftIcon)
             )
-            iconId = icon.id
+            iconId = leftIcon!!.id
 
             val iconParams =
                 RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             iconParams.addRule(RelativeLayout.CENTER_VERTICAL)
-            iconParams.marginStart = ta.getDimensionPixelSize(R.styleable.SuperFormView_formLeftIconMargin, context.dp2px(10f))
-            icon.layoutParams = iconParams
+            iconParams.marginStart =
+                ta.getDimensionPixelSize(R.styleable.SuperFormView_formLeftIconMargin, context.dp2px(10f))
+            leftIcon!!.layoutParams = iconParams
 
-            leftView.addView(icon)
+            leftView.addView(leftIcon)
         }
 
         // 左侧必填
@@ -75,7 +77,8 @@ abstract class AbstractFormView : ISuperFormView {
             if (iconId != 0) {
                 mustParams.addRule(RelativeLayout.END_OF, iconId)
             }
-            mustParams.marginStart = ta.getDimensionPixelSize(R.styleable.SuperFormView_formMustTextMargin, context.dp2px(15f))
+            mustParams.marginStart =
+                ta.getDimensionPixelSize(R.styleable.SuperFormView_formMustTextMargin, context.dp2px(15f))
 
             must.layoutParams = mustParams
             leftView.addView(must)
@@ -103,7 +106,8 @@ abstract class AbstractFormView : ISuperFormView {
                 leftTextParams.addRule(RelativeLayout.END_OF, iconId)
             }
 
-            leftTextParams.marginStart = ta.getDimensionPixelSize(R.styleable.SuperFormView_formLeftTextMargin, context.dp2px(2f))
+            leftTextParams.marginStart =
+                ta.getDimensionPixelSize(R.styleable.SuperFormView_formLeftTextMargin, context.dp2px(2f))
 
             leftText!!.layoutParams = leftTextParams
             leftView.addView(leftText!!)
@@ -114,6 +118,10 @@ abstract class AbstractFormView : ISuperFormView {
 
     fun setLeftText(text: String) {
         leftText?.text = text
+    }
+
+    fun setLeftIconVisibility(visibility: Int) {
+        leftIcon?.visibility = visibility
     }
 
     open fun createIcon(context: Context, isCircle: Boolean, url: String?, drawable: Drawable?): AppCompatImageView {

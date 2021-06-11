@@ -144,7 +144,11 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
     private fun setViewModel() {
         val classVM = RefGenericSuperclass.findActualTypeClass(javaClass, BaseViewModel::class.java)
         if (classVM != null) {
-            viewModel = ViewModelProvider(this, ViewModelFactory.default(appComponent)).get((classVM as Class<VM>))
+            viewModel = ViewModelProvider(
+                this,
+                ViewModelFactory.default(appComponent.application())
+            ).get((classVM as Class<VM>))
+            viewModel.setupAppComponent(appComponent)
             lifecycle.addObserver(viewModel)
         }
     }
@@ -158,19 +162,20 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
     override fun initObservables() {
         viewModel.defUI.toast.observe(this, { FrToasty.normal(selfContext, it).show() })
 
-        viewModel.defUI.loading.observe(this, {
+        viewModel.defUI.showLoading.observe(this, {
             if (loading == null) {
                 loading = XPopup.Builder(selfContext)
                     .dismissOnTouchOutside(false)
                     .dismissOnBackPressed(false)
-                    .asLoading("正在加载中...")
+                    .asLoading()
             }
 
-            if (it) {
-                loading?.show()
-            } else {
-                loading?.dismiss()
-            }
+            loading?.setTitle(it)
+            loading?.show()
+        })
+
+        viewModel.defUI.hideLoading.observe(this, {
+            loading?.dismiss()
         })
 
         viewModel.defUI.defaultPages.observe(this, {

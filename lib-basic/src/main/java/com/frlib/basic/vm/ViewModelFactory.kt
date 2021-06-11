@@ -1,5 +1,6 @@
 package com.frlib.basic.vm
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.frlib.basic.app.IAppComponent
@@ -10,17 +11,17 @@ import com.frlib.basic.app.IAppComponent
  * @desc 自定义view model创建工厂
  */
 class ViewModelFactory(
-    private val appComponent: IAppComponent
+    private val application: Application
 ) : ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         private var instances: ViewModelFactory? = null
 
-        fun default(appComponent: IAppComponent): ViewModelFactory {
+        fun default(application: Application): ViewModelFactory {
             if (null == instances) {
                 synchronized(ViewModelFactory::class.java) {
                     if (null == instances) {
-                        instances = ViewModelFactory(appComponent)
+                        instances = ViewModelFactory(application)
                     }
                 }
             }
@@ -30,6 +31,6 @@ class ViewModelFactory(
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(IAppComponent::class.java).newInstance(appComponent)
+        return modelClass.getConstructor(Application::class.java).newInstance(application)
     }
 }

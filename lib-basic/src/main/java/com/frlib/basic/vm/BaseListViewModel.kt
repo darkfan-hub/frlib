@@ -1,7 +1,7 @@
 package com.frlib.basic.vm
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.data.entity.BasicApiEntity
 import com.frlib.basic.data.entity.BasicApiPageEntity
 import com.frlib.basic.lifecycle.SingleLiveEvent
@@ -12,8 +12,8 @@ import com.frlib.basic.lifecycle.SingleLiveEvent
  * @desc list view model 基类
  */
 abstract class BaseListViewModel<T>(
-    appComponent: IAppComponent
-) : BaseViewModel(appComponent) {
+    application: Application
+) : BaseViewModel(application) {
 
     val queryMap = HashMap<String, Any>()
 

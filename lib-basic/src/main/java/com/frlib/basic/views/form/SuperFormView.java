@@ -92,13 +92,24 @@ public class SuperFormView extends RelativeLayout {
     }
 
     /**
-     * 设置右侧文字
+     * 设置左侧文字
      *
      * @param text 文字
      */
     public void setLeftText(String text) {
         if (formView instanceof BasicFormView) {
             ((BasicFormView) formView).setLeftText(text);
+        }
+    }
+
+    /**
+     * 设置左侧icon显示状态
+     *
+     * @param visibility 显示状态
+     */
+    public void setLeftIconVisibility(int visibility) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).setLeftIconVisibility(visibility);
         }
     }
 
@@ -147,11 +158,23 @@ public class SuperFormView extends RelativeLayout {
     }
 
     /**
+     * 移除右侧文字输入监听
+     */
+    public void removeRightTextChangedListener(TextWatcher watcher) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).removeRightTextChangedListener(watcher);
+        }
+    }
+
+    /**
      * 为整个view设置点击事件
      *
      * @param clickCallback 点击事件
      */
     public void setClickCallback(View.OnClickListener clickCallback) {
+        if (formView instanceof BasicFormView) {
+            ((BasicFormView) formView).setClickCallback(clickCallback);
+        }
         setOnClickListener(clickCallback);
     }
 }

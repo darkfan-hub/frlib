@@ -7,19 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.frlib.basic.R
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.defaultpages.DefaultPages
 import com.frlib.basic.defaultpages.DefaultPagesContainer
 import com.frlib.basic.defaultpages.Pages
 import com.frlib.basic.defaultpages.state.EmptyState
 import com.frlib.basic.defaultpages.state.SuccessState
-import com.frlib.basic.vm.BaseViewModel
-import com.frlib.basic.vm.ViewModelFactory
 import com.frlib.basic.ref.RefGenericSuperclass
 import com.frlib.basic.toast.FrToasty
-import com.frlib.basic.views.EmptyView
-import com.frlib.utils.ext.string
+import com.frlib.basic.vm.BaseViewModel
+import com.frlib.basic.vm.ViewModelFactory
+import com.frlib.utils.ext.length
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
 import me.jessyan.autosize.AutoSizeCompat
@@ -125,7 +123,11 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     private fun setViewModel() {
         val classVM = RefGenericSuperclass.findActualTypeClass(javaClass, BaseViewModel::class.java)
         if (classVM != null) {
-            viewModel = ViewModelProvider(self, ViewModelFactory.default(appComponent)).get((classVM as Class<VM>))
+            viewModel = ViewModelProvider(
+                self,
+                ViewModelFactory.default(appComponent.application())
+            ).get((classVM as Class<VM>))
+            viewModel.setupAppComponent(appComponent)
             lifecycle.addObserver(viewModel)
         }
     }
@@ -133,19 +135,21 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     override fun initObservables() {
         viewModel.defUI.toast.observe(self, { FrToasty.normal(this, it).show() })
 
-        viewModel.defUI.loading.observe(self, {
+
+        viewModel.defUI.showLoading.observe(self, {
             if (loading == null) {
                 loading = XPopup.Builder(self)
                     .dismissOnTouchOutside(false)
                     .dismissOnBackPressed(false)
-                    .asLoading("正在加载中...")
+                    .asLoading()
             }
 
-            if (it) {
-                loading?.show()
-            } else {
-                loading?.dismiss()
-            }
+            loading?.setTitle(it)
+            loading?.show()
+        })
+
+        viewModel.defUI.hideLoading.observe(self, {
+            loading?.dismiss()
         })
 
         viewModel.defUI.defaultPages.observe(self, {

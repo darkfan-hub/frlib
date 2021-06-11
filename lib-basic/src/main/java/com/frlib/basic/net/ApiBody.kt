@@ -1,10 +1,11 @@
 package com.frlib.basic.net
 
+import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson.JSONArray
+import com.alibaba.fastjson.JSONObject
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONArray
-import org.json.JSONObject
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -31,7 +32,7 @@ inline fun paramToRequestBody(vararg params: Pair<String, Any>): RequestBody {
     val json = JSONObject().apply {
         params.forEach {
             if (it.second is List<*>) {
-                put(it.first, JSONArray(it.second as List<*>))
+                put(it.first, JSONArray.parseArray(JSON.toJSONString(it.second)))
             } else {
                 put(it.first, it.second)
             }
@@ -55,7 +56,7 @@ inline fun getRequestBody(vararg params: Pair<String, Any>): RequestBody {
     val json = JSONObject().apply {
         params.forEach {
             if (it.second is List<*>) {
-                put(it.first, JSONArray(it.second as List<*>))
+                put(it.first, JSONArray.parseArray(JSON.toJSONString(it.second)))
             } else {
                 put(it.first, it.second)
             }

@@ -19,6 +19,13 @@ fun Int.cent2Yuan(): String {
 }
 
 /**
+ * long 判空
+ */
+fun Long?.isNull(): Boolean {
+    return this == null
+}
+
+/**
  * 粉丝数格式化
  */
 fun Int.fansCountFormat(): String {

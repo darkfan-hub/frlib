@@ -184,6 +184,7 @@ public class TimeUtil {
     public static final String PATTERN_YEAR_MONTH = "yyyy MM";
     public static final String PATTERN_MONTH_DAY = "MM-dd";
     public static final String PATTERN_MONTH_DAY_EEEE = "MM-dd EEEE";
+    public static final String PATTERN_YMD_AND_HS = "yyyy-MM-dd HH:mm";
     public static final String PATTERN_YEAR = "yyyy";
     public static final String PATTERN_MONTH = "MM";
     public static final String PATTERN_DAY = "dd";
