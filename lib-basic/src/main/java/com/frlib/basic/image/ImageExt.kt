@@ -47,7 +47,7 @@ inline fun ImageView.displayImage(
     }
     options.centerCrop()
 
-    Glide.with(context)
+    FrGlideApp.with(context)
         .load(url)
         .apply(options)
         .into(this)
@@ -83,7 +83,7 @@ inline fun ImageView.displayRadiusImage(
         )
     )
 
-    Glide.with(context)
+    FrGlideApp.with(context)
         .load(url)
         .apply(options)
         .thumbnail(glideRequestBuilder(context, options, placeholder))
@@ -108,7 +108,7 @@ inline fun ImageView.displayCircleImage(
 ) {
     val options = RequestOptions().transform(CenterCrop(), CircleCrop())
 
-    Glide.with(context)
+    FrGlideApp.with(context)
         .load(url)
         .apply(options)
         .thumbnail(glideRequestBuilder(context, options, placeholder))
@@ -121,9 +121,9 @@ fun glideRequestBuilder(
     placeholder: Drawable?
 ): RequestBuilder<Drawable> {
     return if (placeholder == null) {
-        Glide.with(context).load(R.drawable.frlib_iamge_placeholder).apply(options)
+        FrGlideApp.with(context).load(R.drawable.frlib_iamge_placeholder).apply(options)
     } else {
-        Glide.with(context).load(placeholder).apply(options)
+        FrGlideApp.with(context).load(placeholder).apply(options)
     }
 }
 

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.target.ImageViewTarget
@@ -43,7 +42,7 @@ class GlideEngine : ImageEngine {
     }
 
     override fun loadImage(context: Context, url: String, imageView: ImageView) {
-        Glide.with(context).load(url).placeholder(R.drawable.frlib_iamge_placeholder).centerCrop().into(imageView)
+        FrGlideApp.with(context).load(url).placeholder(R.drawable.frlib_iamge_placeholder).centerCrop().into(imageView)
     }
 
     override fun loadImage(
@@ -53,7 +52,7 @@ class GlideEngine : ImageEngine {
         longImageView: SubsamplingScaleImageView?,
         callback: OnImageCompleteCallback?
     ) {
-        Glide.with(context)
+        FrGlideApp.with(context)
             .asBitmap()
             .load(url)
             .into(object : ImageViewTarget<Bitmap>(imageView) {
@@ -116,7 +115,7 @@ class GlideEngine : ImageEngine {
             .sizeMultiplier(0.5f)
             .centerCrop()
 
-        Glide.with(context)
+        FrGlideApp.with(context)
             .asBitmap()
             .load(url)
             .apply(options)
@@ -130,7 +129,7 @@ class GlideEngine : ImageEngine {
     }
 
     override fun loadAsGifImage(context: Context, url: String, imageView: ImageView) {
-        Glide.with(context)
+        FrGlideApp.with(context)
             .asGif()
             .load(url)
             .into(imageView)
@@ -141,7 +140,7 @@ class GlideEngine : ImageEngine {
             .override(200, 200)
             .centerCrop()
 
-        Glide.with(context)
+        FrGlideApp.with(context)
             .load(url)
             .apply(options)
             .into(imageView)

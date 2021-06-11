@@ -1,6 +1,6 @@
 package com.android.frlib
 
-import com.frlib.basic.app.IAppComponent
+import android.app.Application
 import com.frlib.basic.vm.BaseListViewModel
 
 /**
@@ -9,10 +9,10 @@ import com.frlib.basic.vm.BaseListViewModel
  * @desc
  */
 class FrlibListViewModel(
-    appComponent: IAppComponent
-) : BaseListViewModel<String>(appComponent) {
+    application: Application
+) : BaseListViewModel<String>(application) {
 
     override suspend fun loadData(): List<String> {
-        TODO("Not yet implemented")
+        return arrayListOf()
     }
 }
