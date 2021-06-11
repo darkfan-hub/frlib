@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -55,24 +54,27 @@ inline fun ImageView.displayImage(
 
 inline fun ImageView.displayRadiusImage(
     url: String,
-    radius: Int
+    radius: Int,
+    overrideSize: Int = 0,
 ) {
-    displayRadiusImage(this.context, url, radius, null)
+    displayRadiusImage(this.context, url, radius, null, overrideSize)
 }
 
 inline fun ImageView.displayRadiusImage(
     url: String,
     radius: Int,
-    placeholder: Drawable
+    placeholder: Drawable,
+    overrideSize: Int = 0,
 ) {
-    displayRadiusImage(this.context, url, radius, placeholder)
+    displayRadiusImage(this.context, url, radius, placeholder, overrideSize)
 }
 
 inline fun ImageView.displayRadiusImage(
     context: Context,
     url: String,
     radius: Int,
-    placeholder: Drawable?
+    placeholder: Drawable?,
+    overrideSize: Int = 0,
 ) {
     val options = RequestOptions().transform(
         CenterCrop(),
@@ -82,6 +84,10 @@ inline fun ImageView.displayRadiusImage(
             RoundedCornersTransformation.CornerType.ALL
         )
     )
+
+    if (overrideSize > 0) {
+        options.override(overrideSize)
+    }
 
     FrGlideApp.with(context)
         .load(url)

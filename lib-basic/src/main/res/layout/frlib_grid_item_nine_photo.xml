@@ -11,12 +11,11 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_item_nine_photo_flag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:clickable="true"
+        android:layout_alignParentEnd="true"
         android:padding="2dp"
         android:src="@drawable/frlib_icon_search_delete"
         android:visibility="gone"
