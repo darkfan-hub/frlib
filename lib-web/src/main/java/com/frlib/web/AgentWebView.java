@@ -12,12 +12,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityManager;
 
-import com.juliye.library.common.utility.log.Timber;
-import com.juliye.library.common.utility.toast.ToastUtil;
-import com.juliye.library.web.JsCallJava;
-import com.juliye.library.web.LollipopFixedWebView;
-import com.juliye.library.web.MiddlewareWebChromeBase;
-import com.juliye.library.web.MiddlewareWebClientBase;
 import com.tencent.smtt.export.external.interfaces.JsPromptResult;
 import com.tencent.smtt.sdk.WebBackForwardList;
 import com.tencent.smtt.sdk.WebChromeClient;
