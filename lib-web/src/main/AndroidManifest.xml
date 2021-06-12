@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.frlib.web">
+
+    <application>
+        <activity
+            android:name=".activity.WebPageActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ActionActivity"
+            android:screenOrientation="portrait" />
+    </application>
+</manifest>

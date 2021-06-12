@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply from: '../common_build.gradle'
+
+android {
+
+    // 开启dataBinding
+    dataBinding {
+        enabled = true
+    }
+
+    // 开启viewBinding
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation project(':lib-basic')
+    implementation project(':lib-utils')
+    implementation rootProject.ext.libs['downloader']
+}

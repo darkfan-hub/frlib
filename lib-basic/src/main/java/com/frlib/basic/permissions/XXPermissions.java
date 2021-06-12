@@ -270,7 +270,7 @@ public final class XXPermissions {
 
         if (debugMode) {
             // 检查申请的存储权限是否符合规范
-            PermissionChecker.checkStoragePermission(mContext, mPermissions, isScopedStorage());
+            // PermissionChecker.checkStoragePermission(mContext, mPermissions, isScopedStorage());
             // 检查申请的定位权限是否符合规范
             PermissionChecker.checkLocationPermission(mPermissions);
             // 检查申请的权限和 targetSdk 版本是否能吻合

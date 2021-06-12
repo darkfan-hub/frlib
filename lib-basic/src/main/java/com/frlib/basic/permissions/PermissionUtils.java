@@ -25,7 +25,7 @@ import java.util.Random;
  * @date 2020/12/26
  * @desc 权限相关工具类
  */
-final class PermissionUtils {
+public class PermissionUtils {
 
     /**
      * 是否是 Android 11 及以上版本
@@ -154,7 +154,7 @@ final class PermissionUtils {
     /**
      * 判断某个权限集合是否包含特殊权限
      */
-    static boolean containsSpecialPermission(List<String> permissions) {
+    public static boolean containsSpecialPermission(List<String> permissions) {
         if (permissions == null || permissions.isEmpty()) {
             return false;
         }
@@ -170,7 +170,7 @@ final class PermissionUtils {
     /**
      * 判断某个权限是否是特殊权限
      */
-    static boolean isSpecialPermission(String permission) {
+    public static boolean isSpecialPermission(String permission) {
         return Permission.MANAGE_EXTERNAL_STORAGE.equals(permission) ||
                 Permission.REQUEST_INSTALL_PACKAGES.equals(permission) ||
                 Permission.SYSTEM_ALERT_WINDOW.equals(permission) ||
@@ -181,7 +181,7 @@ final class PermissionUtils {
     /**
      * 判断某些权限是否全部被授予
      */
-    static boolean isGrantedPermissions(Context context, List<String> permissions) {
+    public static boolean isGrantedPermissions(Context context, List<String> permissions) {
         // 如果是安卓 6.0 以下版本就直接返回 true
         if (!isAndroid6()) {
             return true;
@@ -222,7 +222,7 @@ final class PermissionUtils {
     /**
      * 判断某个权限是否授予
      */
-    static boolean isGrantedPermission(Context context, String permission) {
+    public static boolean isGrantedPermission(Context context, String permission) {
         // 如果是安卓 6.0 以下版本就默认授予
         if (!isAndroid6()) {
             return true;
@@ -298,7 +298,7 @@ final class PermissionUtils {
      * @return 已授权返回  {@link PackageManager#PERMISSION_GRANTED}
      * 未授权返回  {@link PackageManager#PERMISSION_DENIED}
      */
-    static int getPermissionStatus(Context context, String permission) {
+    public static int getPermissionStatus(Context context, String permission) {
         return PermissionUtils.isGrantedPermission(context, permission) ?
                 PackageManager.PERMISSION_GRANTED : PackageManager.PERMISSION_DENIED;
     }
@@ -309,7 +309,7 @@ final class PermissionUtils {
      * @param activity    Activity对象
      * @param permissions 请求的权限
      */
-    static boolean isPermissionPermanentDenied(Activity activity, List<String> permissions) {
+    public static boolean isPermissionPermanentDenied(Activity activity, List<String> permissions) {
         for (String permission : permissions) {
             if (isPermissionPermanentDenied(activity, permission)) {
                 return true;
@@ -324,7 +324,7 @@ final class PermissionUtils {
      * @param activity   Activity对象
      * @param permission 请求的权限
      */
-    static boolean isPermissionPermanentDenied(Activity activity, String permission) {
+    public static boolean isPermissionPermanentDenied(Activity activity, String permission) {
         if (!isAndroid6()) {
             return false;
         }
@@ -393,7 +393,7 @@ final class PermissionUtils {
      * @param permissions  需要请求的权限组
      * @param grantResults 允许结果组
      */
-    static List<String> getDeniedPermissions(String[] permissions, int[] grantResults) {
+    public static List<String> getDeniedPermissions(String[] permissions, int[] grantResults) {
         List<String> deniedPermissions = new ArrayList<>();
         for (int i = 0; i < grantResults.length; i++) {
             // 把没有授予过的权限加入到集合中
