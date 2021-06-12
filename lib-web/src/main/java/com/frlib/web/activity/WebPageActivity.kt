@@ -77,7 +77,7 @@ class WebPageActivity : AbstractActivity<WebActivityWebpageBinding, BaseViewMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent.extras?.apply {
-            val isPortrait = getBoolean("isPortrait")
+            val isPortrait = getBoolean("isPortrait", true)
             requestedOrientation = if (isPortrait) {
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             } else {
