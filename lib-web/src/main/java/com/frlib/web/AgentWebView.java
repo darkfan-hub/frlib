@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityManager;
 
+import com.frlib.basic.toast.FrToasty;
 import com.tencent.smtt.export.external.interfaces.JsPromptResult;
 import com.tencent.smtt.sdk.WebBackForwardList;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -19,6 +20,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import org.json.JSONObject;
+import timber.log.Timber;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -150,7 +152,7 @@ public class AgentWebView extends LollipopFixedWebView {
         } catch (Throwable e) {
             Pair<Boolean, String> pair = isWebViewPackageException(e);
             if (pair.first) {
-                ToastUtil.showShortToast(getContext(), pair.second);
+                FrToasty.normal(getContext(), pair.second);
                 destroy();
             } else {
                 throw e;
