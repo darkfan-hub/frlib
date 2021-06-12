@@ -14,13 +14,14 @@
             app:centerType="textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:leftImageResource="@drawable/frlib_icon_back_black"
             app:leftType="imageButton"
-            app:showBottomLine="false" />
+            app:showBottomLine="false"/>
 
         <FrameLayout
             android:id="@+id/fl_web_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
     </LinearLayout>
 </layout>
