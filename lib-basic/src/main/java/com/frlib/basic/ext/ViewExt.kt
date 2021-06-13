@@ -1,9 +1,14 @@
 package com.frlib.basic.ext
 
 import android.app.Activity
+import android.view.View
+import androidx.collection.LruCache
+import com.frlib.basic.config.AppConstants
+import com.frlib.utils.ext.isNull
 import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshHeader
+import timber.log.Timber
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -63,4 +68,21 @@ fun Activity.statusBarStyle(
         .navigationBarColor(navigationBarColor)
         .navigationBarDarkIcon(navigationBarDarkIcon)
         .init()
+}
+
+private var lastClickTime = 0L
+private var lastClickTag = 0
+
+fun View.click(block: () -> Unit) {
+    this.setOnClickListener {
+        val currentTag = this.id
+        val currentTimeMillis = System.currentTimeMillis()
+        if (currentTimeMillis - lastClickTime < AppConstants.double_click_time && lastClickTag == currentTag) {
+            Timber.i("%s 毫秒内发生快速点击：%d", AppConstants.double_click_time, currentTag)
+            return@setOnClickListener
+        }
+        lastClickTime = currentTimeMillis
+        lastClickTag = currentTag
+        block()
+    }
 }

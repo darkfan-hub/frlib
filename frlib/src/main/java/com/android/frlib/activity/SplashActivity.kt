@@ -4,10 +4,13 @@ import android.os.Bundle
 import com.android.frlib.R
 import com.android.frlib.databinding.FrlibActivitySplshBinding
 import com.frlib.basic.activity.AbstractActivity
+import com.frlib.basic.ext.click
 import com.frlib.basic.image.displayRadiusImage
 import com.frlib.basic.immersion.ImmersionBar
 import com.frlib.basic.vm.BaseViewModel
+import com.frlib.utils.TimeUtil
 import com.frlib.utils.ext.dp2px
+import timber.log.Timber
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -27,8 +30,13 @@ class SplashActivity : AbstractActivity<FrlibActivitySplshBinding, BaseViewModel
         )
     }
 
-    override fun initData() {
-        super.initData()
+    override fun setClickListen() {
+        super.setClickListen()
+        dataBinding.btTestClick.click { clickMethod() }
+    }
+
+    private fun clickMethod() {
+        Timber.i("click time -> ${TimeUtil.getNowTimeString()}")
     }
 
     override fun useDefaultPages(): Boolean = false

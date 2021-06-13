@@ -17,7 +17,6 @@ import com.frlib.basic.ref.RefGenericSuperclass
 import com.frlib.basic.toast.FrToasty
 import com.frlib.basic.vm.BaseViewModel
 import com.frlib.basic.vm.ViewModelFactory
-import com.frlib.utils.ext.length
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
 import me.jessyan.autosize.AutoSizeCompat
