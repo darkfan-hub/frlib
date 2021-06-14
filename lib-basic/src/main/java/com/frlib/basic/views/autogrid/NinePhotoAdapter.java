@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.frlib.basic.R;
+import com.frlib.basic.ext.ViewExtKt;
 import com.frlib.basic.views.ninegrid.GridImageView;
 
 import java.util.List;
@@ -49,15 +50,13 @@ public abstract class NinePhotoAdapter extends QuickAutoGridAdapter<String, Base
     }
 
     private void bindViewClickListener(BaseAutoGridHolder holder, Context context, int position) {
-        holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPlusItem(position)) {
-                    onClickAddNinePhotoItem(context);
-                } else {
-                    onClickNinePhotoItem(context, position, getData());
-                }
+        ViewExtKt.click(holder.getConvertView(), () -> {
+            if (isPlusItem(position)) {
+                onClickAddNinePhotoItem(context);
+            } else {
+                onClickNinePhotoItem(context, position, getData());
             }
+            return null;
         });
     }
 

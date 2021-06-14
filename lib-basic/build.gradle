@@ -62,6 +62,8 @@ dependencies {
     // rxjava and rxandroid
     implementation rootProject.ext.libs['rxjava']
     implementation rootProject.ext.libs['rxandroid']
+    // downloader
+    implementation rootProject.ext.libs['downloader']
     // auto size
     api rootProject.ext.libs['autosize']
 }

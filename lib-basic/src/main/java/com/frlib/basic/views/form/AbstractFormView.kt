@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -174,6 +175,7 @@ abstract class AbstractFormView : ISuperFormView {
         edit.setTextColor(textColor)
         edit.hint = hintText
         edit.setHintTextColor(hintColor)
+        edit.imeOptions = EditorInfo.IME_ACTION_DONE
         return edit
     }
 }

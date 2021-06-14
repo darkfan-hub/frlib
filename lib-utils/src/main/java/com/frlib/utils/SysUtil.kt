@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Process
+import androidx.core.content.FileProvider
+import java.io.File
 
 /**
  * @author Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -149,6 +151,22 @@ object SysUtil {
         val intent = Intent(Intent.ACTION_DIAL)
         val data: Uri = Uri.parse("tel:$phone")
         intent.data = data
+        context.startActivity(intent)
+    }
+
+    @JvmStatic
+    fun installApp(context: Context, file: File) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val fileUri: Uri
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            fileUri = FileProvider.getUriForFile(context, context.packageName + ".fileProvider", file)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } else {
+            fileUri = Uri.fromFile(file)
+        }
+
+        intent.setDataAndType(fileUri, "application/vnd.android.package-archive")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
 }

@@ -18,6 +18,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import com.frlib.basic.R;
 import com.frlib.basic.config.AppConstants;
+import com.frlib.basic.ext.ViewExtKt;
 import com.frlib.utils.StringUtil;
 import com.frlib.utils.UIUtil;
 import com.frlib.utils.ext.ResourcesExtKt;
@@ -417,10 +418,12 @@ public class TitleBar extends RelativeLayout {
             leftView = titleBarCustomView(context, rlMain, leftCustomViewId);
         }
 
-        addViewToMain(leftView, leftParams, v -> {
+        addViewToMain(leftView, leftParams);
+        ViewExtKt.click(leftView, () -> {
             if (titleBarListener != null) {
                 titleBarListener.leftClick(leftView);
             }
+            return null;
         });
     }
 
@@ -468,7 +471,7 @@ public class TitleBar extends RelativeLayout {
             centerParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         }
 
-        addViewToMain(centerView, centerParams, null);
+        addViewToMain(centerView, centerParams);
     }
 
     /**
@@ -580,7 +583,7 @@ public class TitleBar extends RelativeLayout {
             searchIconRightParams.addRule(RelativeLayout.CENTER_VERTICAL);
             searchIconRightParams.addRule(RelativeLayout.ALIGN_PARENT_END);
             searchIconRightParams.setMarginEnd(size15);
-            searchRightIcon.setOnClickListener(v -> {
+            ViewExtKt.click(searchRightIcon, () -> {
                 if (titleBarListener != null) {
                     if (centerSearchRightType == BarType.VOICE.ordinal()) {
                         titleBarListener.voiceIconClick(searchRightIcon);
@@ -589,6 +592,7 @@ public class TitleBar extends RelativeLayout {
                         titleBarListener.deleteIconClick(searchRightIcon);
                     }
                 }
+                return null;
             });
             centerSearch.addView(searchRightIcon, searchIconRightParams);
             return searchRightIcon.getId();
@@ -617,10 +621,11 @@ public class TitleBar extends RelativeLayout {
             searchEditText.setCursorVisible(false);
             searchEditText.clearFocus();
             searchEditText.setFocusable(false);
-            searchEditText.setOnClickListener(v -> {
-            });
         } else {
-            searchEditText.setOnClickListener(v -> searchEditText.setCursorVisible(true));
+            ViewExtKt.click(searchEditText, () -> {
+                searchEditText.setCursorVisible(true);
+                return null;
+            });
         }
 
         searchEditText.setCursorVisible(false);
@@ -673,10 +678,13 @@ public class TitleBar extends RelativeLayout {
             rightView = titleBarCustomView(context, rlMain, rightCustomViewId);
         }
 
-        addViewToMain(rightView, rightParams, v -> {
+        addViewToMain(rightView, rightParams);
+
+        ViewExtKt.click(rightView, () -> {
             if (titleBarListener != null) {
                 titleBarListener.rightClick(rightView);
             }
+            return null;
         });
     }
 
@@ -754,15 +762,10 @@ public class TitleBar extends RelativeLayout {
      *
      * @param view          需要添加的view
      * @param params        需要添加view的布局参数
-     * @param clickListener 需要添加view的点击事件
      */
-    private void addViewToMain(View view, LayoutParams params, OnClickListener clickListener) {
+    private void addViewToMain(View view, LayoutParams params) {
         if (null != view && null != params) {
             rlMain.addView(view, params);
-
-            if (null != clickListener) {
-                view.setOnClickListener(clickListener);
-            }
         }
     }
 
