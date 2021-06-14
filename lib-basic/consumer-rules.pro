@@ -1,5 +1,6 @@
 # 实体类不混淆
 -keep class com.frlib.basic.data.entity.** { *; }
+-keep class com.frlib.basic.mobleinfo.entity.** { *; }
 
 # 忽略警告，避免打包时某些警告出现
 -ignorewarnings
@@ -137,3 +138,61 @@
 
 #Okio
 -dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# Keep all native methods, their classes and any classes in their descriptors
+-keepclasseswithmembers,includedescriptorclasses class com.tencent.mmkv.** {
+    native <methods>;
+    long nativeHandle;
+    private static *** onMMKVCRCCheckFail(***);
+    private static *** onMMKVFileLengthError(***);
+    private static *** mmkvLogImp(...);
+    private static *** onContentChangedByOuterProcess(***);
+}
+
+-dontwarn org.jetbrains.annotations.**
+
+# AndroidX混淆
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
+# 屏幕适配
+-keep class me.jessyan.autosize.** { *; }
+-keep interface me.jessyan.autosize.** { *; }
+
+# SmartRefreshLayout
+-keep class com.scwang.** {*;}
+
+##---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-dontwarn sun.misc.**
+#-keep class com.google.gson.stream.** { *; }
+
+# Prevent proguard from stripping interface information from TypeAdapterFactory,
+# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+# Prevent R8 from leaving Data object members always null
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+-dontwarn com.alibaba.fastjson.**
+-keep class com.alibaba.fastjson.**{ *; }
+
+-keep class com.frlib.basic.gson.** { *; }
+
+##---------------End: proguard configuration for Gson  ----------

@@ -146,7 +146,7 @@ ext {
             // https://github.com/airbnb/lottie-android 动画框架
             'lottie'                 : 'com.airbnb.android:lottie:3.7.0',
             // https://github.com/Tencent/MMKV  sharedpreferences替换方案
-            'mmkv'                   : 'com.tencent:mmkv-static:1.2.8',
+            'mmkv'                   : 'com.tencent:mmkv-static:1.2.9',
             // https://github.com/JessYanCoding/AndroidAutoSize 今日头条屏幕适配方案终极版
             'autosize'               : 'me.jessyan:autosize:1.2.1',
             // https://github.com/lingochamp/FileDownloader 文件下载
