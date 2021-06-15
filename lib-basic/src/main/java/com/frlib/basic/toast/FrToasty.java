@@ -39,7 +39,7 @@ public class FrToasty {
     private static Typeface currentTypeface = LOADED_TOAST_TYPEFACE;
     private static int textSize = 16; // in SP
     private static boolean tintIcon = true;
-    private static boolean allowQueue = true;
+    private static boolean allowQueue = false;
     private static Toast lastToast = null;
 
     private FrToasty() {
@@ -343,7 +343,7 @@ public class FrToasty {
             FrToasty.currentTypeface = LOADED_TOAST_TYPEFACE;
             FrToasty.textSize = 16;
             FrToasty.tintIcon = true;
-            FrToasty.allowQueue = true;
+            FrToasty.allowQueue = false;
         }
 
         @CheckResult
