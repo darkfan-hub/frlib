@@ -60,29 +60,27 @@ abstract class AbstractApp : Application(), IApp, Configuration.Provider {
         if (SysUtil.isMainProcess(application)) {
             // 优先异步初始化MmkvHelper
             MmkvHelper.initialize(application)
-        }
 
-        appComponent = AppComponentImpl.build {
-            app = application
-            globalConfig = globalConfig(application)
-        }
+            appComponent = AppComponentImpl.build {
+                app = application
+                globalConfig = globalConfig(application)
+            }
 
-        appComponent.extras().put(ConfigModule::javaClass.name, configModule())
+            appComponent.extras().put(ConfigModule::javaClass.name, configModule())
 
-        if (SysUtil.isMainProcess(appComponent().application())) {
             appInit().mainInit(this)
-        }
 
-        // 注册activity生命周期监听
-        activityLifecycle = ActivityLifecycle(appComponent)
-        registerActivityLifecycleCallbacks(activityLifecycle)
-        activityLifecycleList.forEach {
-            registerActivityLifecycleCallbacks(it)
+            // 注册activity生命周期监听
+            activityLifecycle = ActivityLifecycle(appComponent)
+            registerActivityLifecycleCallbacks(activityLifecycle)
+            activityLifecycleList.forEach {
+                registerActivityLifecycleCallbacks(it)
+            }
+
+            appInit().threadInit(this)
         }
 
         appInit().allInit(this)
-
-        appInit().threadInit(this)
     }
 
     private fun globalConfig(context: Context): GlobalConfig {

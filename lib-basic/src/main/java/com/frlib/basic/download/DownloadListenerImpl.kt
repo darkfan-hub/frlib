@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
  * @date 07/05/2021 17:56
- * @desc
+ * @desc 下载进度监听
  */
 class DownloadListenerImpl(
     downloadCallback: IDownloadCallback
@@ -18,9 +18,11 @@ class DownloadListenerImpl(
     private var downloadCallbackRef: WeakReference<IDownloadCallback> = WeakReference(downloadCallback)
 
     override fun pending(task: BaseDownloadTask?, soFarBytes: Int, totalBytes: Int) {
+        Timber.d("下载pending")
     }
 
     override fun started(task: BaseDownloadTask?) {
+        Timber.d("下载started")
         downloadCallbackRef.get()?.downloadStart()
     }
 
@@ -31,10 +33,12 @@ class DownloadListenerImpl(
     }
 
     override fun completed(task: BaseDownloadTask) {
+        Timber.i("下载completed")
         downloadCallbackRef.get()?.downloadCompleted(File(task.path))
     }
 
     override fun paused(task: BaseDownloadTask?, soFarBytes: Int, totalBytes: Int) {
+        Timber.w("下载paused")
     }
 
     override fun error(task: BaseDownloadTask, e: Throwable) {
@@ -43,5 +47,6 @@ class DownloadListenerImpl(
     }
 
     override fun warn(task: BaseDownloadTask?) {
+        Timber.w("下载warn")
     }
 }

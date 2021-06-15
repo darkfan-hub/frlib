@@ -1,5 +1,7 @@
 package com.frlib.basic.app
 
+import android.app.Application
+
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
  * @date 25/05/2021 10:54
@@ -11,7 +13,7 @@ interface IAppInit {
      * 所有进程初始化
      * 一般用于三方推送等需要所有进程都初始化
      */
-    fun allInit(app: IApp)
+    fun allInit(app: Application)
 
     /**
      * 主进程初始化

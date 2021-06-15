@@ -1,6 +1,7 @@
 package com.frlib.basic.app
 
 import android.app.Activity
+import android.app.Application
 import androidx.work.OneTimeWorkRequestBuilder
 import com.alibaba.android.arouter.launcher.ARouter
 import com.billy.android.swipe.SmartSwipeBack
@@ -15,7 +16,7 @@ import timber.log.Timber
  */
 abstract class AbstractAppInit : IAppInit {
 
-    override fun allInit(app: IApp) {
+    override fun allInit(app: Application) {
     }
 
     override fun mainInit(app: IApp) {
