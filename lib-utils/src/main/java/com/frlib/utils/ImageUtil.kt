@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -87,6 +88,16 @@ object ImageUtil {
      */
     fun bytes2Drawable(res: Resources, bytes: ByteArray): Drawable {
         return bitmap2Drawable(res, bytes2Bitmap(bytes))
+    }
+
+    /**
+     * file转bitmap
+     *
+     * @param file file文件
+     * @return bitmap
+     */
+    fun file2Bitmap(file: File): Bitmap {
+        return BitmapFactory.decodeFile(file.absolutePath)
     }
 
     /**
