@@ -2,10 +2,9 @@ package com.frlib.basic.ext
 
 import android.app.Activity
 import android.view.View
-import androidx.collection.LruCache
 import com.frlib.basic.config.AppConstants
-import com.frlib.utils.ext.isNull
 import com.gyf.immersionbar.ImmersionBar
+import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import timber.log.Timber
@@ -33,13 +32,14 @@ fun SmartRefreshLayout.init(
     this.setDisableContentWhenRefresh(true) // 在刷新的时候禁止列表的操作
     this.setDisableContentWhenLoading(true) // 在加载的时候禁止列表的操作
     this.setEnableLoadMore(enableLoadMore) // 是否启用上拉加载功能
-    if (autoLoadMore) {
-        // 自动加载
-        this.autoLoadMore()
-    }
-    this.setRefreshHeader(refreshHeader)
     this.setOnRefreshListener { refreshBlock() }
     this.setOnLoadMoreListener { loadMoreBlock() }
+    /*if (autoLoadMore) {
+        // 自动加载
+        this.autoLoadMore()
+    }*/
+    this.setRefreshHeader(refreshHeader)
+    this.setRefreshFooter(ClassicsFooter(this.context))
 }
 
 /**

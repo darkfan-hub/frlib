@@ -73,9 +73,6 @@ abstract class BaseListViewModel<T>(
 
                 if (it.isEmpty()) {
                     emptyLiveData.call()
-                }
-
-                if (it.isEmpty() || it.size < pageSize || isLastPage()) {
                     noMoreDataLiveData.call()
                 }
             },
@@ -113,13 +110,15 @@ abstract class BaseListViewModel<T>(
                 }
 
                 finishLoadMoreLiveData.call()
-                if (isLastPage()) {
+
+                if (it.isNullOrEmpty()) {
                     noMoreDataLiveData.call()
                 }
             },
             error = {
                 loadMoreErrorLiveData.call()
-            }
+            },
+            showLoading = false
         )
     }
 

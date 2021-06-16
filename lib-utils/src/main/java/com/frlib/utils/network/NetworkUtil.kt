@@ -3,6 +3,7 @@ package com.frlib.utils.network
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
+import com.frlib.utils.SysUtil
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -11,7 +12,13 @@ import android.net.ConnectivityManager
  */
 object NetworkUtil {
 
-    fun networkType(): NetworkType {
+    fun networkType(context: Context): NetworkType {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (connectivityManager == null) {
+            return NetworkType.NET_UNKNOWN
+        }
+
         return NetworkType.NET_2G
     }
 
