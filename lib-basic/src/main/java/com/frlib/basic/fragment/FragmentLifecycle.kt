@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.frlib.basic.app.AppManager
 import com.frlib.basic.app.IAppComponent
 import timber.log.Timber
 
@@ -27,6 +28,8 @@ class FragmentLifecycle(
         Timber.i("${f.javaClass.simpleName} Created!")
         if (f is IFragment && !f.isAdded) {
             (f as IFragment).setupActivityComponent(appComponent)
+
+            AppManager.addNetworkStateChangeListener(f.networkChangeListener())
         }
     }
 
@@ -68,5 +71,8 @@ class FragmentLifecycle(
     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
         super.onFragmentDestroyed(fm, f)
         Timber.i("${f.javaClass.simpleName} Destroyed!")
+        if (f is IFragment) {
+            AppManager.removeNetworkStateChangeListener(f.networkChangeListener())
+        }
     }
 }

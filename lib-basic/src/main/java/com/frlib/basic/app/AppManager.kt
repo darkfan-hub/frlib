@@ -2,6 +2,8 @@ package com.frlib.basic.app
 
 import android.app.Activity
 import android.os.Process
+import com.frlib.utils.network.INetworkStateChangeListener
+import com.frlib.utils.network.NetworkType
 import java.util.*
 
 /**
@@ -173,6 +175,49 @@ object AppManager {
             System.exit(0)
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    /**
+     * 网络状态监听
+     */
+    private val networkStateChangeListenerList: LinkedList<INetworkStateChangeListener> by lazy {
+        LinkedList<INetworkStateChangeListener>()
+    }
+
+    /**
+     * 添加一条网络监听
+     */
+    fun addNetworkStateChangeListener(listener: INetworkStateChangeListener) {
+        if (!networkStateChangeListenerList.contains(listener)) {
+            networkStateChangeListenerList.add(listener)
+        }
+    }
+
+    /**
+     * 移除一条网络监听
+     */
+    fun removeNetworkStateChangeListener(listener: INetworkStateChangeListener) {
+        if (networkStateChangeListenerList.contains(listener)) {
+            networkStateChangeListenerList.remove(listener)
+        }
+    }
+
+    /**
+     * 网络已经连接
+     */
+    fun netWorkConnected(networkType: NetworkType) {
+        networkStateChangeListenerList.forEach {
+            it.onConnected(networkType)
+        }
+    }
+
+    /**
+     * 网络已经失去连接
+     */
+    fun netWorkDisconnected() {
+        networkStateChangeListenerList.forEach {
+            it.onDisconnected()
         }
     }
 }

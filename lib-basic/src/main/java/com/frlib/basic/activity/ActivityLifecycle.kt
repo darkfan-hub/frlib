@@ -28,7 +28,7 @@ class ActivityLifecycle(
 
         if (activity is IActivity) {
             activity.setupActivityComponent(appComponent)
-
+            AppManager.addNetworkStateChangeListener(activity.networkChangeListener())
             registerFragmentCallbacks(activity)
         }
 
@@ -97,6 +97,7 @@ class ActivityLifecycle(
     override fun onActivityDestroyed(activity: Activity) {
         Timber.i("${activity.javaClass.simpleName} Destroyed!")
         if (activity is IActivity) {
+            AppManager.removeNetworkStateChangeListener(activity.networkChangeListener())
             unregisterFragmentCallbacks(activity)
         }
         AppManager.removeActivity(activity)

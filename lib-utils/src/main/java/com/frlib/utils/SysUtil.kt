@@ -158,7 +158,7 @@ object SysUtil {
     fun installApp(context: Context, file: File) {
         val intent = Intent(Intent.ACTION_VIEW)
         val fileUri: Uri
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (isAndroid7()) {
             fileUri = FileProvider.getUriForFile(context, context.packageName + ".fileProvider", file)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.defaultpages.DefaultPagesContainer
+import com.frlib.utils.network.INetworkStateChangeListener
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -92,6 +93,11 @@ interface IFragment {
      * @return 返回 {@code true}, Arms 会自动注册 EventBus
      */
     fun useEventBus(): Boolean
+
+    /**
+     * 网络状态改变监听
+     */
+    fun networkChangeListener(): INetworkStateChangeListener
 
     /**
      * 是否使用缺省页

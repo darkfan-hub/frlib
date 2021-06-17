@@ -19,6 +19,8 @@ import com.frlib.basic.ref.RefGenericSuperclass
 import com.frlib.basic.toast.FrToasty
 import com.frlib.basic.vm.BaseViewModel
 import com.frlib.basic.vm.ViewModelFactory
+import com.frlib.utils.network.INetworkStateChangeListener
+import com.frlib.utils.network.NetworkType
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
 
@@ -84,6 +86,9 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
 
     /** 缺省页-成功状态 */
     private val successState: SuccessState by lazy { SuccessState() }
+
+    /** 网络状态监听回调 */
+    private var networkStateChangeListener: INetworkStateChangeListener? = null
 
     /** 数据加载状态 */
     private var dataLoaded = false
@@ -213,6 +218,26 @@ abstract class AbstractFragment<DB : ViewDataBinding, VM : BaseViewModel> : Frag
     }
 
     override fun initData() {
+    }
+
+    override fun networkChangeListener(): INetworkStateChangeListener {
+        if (networkStateChangeListener == null) {
+            networkStateChangeListener = object : INetworkStateChangeListener {
+                override fun onConnected(networkType: NetworkType) {
+                    if (useDefaultPages()) {
+                        viewModel.defaultPages(Pages.CONTENT)
+                    }
+                }
+
+                override fun onDisconnected() {
+                    if (useDefaultPages()) {
+                        viewModel.defaultPages(Pages.NET_ERROR)
+                    }
+                }
+            }
+        }
+
+        return networkStateChangeListener!!
     }
 
     override fun defaultPages(): DefaultPagesContainer {

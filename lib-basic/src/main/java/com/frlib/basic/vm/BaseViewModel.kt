@@ -117,6 +117,10 @@ open class BaseViewModel(
                     success(result)
                 },
                 { error ->
+                    if (error.code == ERROR.TIMEOUT_ERROR.getKey()) {
+                        defaultPages(Pages.NET_ERROR)
+                    }
+
                     toast(error.errMsg)
                     error(error)
                 },
@@ -192,7 +196,7 @@ open class BaseViewModel(
      * @param pages 缺省页状态
      */
     fun defaultPages(pages: Pages) {
-        defUI.defaultPages.postValue(pages)
+        launchUI { defUI.defaultPages.postValue(pages) }
     }
 
     class UIChange {

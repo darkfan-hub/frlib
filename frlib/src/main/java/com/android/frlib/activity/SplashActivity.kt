@@ -40,7 +40,7 @@ class SplashActivity : AbstractActivity<FrlibActivitySplshBinding, SplashVM>() {
         dataBinding.btTestClick.click { viewModel.downloadImage() }
     }
 
-    override fun useDefaultPages(): Boolean = false
+    override fun useDefaultPages(): Boolean = true
 
     override fun useSwipe(): Boolean = false
 }

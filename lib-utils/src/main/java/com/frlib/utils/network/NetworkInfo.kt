@@ -30,5 +30,9 @@ enum class NetworkType(private val code: Int, private val codeName: String) {
     NET_UNKNOWN(6, "UNKNOWN"),
 
     /** 网络类型 无连接 */
-    NET_DISABLED(7, "DISABLED"),
+    NET_DISABLED(7, "DISABLED"),;
+
+    fun getValue(): String {
+        return codeName
+    }
 }

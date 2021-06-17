@@ -8,6 +8,7 @@ import java.lang.NullPointerException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.concurrent.TimeoutException
 import javax.net.ssl.SSLException
 
 /**
@@ -29,6 +30,7 @@ fun Throwable.handleException(): ResponseThrowable {
         is SSLException -> {
             ResponseThrowable(ERROR.SSL_ERROR, this)
         }
+        is TimeoutException,
         is SocketTimeoutException,
         is UnknownHostException-> {
             ResponseThrowable(ERROR.TIMEOUT_ERROR, this)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.LruCache
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.defaultpages.DefaultPagesContainer
+import com.frlib.utils.network.INetworkStateChangeListener
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -41,6 +42,11 @@ interface IActivity {
      * 初始化Observable
      */
     fun initObservables()
+
+    /**
+     * 网络状态改变监听
+     */
+    fun networkChangeListener(): INetworkStateChangeListener
 
     /**
      * 这个 Activity 是否会使用 Fragment,框架会根据这个属性判断是否注册 [FragmentManager.FragmentLifecycleCallbacks]
