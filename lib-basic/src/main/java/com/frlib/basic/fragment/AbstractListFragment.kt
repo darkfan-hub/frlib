@@ -158,7 +158,7 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     override fun networkError() {
         if (!useDefaultPages()) {
             listAdapter.removeEmptyView()
-            listAdapter.setEmptyView(errorView)
+            listAdapter.setEmptyView(netErrorView)
         }
 
         changeRecyclePadding(true)

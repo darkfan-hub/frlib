@@ -1,6 +1,7 @@
 package com.frlib.basic.views
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class EmptyView(
     private var iconMarginTop: Int = 0
     private var textMarginTop: Int = 0
     private var retryText: String = ""
+    private var retryTextColor: Int = 0
     private var retryBackground: Drawable? = null
     private var retryVisibility: Boolean = false
     private var retryListener: OnClickListener? = null
@@ -40,6 +42,7 @@ class EmptyView(
         this.iconMarginTop = builder.iconMarginTop
         this.textMarginTop = builder.textMarginTop
         this.retryText = builder.retryText
+        this.retryTextColor = builder.retryTextColor
         this.retryBackground = builder.retryBackground
         this.retryVisibility = builder.retryVisibility
         this.retryListener = builder.retryListener
@@ -74,6 +77,7 @@ class EmptyView(
         binding.tvEmptyText.text = text
 
         binding.btEmptyRetry.text = retryText
+        binding.btEmptyRetry.setTextColor(retryTextColor)
         if (retryBackground != null) {
             binding.btEmptyRetry.background = retryBackground
         }
@@ -87,6 +91,7 @@ class EmptyView(
         var iconMarginTop: Int = 0
         var textMarginTop: Int = 0
         var retryText: String = "重试"
+        var retryTextColor: Int = Color.WHITE
         var retryBackground: Drawable? = null
         var retryVisibility: Boolean = false
         var retryListener: OnClickListener? = null

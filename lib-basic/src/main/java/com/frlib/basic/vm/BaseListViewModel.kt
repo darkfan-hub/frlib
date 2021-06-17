@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.frlib.basic.data.entity.BasicApiEntity
 import com.frlib.basic.data.entity.BasicApiPageEntity
-import com.frlib.basic.defaultpages.Pages
 import com.frlib.basic.lifecycle.SingleLiveEvent
 import com.frlib.basic.net.ERROR
 
@@ -84,6 +83,7 @@ abstract class BaseListViewModel<T>(
             error = {
                 if (it.code == ERROR.TIMEOUT_ERROR.getKey()) {
                     networkErrorLiveData.call()
+                    noMoreDataLiveData.call()
                 } else {
                     emptyLiveData.call()
                 }
