@@ -7,6 +7,7 @@ import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,6 @@ import com.frlib.utils.ext.dp2px
 import com.frlib.utils.ext.invalid
 import com.frlib.utils.ext.sp2Px
 import timber.log.Timber
-
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -76,10 +76,11 @@ class BasicFormView : AbstractFormView() {
             ta.getColor(R.styleable.SuperFormView_formRightHintTextColor, context.color(R.color.color_cc))
         )
         // 文本输入类型
-        when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 3)) {
+        when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 4)) {
             0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
             1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER
             2 -> rightEditText.inputType = InputType.TYPE_CLASS_PHONE
+            3 -> rightEditText.transformationMethod = PasswordTransformationMethod.getInstance()
         }
         // 文本位置
         val editGravity = ta.getInt(R.styleable.SuperFormView_formRightTextGravity, 0)
@@ -100,6 +101,7 @@ class BasicFormView : AbstractFormView() {
         val paddingVertical =
             ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightPaddingVertical, context.dp2px(15f))
         rightEditText.setPadding(0, paddingVertical, 0, paddingVertical)
+        val autoGravity = ta.getBoolean(R.styleable.SuperFormView_formRightTextAutoGravity, true)
         // 文本输入行数监听
         rightEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -109,7 +111,9 @@ class BasicFormView : AbstractFormView() {
                 val lineCount = rightEditText.lineCount
                 Timber.i("当前行数: $lineCount")
 
-                changeEditGravity(if (lineCount > 1) 1 else 0)
+                if (autoGravity) {
+                    changeEditGravity(if (lineCount > 1) 1 else 0)
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {

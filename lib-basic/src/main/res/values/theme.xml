@@ -84,7 +84,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <!-- 屏幕背景是否变暗 -->
-        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:backgroundDimAmount">0.5</item>
     </style>
 
     <style name="anim_bottom_to_bottom" parent="android:Animation">
