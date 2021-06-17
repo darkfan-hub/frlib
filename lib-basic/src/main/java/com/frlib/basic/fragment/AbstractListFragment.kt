@@ -88,6 +88,8 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
 
         viewModel.emptyLiveData.observe(this, { emptyData() })
 
+        viewModel.networkErrorLiveData.observe(this, { networkError() })
+
         viewModel.finishRefreshLiveData.observe(this, { dataBinding.smartRefresh.finishRefresh() })
 
         viewModel.finishLoadMoreLiveData.observe(this, { dataBinding.smartRefresh.finishLoadMore() })
@@ -147,6 +149,16 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     override fun emptyData() {
         if (!listAdapter.hasEmptyView() && !useDefaultPages()) {
             listAdapter.setEmptyView(emptyView)
+        }
+
+        changeRecyclePadding(true)
+        listAdapter.setList(null)
+    }
+
+    override fun networkError() {
+        if (!useDefaultPages()) {
+            listAdapter.removeEmptyView()
+            listAdapter.setEmptyView(errorView)
         }
 
         changeRecyclePadding(true)

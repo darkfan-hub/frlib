@@ -181,7 +181,7 @@ open class BaseViewModel(
                         }
                     }
                     else -> {
-                        e.handleException()
+                        error(e.handleException())
                     }
                 }
             } finally {

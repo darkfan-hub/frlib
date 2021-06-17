@@ -110,6 +110,8 @@ abstract class AbstractFrListView<T>(
 
         viewModel().emptyLiveData.observe(owner, { emptyData() })
 
+        viewModel().networkErrorLiveData.observe(owner, { networkError() })
+
         viewModel().finishRefreshLiveData.observe(owner, { binding.smartRefresh.finishRefresh() })
 
         viewModel().finishLoadMoreLiveData.observe(owner, { binding.smartRefresh.finishLoadMore() })
@@ -189,10 +191,23 @@ abstract class AbstractFrListView<T>(
         listAdapter.setList(null)
     }
 
+    override fun networkError() {
+        listAdapter.removeEmptyView()
+        listAdapter.setEmptyView(networkErrorView())
+
+        changeRecyclePadding(true)
+        listAdapter.setList(null)
+    }
+
     /**
      * 空页面
      */
     abstract fun emptyView(): View
+
+    /**
+     * 网络错误页面
+     */
+    abstract fun networkErrorView(): View
 
     /**
      * 刷新header

@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.frlib.basic.data.entity.BasicApiEntity
 import com.frlib.basic.data.entity.BasicApiPageEntity
+import com.frlib.basic.defaultpages.Pages
 import com.frlib.basic.lifecycle.SingleLiveEvent
+import com.frlib.basic.net.ERROR
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -43,6 +45,9 @@ abstract class BaseListViewModel<T>(
     /** 空布局 */
     val emptyLiveData by lazy { SingleLiveEvent<Void>() }
 
+    /** 网络错误 */
+    val networkErrorLiveData by lazy { SingleLiveEvent<Void>() }
+
     /** 当前页下标 */
     open var pageIndex = 1
 
@@ -77,8 +82,13 @@ abstract class BaseListViewModel<T>(
                 }
             },
             error = {
+                if (it.code == ERROR.TIMEOUT_ERROR.getKey()) {
+                    networkErrorLiveData.call()
+                } else {
+                    emptyLiveData.call()
+                }
+
                 defUI.toast.postValue(it.errMsg)
-                emptyLiveData.call()
             },
             complete = {
                 // 结束下拉刷新

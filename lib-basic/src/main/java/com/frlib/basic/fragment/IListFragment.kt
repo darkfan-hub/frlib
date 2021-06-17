@@ -53,6 +53,11 @@ interface IListFragment<T> {
     fun emptyData()
 
     /**
+     * 网络错误
+     */
+    fun networkError()
+
+    /**
      * 列表适配器
      */
     fun recyclerViewAdapter(): BaseAdapter<T, BaseViewHolder>
