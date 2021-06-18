@@ -97,6 +97,8 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
         viewModel.loadMoreErrorLiveData.observe(this, { dataBinding.smartRefresh.finishLoadMore(false) })
 
         viewModel.noMoreDataLiveData.observe(this, { dataBinding.smartRefresh.finishLoadMoreWithNoMoreData() })
+
+        viewModel.clearNoMoreDataLiveData.observe(this, { dataBinding.smartRefresh.setNoMoreData(false) })
     }
 
     override fun initData() {
@@ -136,7 +138,11 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     }
 
     override fun changeRecyclePadding(isEmpty: Boolean) {
-        recyclerView.setPadding(if (isEmpty) 0 else recyclePadding())
+        if (isEmpty) {
+            recyclerView.setPadding(0)
+        } else {
+            recyclerView.setPadding(recyclePadding(), recyclePadding(), recyclePadding(), 0)
+        }
     }
 
     /**

@@ -29,6 +29,9 @@ abstract class BaseListViewModel<T>(
     /** 没有更多 */
     val noMoreDataLiveData by lazy { SingleLiveEvent<Void>() }
 
+    /** 清除没有更多标记 */
+    val clearNoMoreDataLiveData by lazy { SingleLiveEvent<Void>() }
+
     /** 加载更多数据 */
     val addDataLiveData by lazy { MutableLiveData<T>() }
 
@@ -68,6 +71,8 @@ abstract class BaseListViewModel<T>(
      * 下拉刷新
      */
     open fun refresh(showDialog: Boolean = false) {
+        clearNoMoreDataLiveData.call()
+
         launchOfResult(
             showLoading = showDialog,
             block = { onRefresh() },

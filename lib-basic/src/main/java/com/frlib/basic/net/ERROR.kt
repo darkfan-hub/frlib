@@ -44,7 +44,7 @@ enum class ERROR(private val code: Int, private val err: String) {
     /**
      * token 过期
      */
-    TOKEN_ERROR(1007, "token已失效, 请重新登录");
+    TOKEN_ERROR(1007, "登录已失效, 请重新登录");
 
     fun getValue(): String {
         return err

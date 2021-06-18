@@ -119,6 +119,8 @@ abstract class AbstractFrListView<T>(
         viewModel().loadMoreErrorLiveData.observe(owner, { binding.smartRefresh.finishLoadMore(false) })
 
         viewModel().noMoreDataLiveData.observe(owner, { binding.smartRefresh.finishLoadMoreWithNoMoreData() })
+
+        viewModel().clearNoMoreDataLiveData.observe(owner, { binding.smartRefresh.setNoMoreData(false) })
     }
 
     /**
