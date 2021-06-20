@@ -15,6 +15,8 @@ android {
 }
 
 dependencies {
+    api files('libs/tbs_sdk_43993.jar')
+
     implementation project(':lib-basic')
     implementation project(':lib-utils')
     implementation rootProject.ext.libs['downloader']
