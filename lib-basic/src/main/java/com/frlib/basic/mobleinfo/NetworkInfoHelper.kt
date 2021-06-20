@@ -2,12 +2,11 @@ package com.frlib.basic.mobleinfo
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import com.frlib.basic.mobleinfo.entity.NetworkInfoEntity
 import com.frlib.utils.SysUtil
+import com.frlib.utils.network.NetworkType
 import com.frlib.utils.network.NetworkUtil
 
 /**
@@ -17,79 +16,18 @@ import com.frlib.utils.network.NetworkUtil
  */
 object NetworkInfoHelper {
 
-    fun registerNetworkCallback(context: Context, callback: ConnectivityManager.NetworkCallback) {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (SysUtil.isAndroid7()) {
-            connectivityManager.registerDefaultNetworkCallback(callback)
-        }
-    }
-
     @SuppressLint("MissingPermission")
     fun networkInfo(context: Context): NetworkInfoEntity {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         val networkInfo = NetworkInfoEntity()
-        // 网络类型
-        if (SysUtil.isAndroid6()) {
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
-                networkInfo.networkType = when {
-                    hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> "WIFI|VPN"
-                    hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WIFI"
-                    hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> networkType(context, telephonyManager)
-                    else -> "unknown"
-                }
-                networkInfo.isWifi = hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-            }
-        } else {
-            connectivityManager.activeNetworkInfo?.run {
-                networkInfo.networkType = when (type) {
-                    ConnectivityManager.TYPE_WIFI -> "WIFI"
-                    ConnectivityManager.TYPE_MOBILE -> networkType(context, telephonyManager)
-                    else -> "unknown"
-                }
-            }
-        }
-
+        val networkType = NetworkUtil.networkType(context)
+        networkInfo.networkType = networkType.getValue()
+        networkInfo.isWifi = networkType == NetworkType.NET_WIFI
         networkInfo.simOperator = NetworkUtil.getSimOperators(telephonyManager.simOperator)
-
         val subId = getDefaultDataSubId(context)
         networkInfo.imei = reflectSimInfo(telephonyManager, "getSubscriberIdGemini", subId)
         networkInfo.imsi = reflectSimInfo(telephonyManager, "getSubscriberIdGemini", subId)
         return networkInfo
-    }
-
-    @SuppressLint("MissingPermission")
-    fun networkType(
-        context: Context,
-        telephonyManager: TelephonyManager
-    ): String {
-        return if (SysUtil.isAndroid10()) {
-            try {
-                when (telephonyManager.dataNetworkType) {
-                    TelephonyManager.NETWORK_TYPE_GPRS,
-                    TelephonyManager.NETWORK_TYPE_EDGE,
-                    TelephonyManager.NETWORK_TYPE_CDMA,
-                    TelephonyManager.NETWORK_TYPE_1xRTT,
-                    TelephonyManager.NETWORK_TYPE_IDEN -> "2G"
-                    TelephonyManager.NETWORK_TYPE_UMTS,
-                    TelephonyManager.NETWORK_TYPE_EVDO_0,
-                    TelephonyManager.NETWORK_TYPE_EVDO_A,
-                    TelephonyManager.NETWORK_TYPE_HSDPA,
-                    TelephonyManager.NETWORK_TYPE_HSUPA,
-                    TelephonyManager.NETWORK_TYPE_HSPA,
-                    TelephonyManager.NETWORK_TYPE_EVDO_B,
-                    TelephonyManager.NETWORK_TYPE_EHRPD,
-                    TelephonyManager.NETWORK_TYPE_HSPAP -> "3G"
-                    TelephonyManager.NETWORK_TYPE_LTE -> "4G"
-                    TelephonyManager.NETWORK_TYPE_NR -> "5G"
-                    else -> "unknown"
-                }
-            } catch (e: Exception) {
-                "unknown"
-            }
-        } else {
-            NetworkUtil.networkTypeString(context)
-        }
     }
 
     /**
