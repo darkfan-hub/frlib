@@ -2,7 +2,10 @@ package com.frlib.basic.activity
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -17,11 +20,13 @@ import com.frlib.basic.ref.RefGenericSuperclass
 import com.frlib.basic.toast.FrToasty
 import com.frlib.basic.vm.BaseViewModel
 import com.frlib.basic.vm.ViewModelFactory
+import com.frlib.utils.KeyboardUtil
 import com.frlib.utils.network.INetworkStateChangeListener
 import com.frlib.utils.network.NetworkType
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.impl.LoadingPopupView
 import me.jessyan.autosize.AutoSizeCompat
+import timber.log.Timber
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -184,6 +189,21 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     }
 
     override fun setClickListen() {
+        findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT).setOnClickListener {
+            KeyboardUtil.hideSoftInput(self)
+        }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        Timber.i("dispatchTouchEvent -> ${ev.action}")
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val currentView = currentFocus
+            currentView?.let {
+                it.clearFocus()
+                KeyboardUtil.hideSoftInput(self, it)
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun initData() {
@@ -224,6 +244,7 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
 
     override fun onDestroy() {
         super.onDestroy()
+        KeyboardUtil.hideSoftInput(self)
         lifecycle.removeObserver(viewModel)
     }
 

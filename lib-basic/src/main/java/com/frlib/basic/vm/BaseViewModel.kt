@@ -164,18 +164,20 @@ open class BaseViewModel(
             } catch (e: Throwable) {
                 when (e) {
                     is HttpException -> {
-                        if (AppConstants.api_state_token_invalid == e.code()) {
-                            error(ResponseThrowable(ERROR.TOKEN_ERROR, e))
-                        } else {
-                            val srt = e.response()?.errorBody()?.string()
-                            srt?.let { errStr ->
-                                if (errStr.startsWith("{") && errStr.endsWith("}")) {
-                                    val jsonObject = JSONObject(errStr)
-                                    val code = jsonObject.optInt("code")
-                                    val msg = jsonObject.optString("message")
-                                    error(ResponseThrowable(code, msg))
-                                } else {
-                                    error(ResponseThrowable(ERROR.HTTP_ERROR, e))
+                        when (e.code()) {
+                            AppConstants.api_state_token_invalid -> error(ResponseThrowable(ERROR.TOKEN_ERROR, e))
+                            404 -> error(ResponseThrowable(ERROR.HTTP_NOT_FOUND, e))
+                            else -> {
+                                val srt = e.response()?.errorBody()?.string()
+                                srt?.let { errStr ->
+                                    if (errStr.startsWith("{") && errStr.endsWith("}")) {
+                                        val jsonObject = JSONObject(errStr)
+                                        val code = jsonObject.optInt("code")
+                                        val msg = jsonObject.optString("message")
+                                        error(ResponseThrowable(code, msg))
+                                    } else {
+                                        error(ResponseThrowable(ERROR.HTTP_ERROR, e))
+                                    }
                                 }
                             }
                         }
