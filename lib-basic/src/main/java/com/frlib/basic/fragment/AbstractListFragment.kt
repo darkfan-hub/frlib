@@ -141,7 +141,7 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
         if (isEmpty) {
             recyclerView.setPadding(0)
         } else {
-            recyclerView.setPadding(recyclePadding(), recyclePadding(), recyclePadding(), 0)
+            recyclerView.setPadding(recyclePadding())
         }
     }
 

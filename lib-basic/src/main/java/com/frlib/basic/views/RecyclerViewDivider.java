@@ -148,9 +148,9 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
                 break;
             case HORIZONTAL_LIST:
                 childCount -= 1;
-                //垂直布局底部留边，最后一行不留
-                // outRect.set(0, 0, 0, (itemPosition != childCount) ? mDividerHeight : 0);
-                outRect.set(0, 0, 0, mDividerHeight);
+                // 垂直布局底部留边，最后一行不留
+                outRect.set(0, 0, 0, (itemPosition != childCount) ? mDividerHeight : 0);
+                // outRect.set(0, 0, 0, mDividerHeight);
                 break;
             default:
                 break;
