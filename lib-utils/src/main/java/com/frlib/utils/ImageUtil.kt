@@ -10,6 +10,8 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -28,7 +30,7 @@ object ImageUtil {
     @JvmStatic
     fun bitmap2Bytes(bitmap: Bitmap, format: Bitmap.CompressFormat): ByteArray {
         val output = ByteArrayOutputStream()
-        bitmap.compress(format, 100, output)
+        bitmap.compress(format, 95, output)
         val result = output.toByteArray()
         CloseUtil.closeIO(output)
         return result
@@ -96,8 +98,35 @@ object ImageUtil {
      * @param file file文件
      * @return bitmap
      */
-    fun file2Bitmap(file: File): Bitmap {
-        return BitmapFactory.decodeFile(file.absolutePath)
+    fun file2Bitmap(file: File, w: Int, h: Int): Bitmap {
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        var bitmap = BitmapFactory.decodeFile(file.absolutePath, options)
+        options.inJustDecodeBounds = false
+        options.inPreferredConfig = Bitmap.Config.RGB_565
+
+        val realW = options.outWidth
+        val realH = options.outHeight
+
+        var bi = 1
+        if (realW > realH && realW > w) {
+            bi = realW / w
+        } else if (realW < realH && realH > h) {
+            bi = realH / h
+        }
+
+        if (bi < 0) {
+            bi = 1
+        }
+
+        return try {
+            val desW = realW / bi
+            val desH = realH / bi
+            bitmap = BitmapFactory.decodeFile(file.absolutePath, options)
+            Bitmap.createScaledBitmap(bitmap, desW, desH, true)
+        } catch (e: FileNotFoundException) {
+            bitmap
+        }
     }
 
     /**

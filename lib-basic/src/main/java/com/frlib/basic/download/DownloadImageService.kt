@@ -38,9 +38,7 @@ class DownloadImageService(
     )
 
     fun downloadImage(imageUrl: String, downloadCallback: IDownloadCallback) {
-        val imagePath = "${imagesDir}${File.separator}${imageUrl.hashCode()}.${
-            FileUtil.getFileExtensionWithUrl(imageUrl)
-        }"
+        val imagePath = "${imagesDir}${File.separator}${imageUrl.hashCode()}"
 
         val imageFile = FileUtil.getFileByPath(imagePath)
 
