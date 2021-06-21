@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.frlib.basic.R
 import com.frlib.basic.adapter.BaseAdapter
@@ -66,6 +67,7 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     open fun setRecyclerView() {
         recyclerView = dataBinding.rvList
         with(recyclerView) {
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             layoutManager = layoutManager()
             listAdapter = recyclerViewAdapter()
             adapter = listAdapter
@@ -84,7 +86,12 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
             recyclerView.postDelayed({ listAdapter.setList(it) }, 10)
         })
 
-        viewModel.loadMoreDataLiveData.observe(this, { listAdapter.addData(it) })
+        viewModel.loadMoreDataLiveData.observe(this, {
+            val lastSize = listAdapter.data.size
+            listAdapter.addData(it)
+            // 加上这个防止加载更多后, 最后一条item与新的第一条item间距小时问题
+            listAdapter.notifyItemChanged(lastSize - 1)
+        })
 
         viewModel.emptyLiveData.observe(this, { emptyData() })
 

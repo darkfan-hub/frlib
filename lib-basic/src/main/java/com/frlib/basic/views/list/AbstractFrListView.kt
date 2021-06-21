@@ -106,7 +106,12 @@ abstract class AbstractFrListView<T>(
             recyclerView.postDelayed({ listAdapter.setList(it) }, 10)
         })
 
-        viewModel().loadMoreDataLiveData.observe(owner, { listAdapter.addData(it) })
+        viewModel().loadMoreDataLiveData.observe(owner, {
+            val lastSize = listAdapter.data.size
+            listAdapter.addData(it)
+            // 加上这个防止加载更多后, 最后一条item与新的第一条item间距小时问题
+            listAdapter.notifyItemChanged(lastSize - 1)
+        })
 
         viewModel().emptyLiveData.observe(owner, { emptyData() })
 

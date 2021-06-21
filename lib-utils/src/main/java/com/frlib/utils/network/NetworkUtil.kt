@@ -78,7 +78,11 @@ object NetworkUtil {
 
         if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
             val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return networkType(tm.dataNetworkType)
+            return try {
+                networkType(tm.dataNetworkType)
+            } catch (securityException: SecurityException) {
+                NetworkType.NET_UNKNOWN
+            }
         }
 
         return NetworkType.NET_DISABLED
