@@ -9,8 +9,6 @@ import com.google.gson.Gson
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import java.util.concurrent.ExecutorService
-
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>

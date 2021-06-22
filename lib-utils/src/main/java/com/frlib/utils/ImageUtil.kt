@@ -11,7 +11,6 @@ import android.view.View
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
-import java.io.FileOutputStream
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -30,7 +29,31 @@ object ImageUtil {
     @JvmStatic
     fun bitmap2Bytes(bitmap: Bitmap, format: Bitmap.CompressFormat): ByteArray {
         val output = ByteArrayOutputStream()
-        bitmap.compress(format, 95, output)
+        bitmap.compress(format, 85, output)
+        val result = output.toByteArray()
+        CloseUtil.closeIO(output)
+        return result
+    }
+
+    /**
+     * bitmap转byteArr
+     *
+     * @param bitmap bitmap对象
+     * @param format 格式
+     * @param maxSize 最大的大小, 单位byte
+     * @return 字节数组
+     */
+    @JvmStatic
+    fun bitmap2Bytes(bitmap: Bitmap, format: Bitmap.CompressFormat, maxSize: Int): ByteArray {
+        var quality = 100
+        val output = ByteArrayOutputStream()
+
+        do {
+            output.reset()
+            bitmap.compress(format, quality, output)
+            quality -= 5
+        } while (output.toByteArray().size > maxSize)
+
         val result = output.toByteArray()
         CloseUtil.closeIO(output)
         return result

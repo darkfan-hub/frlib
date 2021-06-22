@@ -7,7 +7,6 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.work.OneTimeWorkRequestBuilder
-import com.alibaba.android.arouter.launcher.ARouter
 import com.billy.android.swipe.SmartSwipeBack
 import com.frlib.basic.activity.IActivity
 import com.frlib.utils.SysUtil
@@ -27,17 +26,11 @@ abstract class AbstractAppInit : IAppInit {
 
     override fun mainInit(app: IApp) {
         if (app.appComponent().enableDebug()) {
-            ARouter.openLog()
-            ARouter.openDebug()
-
             Timber.plant(Timber.DebugTree())
         }
 
         // auto size
         AutoSize.initCompatMultiProcess(app.appComponent().application())
-
-        // 初始化ARouter
-        ARouter.init(app.appComponent().application())
 
         // 全局侧滑返回
         SmartSwipeBack.activitySlidingBack(

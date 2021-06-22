@@ -8,6 +8,7 @@ import androidx.core.view.setPadding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.frlib.basic.R
 import com.frlib.basic.adapter.BaseAdapter
@@ -85,6 +86,7 @@ abstract class AbstractFrListView<T>(
     open fun setRecyclerView() {
         recyclerView = binding.rvList
         with(binding.rvList) {
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             layoutManager = layoutManager()
             listAdapter = recyclerViewAdapter()
             adapter = listAdapter
