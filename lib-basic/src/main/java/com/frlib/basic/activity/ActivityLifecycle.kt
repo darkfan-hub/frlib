@@ -28,7 +28,7 @@ class ActivityLifecycle(
 
         if (activity is IActivity) {
             activity.setupActivityComponent(appComponent)
-            AppManager.addNetworkStateChangeListener(activity.networkChangeListener())
+            // AppManager.addNetworkStateChangeListener(activity.networkChangeListener())
             registerFragmentCallbacks(activity)
         }
 
@@ -91,7 +91,7 @@ class ActivityLifecycle(
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-        Timber.i("${activity.javaClass.simpleName} SaveInstanceState!")
+        Timber.i("${activity.javaClass.simpleName} SaveInstanceState -> $outState")
     }
 
     override fun onActivityDestroyed(activity: Activity) {

@@ -73,6 +73,7 @@ class WebPageActivity : AbstractActivity<WebActivityWebpageBinding, BaseViewMode
 
     private lateinit var agentWeb: AgentWeb
     private var indicatorColor: Int = -1
+    private var hasTitle = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,6 +163,7 @@ class WebPageActivity : AbstractActivity<WebActivityWebpageBinding, BaseViewMode
         super.onResume()
         agentWeb.webLifeCycle.onResume()
         intent.extras?.apply {
+            hasTitle = containsKey("title")
             if (!getBoolean("titleVisible", true)) {
                 dataBinding.webTbTitle.visibility = View.GONE
             } else {
@@ -207,7 +209,9 @@ class WebPageActivity : AbstractActivity<WebActivityWebpageBinding, BaseViewMode
                 super.onReceivedTitle(view, title)
                 Timber.d("onReceivedTitle -----> $title")
 
-                dataBinding.webTbTitle.post { dataBinding.webTbTitle.setTitleText(title) }
+                if (!hasTitle) {
+                    dataBinding.webTbTitle.post { dataBinding.webTbTitle.setTitleText(title) }
+                }
             }
         }
     }

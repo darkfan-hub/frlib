@@ -29,7 +29,7 @@ class FragmentLifecycle(
         if (f is IFragment && !f.isAdded) {
             (f as IFragment).setupActivityComponent(appComponent)
 
-            AppManager.addNetworkStateChangeListener(f.networkChangeListener())
+            // AppManager.addNetworkStateChangeListener(f.networkChangeListener())
         }
     }
 
@@ -74,5 +74,10 @@ class FragmentLifecycle(
         if (f is IFragment) {
             AppManager.removeNetworkStateChangeListener(f.networkChangeListener())
         }
+    }
+
+    override fun onFragmentSaveInstanceState(fm: FragmentManager, f: Fragment, outState: Bundle) {
+        super.onFragmentSaveInstanceState(fm, f, outState)
+        Timber.i("${f.javaClass.simpleName} SaveInstanceState -> $outState")
     }
 }
