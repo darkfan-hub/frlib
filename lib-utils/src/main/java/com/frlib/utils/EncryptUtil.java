@@ -721,7 +721,7 @@ public class EncryptUtil {
      * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
      * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
      */
-    public static        String AES_Transformation = "AES/ECB/NoPadding";
+    public static        String AES_Transformation = "AES/ECB/PKCS5Padding";
     private static final String AES_Algorithm      = "AES";
 
 

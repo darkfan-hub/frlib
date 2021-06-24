@@ -12,9 +12,9 @@ import com.frlib.basic.lifecycle.SingleLiveEvent
 import com.frlib.basic.net.ERROR
 import com.frlib.basic.net.ResponseThrowable
 import com.frlib.basic.net.handleException
+import com.frlib.basic.net.handleHttpException
 import com.frlib.utils.ext.string
 import kotlinx.coroutines.*
-import org.json.JSONObject
 import retrofit2.HttpException
 import timber.log.Timber
 
@@ -81,7 +81,7 @@ open class BaseViewModel(
      * 隐藏loading
      */
     fun hideLoading() {
-        defUI.hideLoading.call()
+        launchUI { defUI.hideLoading.call() }
     }
 
     /** 协逞线程切换 */
@@ -162,25 +162,10 @@ open class BaseViewModel(
                     success(result)
                 }
             } catch (e: Throwable) {
+                Timber.e("http request error -> $e")
                 when (e) {
                     is HttpException -> {
-                        when (e.code()) {
-                            AppConstants.api_state_token_invalid -> error(ResponseThrowable(ERROR.TOKEN_ERROR, e))
-                            404 -> error(ResponseThrowable(ERROR.HTTP_NOT_FOUND, e))
-                            else -> {
-                                val srt = e.response()?.errorBody()?.string()
-                                srt?.let { errStr ->
-                                    if (errStr.startsWith("{") && errStr.endsWith("}")) {
-                                        val jsonObject = JSONObject(errStr)
-                                        val code = jsonObject.optInt("code")
-                                        val msg = jsonObject.optString("message")
-                                        error(ResponseThrowable(code, msg))
-                                    } else {
-                                        error(ResponseThrowable(ERROR.HTTP_ERROR, e))
-                                    }
-                                }
-                            }
-                        }
+                        error(e.handleHttpException())
                     }
                     else -> {
                         error(e.handleException())

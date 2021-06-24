@@ -96,6 +96,9 @@ abstract class BaseListViewModel<T>(
                 defUI.toast.postValue(it.errMsg)
             },
             complete = {
+                if (showDialog) {
+                    hideLoading()
+                }
                 // 结束下拉刷新
                 finishRefreshLiveData.call()
             }

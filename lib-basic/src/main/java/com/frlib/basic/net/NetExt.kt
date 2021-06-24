@@ -1,10 +1,13 @@
 package com.frlib.basic.net
 
 import android.net.ParseException
+import com.frlib.basic.config.AppConstants
+import com.frlib.utils.ext.length
 import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
 import org.json.JSONException
-import java.lang.NullPointerException
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -32,7 +35,7 @@ fun Throwable.handleException(): ResponseThrowable {
         }
         is TimeoutException,
         is SocketTimeoutException,
-        is UnknownHostException-> {
+        is UnknownHostException -> {
             ResponseThrowable(ERROR.TIMEOUT_ERROR, this)
         }
         is NullPointerException -> {
@@ -41,5 +44,27 @@ fun Throwable.handleException(): ResponseThrowable {
         else -> {
             ResponseThrowable(ERROR.UNKNOWN, this)
         }
+    }
+}
+
+fun Throwable.handleHttpException(): ResponseThrowable {
+    return if (this is HttpException) {
+        when (this.code()) {
+            AppConstants.api_state_token_invalid -> ResponseThrowable(ERROR.TOKEN_ERROR, this)
+            404 -> ResponseThrowable(ERROR.HTTP_NOT_FOUND, this)
+            else -> {
+                val str = this.response()?.errorBody()?.string()
+                if (str.length() > 0 && str!!.startsWith("{") && str.endsWith("}")) {
+                    val jsonObject = JSONObject(str)
+                    val code = jsonObject.optInt("code")
+                    val msg = jsonObject.optString("message")
+                    ResponseThrowable(code, msg)
+                } else {
+                    ResponseThrowable(ERROR.HTTP_ERROR, this)
+                }
+            }
+        }
+    } else {
+        ResponseThrowable(ERROR.HTTP_ERROR, this)
     }
 }

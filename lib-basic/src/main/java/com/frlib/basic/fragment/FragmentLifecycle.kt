@@ -26,7 +26,7 @@ class FragmentLifecycle(
     override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
         super.onFragmentCreated(fm, f, savedInstanceState)
         Timber.i("${f.javaClass.simpleName} Created!")
-        if (f is IFragment && !f.isAdded) {
+        if (f is IFragment) {
             (f as IFragment).setupActivityComponent(appComponent)
 
             // AppManager.addNetworkStateChangeListener(f.networkChangeListener())
