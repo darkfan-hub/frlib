@@ -1,7 +1,7 @@
 ### 原有git项目引入子项目
 ```
 gitee:
-git submodule add https://gitee.com/black-dashu/frlib.git
+git submodule add https://gitee.com/gxb66/frlib.git
 
 github:
 git submodule add https://github.com/ff-xingyun/frlib.git
