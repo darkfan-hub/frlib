@@ -105,7 +105,10 @@ abstract class AbstractFrListView<T>(
                 changeRecyclePadding()
             }
 
-            recyclerView.postDelayed({ listAdapter.setList(it) }, 10)
+            recyclerView.postDelayed({
+                listAdapter.setList(it)
+                recyclerView.scrollToPosition(0)
+            }, 10)
         })
 
         viewModel().loadMoreDataLiveData.observe(owner, {
@@ -192,9 +195,8 @@ abstract class AbstractFrListView<T>(
      * 空数据
      */
     override fun emptyData() {
-        if (!listAdapter.hasEmptyView()) {
-            listAdapter.setEmptyView(emptyView())
-        }
+        listAdapter.removeEmptyView()
+        listAdapter.setEmptyView(emptyView())
 
         changeRecyclePadding(true)
         listAdapter.setList(null)
@@ -223,7 +225,10 @@ abstract class AbstractFrListView<T>(
      */
     open fun refreshHeader(): RefreshHeader {
         val timeFormat =
-            SimpleDateFormat(context.getString(R.string.frlib_text_header_update), Locale.getDefault())
+            SimpleDateFormat(
+                context.getString(R.string.frlib_text_header_update),
+                Locale.getDefault()
+            )
         return ClassicsHeader(context).setTimeFormat(timeFormat)
     }
 

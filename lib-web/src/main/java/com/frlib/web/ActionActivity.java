@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import com.frlib.basic.permissions.OnPermissionCallback;
 import com.frlib.basic.permissions.PermissionUtils;
 import com.frlib.basic.permissions.XXPermissions;
@@ -20,7 +21,7 @@ import static android.provider.MediaStore.EXTRA_OUTPUT;
  * @author ???
  * @since 2.0.0
  */
-public final class ActionActivity extends Activity {
+public final class ActionActivity extends AppCompatActivity {
 
     public static final String KEY_ACTION = "KEY_ACTION";
     public static final String KEY_URI = "KEY_URI";

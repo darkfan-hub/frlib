@@ -4,8 +4,13 @@ apply from: '../common_build.gradle'
 android {
 
     defaultConfig {
-        versionCode 1
-        versionName "1.0.0"
+        defaultConfig {
+            buildConfigField("String", "VERSION_NAME", "\"1.0.0\"")
+        }
+
+        buildFeatures {
+            dataBinding = true
+        }
     }
 
     // 开启dataBinding

@@ -165,7 +165,7 @@ public class DefaultChromeClient extends MiddlewareWebChromeBase {
             callback.invoke(origin, false, false);
             return;
         }
-        if (PermissionUtils.isGrantedPermission(mActivity, Permission.ACCESS_FINE_LOCATION)) {
+        /*if (PermissionUtils.isGrantedPermission(mActivity, Permission.ACCESS_FINE_LOCATION)) {
             Timber.i("onGeolocationPermissionsShowPromptInternal:" + true);
             callback.invoke(origin, true, false);
         } else {
@@ -175,7 +175,7 @@ public class DefaultChromeClient extends MiddlewareWebChromeBase {
             this.mCallback = callback;
             this.mOrigin = origin;
             ActionActivity.start(mActivity, mAction);
-        }
+        }*/
     }
 
     @Override

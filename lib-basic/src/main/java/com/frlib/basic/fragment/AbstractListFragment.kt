@@ -160,7 +160,8 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
     }
 
     override fun emptyData() {
-        if (!listAdapter.hasEmptyView() && !useDefaultPages()) {
+        if (!useDefaultPages()) {
+            listAdapter.removeEmptyView()
             listAdapter.setEmptyView(emptyView)
         }
 

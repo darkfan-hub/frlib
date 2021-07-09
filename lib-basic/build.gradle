@@ -3,14 +3,9 @@ apply from: '../common_build.gradle'
 
 android {
 
-    // 开启dataBinding
-    dataBinding {
-        enabled = true
-    }
-
-    // 开启viewBinding
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
