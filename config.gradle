@@ -177,7 +177,18 @@ ext {
             // https://github.com/JakeWharton/DiskLruCache 缓存
             'disk-lrucache'          : 'com.jakewharton:disklrucache:2.0.2',
             // https://developers.weixin.qq.com/doc/oplatform/Downloads/Android_Resource.html
-            'wechat-sdk'             : 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+            'wechat-sdk'             : 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+',
+            // https://docs.getui.com/getui/mobile/android/androidstudio/
+            'gt-sdk'                 : 'com.getui:gtsdk:3.2.2.0',
+            'gt-core'                : 'com.getui:gtc:3.1.2.0',
+            'gt-hw'                  : 'com.getui.opt:hwp:3.1.0',
+            'gt-xm'                  : 'com.getui.opt:xmp:3.0.2',
+            'gt-oppo'                : 'com.assist-v3:oppo:3.0.2',
+            'gt-vivo'                : 'com.assist-v3:vivo:3.0.2',
+            'gt-mzp'                 : 'com.getui.opt:mzp:3.1.2.0',
+            'gt-ups'                 : 'com.getui.opt:ups:3.1.2.0',
+            // 华为推送 https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-app-version-0000001074227861
+            'push-hw'                : 'com.huawei.hms:push:5.3.0.301',
     ]
 
     kotlins = kotlin.values()

@@ -169,4 +169,9 @@ object SysUtil {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
+
+    @JvmStatic
+    fun isHw(): Boolean {
+        return Build.MANUFACTURER.contains("HUAWEI")
+    }
 }

@@ -161,10 +161,14 @@ object ImageUtil {
      * @return drawable
      */
     fun view2Bitmap(view: View, x: Int, y: Int, width: Int, height: Int): Bitmap {
+        view.measure(
+            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.AT_MOST)
+        )
+        view.layout(x, y, view.measuredWidth, view.measuredHeight)
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         canvas.drawColor(Color.WHITE)
-        view.layout(x, y, (x + width), (y + height))
         view.draw(canvas)
         return bitmap
     }

@@ -42,5 +42,5 @@ fun String?.length(): Int {
 }
 
 fun String.md5(): String {
-    return EncryptUtil.encryptMD5ToString(this).toLowerCase(Locale.getDefault())
+    return EncryptUtil.encryptMD5ToString(this).lowercase(Locale.getDefault())
 }
