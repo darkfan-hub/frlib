@@ -17,6 +17,9 @@ object AppConstants {
     /** app 登录状态 */
     const val KEY_LOGGED_IN = "logged_in"
 
+    /** app 安装版本号 */
+    const val KEY_INSTALL_CODE = "app_install_code"
+
     /** 缓存key APP信息 */
     const val EXTRAS_KEY_APP_INFO = "app_info"
 
