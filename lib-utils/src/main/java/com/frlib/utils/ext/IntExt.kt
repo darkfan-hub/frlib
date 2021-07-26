@@ -7,15 +7,15 @@ import java.math.BigDecimal
  * @date 08/04/2021 19:54
  * @desc 整数扩展
  */
-val RMB_DECIMAL by lazy {
+val cent2YuanDecimal by lazy {
     BigDecimal(100)
 }
 
 /**
  * 价格换算, 分转元
  */
-fun Int.cent2Yuan(): String {
-    return BigDecimal(this).divide(RMB_DECIMAL).toString()
+fun Int.cent2Yuan(scale: Int = 0): String {
+    return BigDecimal(this).setScale(scale).divide(cent2YuanDecimal).toString()
 }
 
 /**

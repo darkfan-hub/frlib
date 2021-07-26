@@ -2,22 +2,19 @@ package com.frlib.basic.views.form
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.text.Editable
-import android.text.InputFilter
+import android.text.*
 import android.text.InputFilter.LengthFilter
-import android.text.InputType
-import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import com.frlib.basic.R
-import com.frlib.utils.ext.color
-import com.frlib.utils.ext.dp2px
-import com.frlib.utils.ext.invalid
-import com.frlib.utils.ext.sp2Px
+import com.frlib.basic.ext.click
+import com.frlib.utils.RegexUtil
+import com.frlib.utils.ext.*
 import timber.log.Timber
 
 /**
@@ -29,9 +26,11 @@ class BasicFormView : AbstractFormView() {
 
     private lateinit var rightEditText: AppCompatEditText
     private lateinit var rightEditTopView: View
+    private var rightIcon: AppCompatImageView? = null
 
     override fun formRightView(context: Context, ta: TypedArray): View {
-        val minHeight = ta.getDimensionPixelSize(R.styleable.SuperFormView_formMinHeight, context.dp2px(54f))
+        val minHeight =
+            ta.getDimensionPixelSize(R.styleable.SuperFormView_formMinHeight, context.dp2px(54f))
 
         val rightView = RelativeLayout(context)
         rightView.minimumHeight = minHeight
@@ -40,47 +39,89 @@ class BasicFormView : AbstractFormView() {
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
         rightParams.marginStart =
-            ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightViewMarginLeft, context.dp2px(128f))
+            ta.getDimensionPixelSize(
+                R.styleable.SuperFormView_formRightViewMarginLeft,
+                context.dp2px(128f)
+            )
         rightView.layoutParams = rightParams
 
         // icon
         var iconId = 0
         if (ta.hasValue(R.styleable.SuperFormView_formRightIcon) || ta.hasValue(R.styleable.SuperFormView_formRightIconUrl)) {
             val circleImage = ta.getBoolean(R.styleable.SuperFormView_formRightIconCircle, false)
-            val icon = createIcon(
+            rightIcon = createIcon(
                 context,
                 circleImage,
                 ta.getString(R.styleable.SuperFormView_formRightIconUrl),
                 ta.getDrawable(R.styleable.SuperFormView_formRightIcon)
             )
-            iconId = icon.id
+            iconId = rightIcon!!.id
 
             val iconParams =
-                RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
             iconParams.addRule(RelativeLayout.CENTER_VERTICAL)
             iconParams.addRule(RelativeLayout.ALIGN_PARENT_END)
             iconParams.marginEnd =
-                ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightIconMargin, context.dp2px(10f))
-            icon.layoutParams = iconParams
+                ta.getDimensionPixelSize(
+                    R.styleable.SuperFormView_formRightIconMargin,
+                    context.dp2px(10f)
+                )
+            rightIcon!!.layoutParams = iconParams
 
-            rightView.addView(icon)
+            rightView.addView(rightIcon!!)
         }
 
         rightEditText = createEditText(
             context,
             ta.getBoolean(R.styleable.SuperFormView_formRightEditEnable, false),
             ta.getString(R.styleable.SuperFormView_formRightText).invalid(),
-            ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightTextSize, context.sp2Px(17f)),
-            ta.getColor(R.styleable.SuperFormView_formRightTextColor, context.color(R.color.color_33)),
+            ta.getDimensionPixelSize(
+                R.styleable.SuperFormView_formRightTextSize,
+                context.sp2Px(17f)
+            ),
+            ta.getColor(
+                R.styleable.SuperFormView_formRightTextColor,
+                context.color(R.color.color_33)
+            ),
             ta.getString(R.styleable.SuperFormView_formRightHintText).invalid(),
-            ta.getColor(R.styleable.SuperFormView_formRightHintTextColor, context.color(R.color.color_cc))
+            ta.getColor(
+                R.styleable.SuperFormView_formRightHintTextColor,
+                context.color(R.color.color_cc)
+            )
         )
+        val rightEditFilters = arrayListOf<InputFilter>()
         // 文本输入类型
         when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 4)) {
             0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
             1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER
             2 -> rightEditText.inputType = InputType.TYPE_CLASS_PHONE
             3 -> rightEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            5 -> {
+                val idCardFilter = object : InputFilter {
+                    override fun filter(
+                        source: CharSequence?,
+                        start: Int,
+                        end: Int,
+                        dest: Spanned?,
+                        dstart: Int,
+                        dend: Int
+                    ): CharSequence {
+                        val charSequence = source.toString()
+                        if (charSequence.length() > 0) {
+                            val isIdCard = RegexUtil.isMatch("^[1234567890X]$", charSequence)
+                            if (!Character.isLetterOrDigit(charSequence[start]) || !isIdCard) {
+                                return ""
+                            }
+                        }
+
+                        return charSequence
+                    }
+                }
+                rightEditFilters.add(idCardFilter)
+            }
         }
         // 文本位置
         val editGravity = ta.getInt(R.styleable.SuperFormView_formRightTextGravity, 0)
@@ -93,13 +134,20 @@ class BasicFormView : AbstractFormView() {
             rightEditText.keyListener = null
         }
         rightEditText.isEnabled = enable
+        // 文本是否单行显示
+        val singleLine = ta.getBoolean(R.styleable.SuperFormView_formSingleLine, false)
+        rightEditText.isSingleLine = singleLine
         // 文本最大字符
         val maxSize = ta.getInteger(R.styleable.SuperFormView_formRightTextMaxSize, 30)
-        rightEditText.filters = arrayOf<InputFilter>(LengthFilter(maxSize))
+        rightEditFilters.add(LengthFilter(maxSize))
+        rightEditText.filters = rightEditFilters.toTypedArray()
         rightEditText.background = null
         rightEditText.minHeight = minHeight
         val paddingVertical =
-            ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightPaddingVertical, context.dp2px(15f))
+            ta.getDimensionPixelSize(
+                R.styleable.SuperFormView_formRightPaddingVertical,
+                context.dp2px(15f)
+            )
         rightEditText.setPadding(0, paddingVertical, 0, paddingVertical)
         val autoGravity = ta.getBoolean(R.styleable.SuperFormView_formRightTextAutoGravity, true)
         // 文本输入行数监听
@@ -114,11 +162,25 @@ class BasicFormView : AbstractFormView() {
                 if (autoGravity) {
                     changeEditGravity(if (lineCount > 1) 1 else 0)
                 }
+
+                if (rightIcon != null) {
+                    if (s.toString().length() > 0) {
+                        rightIcon!!.visibility = View.VISIBLE
+                    } else {
+                        rightIcon!!.visibility = View.INVISIBLE
+                    }
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
             }
         })
+        // 开启清楚文本
+        val openClearText = ta.getBoolean(R.styleable.SuperFormView_formOpenClearText, false)
+        if (openClearText) {
+            rightIcon!!.visibility = View.INVISIBLE
+            clearClickCallback()
+        }
 
         val rightEditParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -130,7 +192,10 @@ class BasicFormView : AbstractFormView() {
             rightEditParams.addRule(RelativeLayout.ALIGN_PARENT_END)
         }
         rightEditParams.marginEnd =
-            ta.getDimensionPixelSize(R.styleable.SuperFormView_formRightTextMargin, context.dp2px(10f))
+            ta.getDimensionPixelSize(
+                R.styleable.SuperFormView_formRightTextMargin,
+                context.dp2px(10f)
+            )
         rightEditText.layoutParams = rightEditParams
         rightView.addView(rightEditText)
 
@@ -188,5 +253,12 @@ class BasicFormView : AbstractFormView() {
 
     fun editEnable(): Boolean {
         return rightEditText.isEnabled
+    }
+
+    private fun clearClickCallback() {
+        rightIcon?.click {
+            rightEditText.text = null
+            rightIcon?.visibility = View.INVISIBLE
+        }
     }
 }

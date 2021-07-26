@@ -4,115 +4,115 @@
     <!-- 标题栏 -->
     <declare-styleable name="TitleBar">
         <!-- 标题栏背景 图片或颜色, 默认白色 -->
-        <attr name="titleBarColor" format="color"/>
+        <attr name="titleBarColor" format="color" />
         <!-- 填充状态栏, 默认true -->
-        <attr name="fillStatusBar" format="boolean"/>
+        <attr name="fillStatusBar" format="boolean" />
         <!-- 状态栏颜色, 默认白色-->
-        <attr name="statusBarColor" format="color"/>
+        <attr name="statusBarColor" format="color" />
         <!-- 标题栏高度, 默认44dp -->
-        <attr name="titleBarHeight" format="dimension"/>
+        <attr name="titleBarHeight" format="dimension" />
         <!-- 显示标题栏分割线, 默认true -->
-        <attr name="showBottomLine" format="boolean"/>
+        <attr name="showBottomLine" format="boolean" />
         <!-- 标题栏分割线颜色, 默认#dddddd -->
-        <attr name="bottomLineColor" format="color"/>
+        <attr name="bottomLineColor" format="color" />
         <!-- 底部阴影高度 showBottomLine = false时有效 -->
-        <attr name="bottomShadowHeight" format="dimension"/>
+        <attr name="bottomShadowHeight" format="dimension" />
 
         <!-- 左边视图类型 -->
         <attr name="leftType">
-            <enum name="none" value="0"/>
-            <enum name="textView" value="1"/>
-            <enum name="imageButton" value="2"/>
-            <enum name="customView" value="3"/>
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="imageButton" value="2" />
+            <enum name="customView" value="3" />
         </attr>
         <!-- TextView 文字, 对应leftType = textView -->
-        <attr name="leftText" format="string"/>
+        <attr name="leftText" format="string" />
         <!-- TextView 颜色, 对应leftType = textView -->
-        <attr name="leftTextColor" format="color"/>
+        <attr name="leftTextColor" format="color" />
         <!-- TextView 字体大小, 对应leftType = textView -->
-        <attr name="leftTextSize" format="dimension"/>
+        <attr name="leftTextSize" format="dimension" />
         <!-- TextView 左边图片, 对应leftType = textView -->
-        <attr name="leftDrawable" format="reference"/>
+        <attr name="leftDrawable" format="reference" />
         <!-- TextView 左边padding, 对应leftType = textView -->
-        <attr name="leftDrawablePadding" format="dimension"/>
+        <attr name="leftDrawablePadding" format="dimension" />
         <!-- ImageView 资源, 对应leftType = imageButton -->
-        <attr name="leftImageResource" format="reference"/>
+        <attr name="leftImageResource" format="reference" />
         <!-- 左边自定义布局, 对应lleftType = customView -->
-        <attr name="leftCustomView" format="reference"/>
+        <attr name="leftCustomView" format="reference" />
 
         <!-- 右边视图类型 -->
         <attr name="rightType">
-            <enum name="none" value="0"/>
-            <enum name="textView" value="1"/>
-            <enum name="imageButton" value="2"/>
-            <enum name="customView" value="3"/>
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="imageButton" value="2" />
+            <enum name="customView" value="3" />
         </attr>
         <!-- TextView 文字, 对应rightType = textView -->
-        <attr name="rightText" format="string|reference"/>
+        <attr name="rightText" format="string|reference" />
         <!-- TextView 颜色, 对应rightType = textView -->
-        <attr name="rightTextColor" format="color"/>
+        <attr name="rightTextColor" format="color" />
         <!-- TextView 字体大小, 对应rightType = textView -->
-        <attr name="rightTextSize" format="dimension"/>
+        <attr name="rightTextSize" format="dimension" />
         <!-- ImageView 资源, 对应rightType = imageButton -->
-        <attr name="rightImageResource" format="reference"/>
+        <attr name="rightImageResource" format="reference" />
         <!-- 右边自定义布局, 对应rightType = customView -->
-        <attr name="rightCustomView" format="reference"/>
+        <attr name="rightCustomView" format="reference" />
 
         <!-- 中间视图类型 -->
         <attr name="centerType">
-            <enum name="none" value="0"/>
-            <enum name="textView" value="1"/>
-            <enum name="customView" value="3"/>
-            <enum name="searchView" value="4"/>
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="customView" value="3" />
+            <enum name="searchView" value="4" />
         </attr>
         <attr name="centerSearchRightType">
-            <enum name="none" value="0"/>
-            <enum name="voice" value="5"/>
-            <enum name="delete" value="6"/>
+            <enum name="none" value="0" />
+            <enum name="voice" value="5" />
+            <enum name="delete" value="6" />
         </attr>
         <!-- TextView 文字, 对应centerType = textView -->
-        <attr name="centerText" format="string|reference"/>
+        <attr name="centerText" format="string|reference" />
         <!-- TextView 颜色, 对应centerType = textView -->
-        <attr name="centerTextColor" format="color"/>
+        <attr name="centerTextColor" format="color" />
         <!-- TextView 字体大小, 对应centerType = textView -->
-        <attr name="centerTextSize" format="dimension"/>
+        <attr name="centerTextSize" format="dimension" />
         <!-- TextView 跑马灯效果, 默认打开, 对应centerType = textView -->
-        <attr name="centerTextMarquee" format="boolean"/>
+        <attr name="centerTextMarquee" format="boolean" />
         <!-- 子标题TextView 文字, 对应centerType = textView -->
-        <attr name="centerSubText" format="string"/>
+        <attr name="centerSubText" format="string" />
         <!-- 子标题TextView 颜色, 对应centerType = textView -->
-        <attr name="centerSubTextColor" format="color"/>
+        <attr name="centerSubTextColor" format="color" />
         <!-- 子标题TextView 字体大小, 对应centerType = textView -->
-        <attr name="centerSubTextSize" format="dimension"/>
+        <attr name="centerSubTextSize" format="dimension" />
         <!-- 搜索输入框是否可输入 -->
-        <attr name="centerSearchEditable" format="boolean"/>
+        <attr name="centerSearchEditable" format="boolean" />
         <!-- 搜索框背景 -->
-        <attr name="centerSearchBg" format="reference"/>
+        <attr name="centerSearchBg" format="reference" />
         <!-- 搜索输入框提示文字 -->
-        <attr name="centerSearchHint" format="string"/>
+        <attr name="centerSearchHint" format="string" />
         <!-- 搜索框icon -->
-        <attr name="centerSearchLeftIcon" format="reference"/>
+        <attr name="centerSearchLeftIcon" format="reference" />
         <!-- 中间自定义布局, 对应centerType = customView -->
-        <attr name="centerCustomView" format="reference"/>
+        <attr name="centerCustomView" format="reference" />
     </declare-styleable>
 
     <!-- 圆角图片 -->
     <declare-styleable name="CircleImageView">
-        <attr name="civ_border_width" format="dimension"/>
-        <attr name="civ_border_color" format="color"/>
-        <attr name="civ_border_overlay" format="boolean"/>
-        <attr name="civ_circle_background_color" format="color"/>
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
 
     <!-- 九宫格图片 -->
     <declare-styleable name="NineGridImageView">
-        <attr name="singleImgSize" format="dimension"/>
-        <attr name="imgGap" format="dimension"/>
-        <attr name="maxSize" format="integer"/>
-        <attr name="needPlus" format="boolean"/>
+        <attr name="singleImgSize" format="dimension" />
+        <attr name="imgGap" format="dimension" />
+        <attr name="maxSize" format="integer" />
+        <attr name="needPlus" format="boolean" />
         <attr name="showStyle" format="enum">
-            <enum name="grid" value="0"/>
-            <enum name="fill" value="1"/>
+            <enum name="grid" value="0" />
+            <enum name="fill" value="1" />
         </attr>
     </declare-styleable>
 
@@ -120,80 +120,80 @@
     <declare-styleable name="ShadowLayout">
         <!-- 1、关于阴影 -->
         <!--阴影：是否要显示阴影，可能有只想用shape和selector功能，不想要阴影-->
-        <attr name="hl_shadowHidden" format="boolean"/>
+        <attr name="hl_shadowHidden" format="boolean" />
         <!--阴影：阴影颜色-->
-        <attr name="hl_shadowColor" format="color"/>
+        <attr name="hl_shadowColor" format="color" />
         <!--阴影：阴影的扩散范围(也可以理解为扩散程度)-->
-        <attr name="hl_shadowLimit" format="dimension"/>
+        <attr name="hl_shadowLimit" format="dimension" />
         <!--控件区域是否对称，默认是对称。不对称的话，那么控件区域随着阴影区域走-->
-        <attr name="hl_shadowSymmetry" format="boolean"/>
+        <attr name="hl_shadowSymmetry" format="boolean" />
         <!--阴影：x轴的偏移量-->
-        <attr name="hl_shadowOffsetX" format="dimension"/>
+        <attr name="hl_shadowOffsetX" format="dimension" />
         <!--阴影：y轴的偏移量-->
-        <attr name="hl_shadowOffsetY" format="dimension"/>
+        <attr name="hl_shadowOffsetY" format="dimension" />
         <!--阴影：左边是否隐藏阴影-->
-        <attr name="hl_shadowHiddenLeft" format="boolean"/>
+        <attr name="hl_shadowHiddenLeft" format="boolean" />
         <!--阴影：右边是否隐藏阴影-->
-        <attr name="hl_shadowHiddenRight" format="boolean"/>
+        <attr name="hl_shadowHiddenRight" format="boolean" />
         <!--阴影：上边是否隐藏阴影-->
-        <attr name="hl_shadowHiddenTop" format="boolean"/>
+        <attr name="hl_shadowHiddenTop" format="boolean" />
         <!--阴影：下面是否隐藏阴影-->
-        <attr name="hl_shadowHiddenBottom" format="boolean"/>
+        <attr name="hl_shadowHiddenBottom" format="boolean" />
 
         <!-- 2、关于圆角 -->
         <!--圆角：统一大小，其中包括了阴影，shape、背景图、stroke边框圆角-->
-        <attr name="hl_cornerRadius" format="dimension"/>
+        <attr name="hl_cornerRadius" format="dimension" />
         <!--圆角：左上圆角。设置后会忽略hl_cornerRadius的值-->
-        <attr name="hl_cornerRadius_leftTop" format="dimension"/>
+        <attr name="hl_cornerRadius_leftTop" format="dimension" />
         <!--圆角：右上圆角。同上-->
-        <attr name="hl_cornerRadius_rightTop" format="dimension"/>
+        <attr name="hl_cornerRadius_rightTop" format="dimension" />
         <!--圆角：左下圆角。同上-->
-        <attr name="hl_cornerRadius_leftBottom" format="dimension"/>
+        <attr name="hl_cornerRadius_leftBottom" format="dimension" />
         <!--圆角：右下圆角。同上-->
-        <attr name="hl_cornerRadius_rightBottom" format="dimension"/>
+        <attr name="hl_cornerRadius_rightBottom" format="dimension" />
 
         <!-- 3、关于shape及selector -->
         <!-- shape及selector样式：pressed、sectored -->
         <attr name="hl_shapeMode">
-            <enum name="pressed" value="1"/>
-            <enum name="selected" value="2"/>
-            <enum name="ripple" value="3"/>
+            <enum name="pressed" value="1" />
+            <enum name="selected" value="2" />
+            <enum name="ripple" value="3" />
         </attr>
 
         <!-- 为false的默认背景，可单独使用-->
-        <attr name="hl_layoutBackground" format="reference|color"/>
+        <attr name="hl_layoutBackground" format="reference|color" />
         <!-- 为true的默认背景，必须搭配hl_layoutBackground属性使用。否则报错-->
-        <attr name="hl_layoutBackground_true" format="reference|color"/>
+        <attr name="hl_layoutBackground_true" format="reference|color" />
 
         <!-- stroke样式，stroke的宽度-->
-        <attr name="hl_strokeWith" format="dimension"/>
+        <attr name="hl_strokeWith" format="dimension" />
         <!-- 为false时，默认的stoke颜色值，可单独使用-->
-        <attr name="hl_strokeColor" format="color"/>
+        <attr name="hl_strokeColor" format="color" />
         <!-- 为true时，默认的stoke颜色值，必须搭配hl_strokeColor属性使用。否则报错-->
-        <attr name="hl_strokeColor_true" format="color"/>
+        <attr name="hl_strokeColor_true" format="color" />
 
         <!-- 这里最终舍弃了系统clickable的方案，因为系统系统主动设置setOnClickListener后，会主动设置成true,所以这里采用自定义 -->
-        <attr name="clickable" format="boolean"/>
+        <attr name="clickable" format="boolean" />
         <!-- hl_clickable为false时，要展示的图片或颜色-->
-        <attr name="hl_layoutBackground_clickFalse" format="reference|color"/>
+        <attr name="hl_layoutBackground_clickFalse" format="reference|color" />
 
         <!-- 4、关于填充的渐变色 -->
         <!-- 要知道，如果设置了渐变色。那么将以渐变色为主。hl_layoutBackground属性将无效 -->
         <!-- 渐变的起始颜色 -->
-        <attr name="hl_startColor" format="color"/>
+        <attr name="hl_startColor" format="color" />
         <!-- 渐变的中间颜色 -->
-        <attr name="hl_centerColor" format="color"/>
+        <attr name="hl_centerColor" format="color" />
         <!-- 渐变的终止颜色 -->
-        <attr name="hl_endColor" format="color"/>
+        <attr name="hl_endColor" format="color" />
         <!-- 渐变角度，默认值为0-->
-        <attr name="hl_angle" format="integer"/>
+        <attr name="hl_angle" format="integer" />
 
         <!-- 5、绑定一个TextView，在点击按钮时，有可能有颜色变化 -->
-        <attr name="hl_bindTextView" format="reference"/>
-        <attr name="hl_textColor" format="color"/>
-        <attr name="hl_textColor_true" format="color"/>
-        <attr name="hl_text" format="string"/>
-        <attr name="hl_text_true" format="string"/>
+        <attr name="hl_bindTextView" format="reference" />
+        <attr name="hl_textColor" format="color" />
+        <attr name="hl_textColor_true" format="color" />
+        <attr name="hl_text" format="string" />
+        <attr name="hl_text_true" format="string" />
     </declare-styleable>
 
     <!--网格控件-->
@@ -201,181 +201,187 @@
         <!--网格图的类型-->
         <attr name="agv_mode">
             <!--类似QQ空间、微信朋友圈的九宫格类型网格图-->
-            <enum name="nine" value="0"/>
+            <enum name="nine" value="0" />
             <!--依次显示网格的普通类型网格图-->
-            <enum name="normal" value="1"/>
+            <enum name="normal" value="1" />
         </attr>
         <!--网格的行数-->
-        <attr name="agv_row" format="integer"/>
+        <attr name="agv_row" format="integer" />
         <!--网格的列数-->
-        <attr name="agv_column" format="integer"/>
+        <attr name="agv_column" format="integer" />
         <!--item 的高度-->
-        <attr name="agv_item_height" format="dimension"/>
+        <attr name="agv_item_height" format="dimension" />
         <!--item 之间的横向间距-->
-        <attr name="agv_horizontal_space" format="dimension"/>
+        <attr name="agv_horizontal_space" format="dimension" />
         <!--item 之间的纵向间距-->
-        <attr name="agv_vertical_space" format="dimension"/>
+        <attr name="agv_vertical_space" format="dimension" />
         <!--九宫格模式下，单个 item 时，item 的宽与 parent 的可用总宽的比-->
-        <attr name="agv_nines_widthper" format="float"/>
+        <attr name="agv_nines_widthper" format="float" />
         <!--九宫格模式下，单个 item 时，item 的高与 parent 的可用总宽的比-->
-        <attr name="agv_nines_heightper" format="float"/>
+        <attr name="agv_nines_heightper" format="float" />
     </declare-styleable>
 
     <declare-styleable name="SlantedTextView">
-        <attr name="slantedTextSize" format="dimension"/>
-        <attr name="slantedBackgroundColor" format="color"/>
-        <attr name="slantedText" format="string"/>
-        <attr name="slantedTextColor" format="color"/>
-        <attr name="slantedLength" format="dimension"/>
+        <attr name="slantedTextSize" format="dimension" />
+        <attr name="slantedBackgroundColor" format="color" />
+        <attr name="slantedText" format="string" />
+        <attr name="slantedTextColor" format="color" />
+        <attr name="slantedLength" format="dimension" />
         <attr name="slantedMode" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
-            <enum name="left_bottom" value="2"/>
-            <enum name="right_bottom" value="3"/>
-            <enum name="left_triangle" value="4"/>
-            <enum name="right_triangle" value="5"/>
-            <enum name="left_bottom_triangle" value="6"/>
-            <enum name="right_bottom_triangle" value="7"/>
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="left_bottom" value="2" />
+            <enum name="right_bottom" value="3" />
+            <enum name="left_triangle" value="4" />
+            <enum name="right_triangle" value="5" />
+            <enum name="left_bottom_triangle" value="6" />
+            <enum name="right_bottom_triangle" value="7" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="SuperFormView">
         <attr name="formStyle" format="enum">
-            <enum name="basic" value="0"/>
-            <enum name="custom" value="1"/>
+            <enum name="basic" value="0" />
+            <enum name="custom" value="1" />
         </attr>
         <!-- 表单属性 -->
-        <attr name="formMinHeight" format="dimension"/>
-        <attr name="formBackground" format="color"/>
+        <attr name="formMinHeight" format="dimension" />
+        <attr name="formBackground" format="color" />
         <!-- 表单左侧 -->
         <!-- 左侧icon -->
-        <attr name="formLeftIcon" format="reference"/>
-        <attr name="formLeftIconUrl" format="string"/>
-        <attr name="formLeftIconCircle" format="boolean"/>
+        <attr name="formLeftIcon" format="reference" />
+        <attr name="formLeftIconUrl" format="string" />
+        <attr name="formLeftIconCircle" format="boolean" />
         <!-- 左侧icon左边距, 默认10dp -->
-        <attr name="formLeftIconMargin" format="dimension"/>
+        <attr name="formLeftIconMargin" format="dimension" />
         <!-- 是否显示必填, 默认显示 -->
-        <attr name="formMustFill" format="boolean"/>
-        <attr name="formMustText" format="string"/>
+        <attr name="formMustFill" format="boolean" />
+        <attr name="formMustText" format="string" />
         <!-- 必填字体大小 默认17sp-->
-        <attr name="formMustTextSize" format="dimension"/>
-        <attr name="formMustTextColor" format="color"/>
+        <attr name="formMustTextSize" format="dimension" />
+        <attr name="formMustTextColor" format="color" />
         <!-- 必填左边距, 默认15dp -->
-        <attr name="formMustTextMargin" format="color"/>
+        <attr name="formMustTextMargin" format="color" />
         <!-- 左侧文字 -->
-        <attr name="formLeftText" format="string"/>
+        <attr name="formLeftText" format="string" />
         <!-- 左侧文字 默认17sp -->
-        <attr name="formLeftTextSize" format="dimension"/>
+        <attr name="formLeftTextSize" format="dimension" />
         <!-- 左侧文字 默认#333333 -->
-        <attr name="formLeftTextColor" format="color"/>
+        <attr name="formLeftTextColor" format="color" />
         <!-- 左侧文字左边距, 默认2dp -->
-        <attr name="formLeftTextMargin" format="dimension"/>
+        <attr name="formLeftTextMargin" format="dimension" />
 
         <!-- 右侧视图左边距, 注意这里距父控件的左边距. 默认128dp -->
-        <attr name="formRightViewMarginLeft" format="dimension"/>
+        <attr name="formRightViewMarginLeft" format="dimension" />
         <!-- 右侧视图右边距, 注意这里距父控件的右边距. 默认10dp -->
-        <attr name="formRightViewMarginRight" format="dimension"/>
+        <attr name="formRightViewMarginRight" format="dimension" />
         <!-- 右侧icon -->
-        <attr name="formRightIcon" format="reference"/>
-        <attr name="formRightIconUrl" format="string"/>
-        <attr name="formRightIconCircle" format="boolean"/>
+        <attr name="formRightIcon" format="reference" />
+        <attr name="formRightIconUrl" format="string" />
+        <attr name="formRightIconCircle" format="boolean" />
         <!-- 右侧icon右边距, 默认10dp -->
-        <attr name="formRightIconMargin" format="dimension"/>
+        <attr name="formRightIconMargin" format="dimension" />
         <!-- 右侧文字是否可编辑, 默认不可以编辑 -->
-        <attr name="formRightEditEnable" format="boolean"/>
+        <attr name="formRightEditEnable" format="boolean" />
         <!-- 右侧文字输入类型 -->
         <attr name="formRightTextInputType" format="enum">
-            <enum name="text" value="0"/>
-            <enum name="number" value="1"/>
-            <enum name="phone" value="2"/>
-            <enum name="password" value="3"/>
-            <enum name="none" value="4"/>
+            <enum name="text" value="0" />
+            <enum name="number" value="1" />
+            <enum name="phone" value="2" />
+            <enum name="password" value="3" />
+            <enum name="none" value="4" />
+            <enum name="idCard" value="5" />
         </attr>
         <!-- 右侧文字垂直padding, 默认15dp -->
-        <attr name="formRightPaddingVertical" format="dimension"/>
+        <attr name="formRightPaddingVertical" format="dimension" />
         <!-- 右侧文字位置, 默认居右 -->
         <attr name="formRightTextGravity" format="enum">
-            <enum name="end" value="0"/>
-            <enum name="start" value="1"/>
+            <enum name="end" value="0" />
+            <enum name="start" value="1" />
         </attr>
         <!-- 右侧文字自动改变文字位置, 默认true -->
-        <attr name="formRightTextAutoGravity" format="boolean"/>
+        <attr name="formRightTextAutoGravity" format="boolean" />
         <!-- 右侧文字位置, 默认30 -->
-        <attr name="formRightTextMaxSize" format="integer"/>
+        <attr name="formRightTextMaxSize" format="integer" />
         <!-- 右侧文字 -->
-        <attr name="formRightText" format="string"/>
+        <attr name="formRightText" format="string" />
         <!-- 右侧文字 默认#333333 -->
-        <attr name="formRightTextColor" format="color"/>
+        <attr name="formRightTextColor" format="color" />
         <!-- 右侧文字 默认17sp -->
-        <attr name="formRightTextSize" format="dimension"/>
+        <attr name="formRightTextSize" format="dimension" />
         <!-- 右侧提示文字 -->
-        <attr name="formRightHintText" format="string"/>
+        <attr name="formRightHintText" format="string" />
         <!-- 右侧文字 默认#CCCCCC -->
-        <attr name="formRightHintTextColor" format="color"/>
+        <attr name="formRightHintTextColor" format="color" />
         <!-- 右侧文字右边距, 默认2dp -->
-        <attr name="formRightTextMargin" format="dimension"/>
+        <attr name="formRightTextMargin" format="dimension" />
         <!-- 右侧自定义视图 -->
-        <attr name="formRightCustomView" format="reference"/>
+        <attr name="formRightCustomView" format="reference" />
         <!-- 右侧自定义视图 宽 -->
-        <attr name="formRightCustomViewWidth" format="dimension"/>
+        <attr name="formRightCustomViewWidth" format="dimension" />
 
         <!-- 表单下划线, 默认显示 -->
-        <attr name="formShowBottomLine" format="boolean"/>
+        <attr name="formShowBottomLine" format="boolean" />
         <!-- 表单下划线高度, 默认1dp -->
-        <attr name="formBottomLineHeight" format="dimension"/>
+        <attr name="formBottomLineHeight" format="dimension" />
         <!-- 表单下划线颜色, 默认#F4F4F4 -->
-        <attr name="formBottomLineColor" format="color"/>
+        <attr name="formBottomLineColor" format="color" />
         <!-- 表单下划线左边距, 默认0dp -->
-        <attr name="formBottomLineMarginLeft" format="dimension"/>
+        <attr name="formBottomLineMarginLeft" format="dimension" />
         <!-- 表单下划线右边距, 默认0dp -->
-        <attr name="formBottomLineMarginRight" format="dimension"/>
+        <attr name="formBottomLineMarginRight" format="dimension" />
+
+        <!-- 表单开启清除文本, 默认false -->
+        <attr name="formOpenClearText" format="boolean" />
+        <!-- 表单单行显示, 默认false -->
+        <attr name="formSingleLine" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="CircleProgressView">
-        <attr name="cpv_progressNormalColor" format="color"/>
-        <attr name="cpv_progressReachColor" format="color"/>
-        <attr name="cpv_progressTextColor" format="color"/>
-        <attr name="cpv_progressTextSize" format="dimension"/>
-        <attr name="cpv_progressTextOffset" format="dimension"/>
-        <attr name="cpv_progressNormalSize" format="dimension"/>
-        <attr name="cpv_progressReachSize" format="dimension"/>
-        <attr name="cpv_radius" format="dimension"/>
-        <attr name="cpv_progressTextVisible" format="boolean"/>
-        <attr name="cpv_progressStartArc" format="integer"/>
-        <attr name="cpv_progressTextSkewX" format="dimension"/>
-        <attr name="cpv_progressTextPrefix" format="string"/>
-        <attr name="cpv_progressTextSuffix" format="string"/>
-        <attr name="cpv_innerBackgroundColor" format="color"/>
+        <attr name="cpv_progressNormalColor" format="color" />
+        <attr name="cpv_progressReachColor" format="color" />
+        <attr name="cpv_progressTextColor" format="color" />
+        <attr name="cpv_progressTextSize" format="dimension" />
+        <attr name="cpv_progressTextOffset" format="dimension" />
+        <attr name="cpv_progressNormalSize" format="dimension" />
+        <attr name="cpv_progressReachSize" format="dimension" />
+        <attr name="cpv_radius" format="dimension" />
+        <attr name="cpv_progressTextVisible" format="boolean" />
+        <attr name="cpv_progressStartArc" format="integer" />
+        <attr name="cpv_progressTextSkewX" format="dimension" />
+        <attr name="cpv_progressTextPrefix" format="string" />
+        <attr name="cpv_progressTextSuffix" format="string" />
+        <attr name="cpv_innerBackgroundColor" format="color" />
         <attr name="cpv_progressStyle" format="enum">
-            <enum name="Normal" value="0"/>
-            <enum name="FillInner" value="1"/>
-            <enum name="FillInnerArc" value="2"/>
+            <enum name="Normal" value="0" />
+            <enum name="FillInner" value="1" />
+            <enum name="FillInnerArc" value="2" />
         </attr>
-        <attr name="cpv_innerProgressColor" format="color"/>
-        <attr name="cpv_innerPadding" format="dimension"/>
-        <attr name="cpv_outerColor" format="color"/>
-        <attr name="cpv_outerSize" format="dimension"/>
-        <attr name="cpv_reachCapRound" format="boolean"/>
+        <attr name="cpv_innerProgressColor" format="color" />
+        <attr name="cpv_innerPadding" format="dimension" />
+        <attr name="cpv_outerColor" format="color" />
+        <attr name="cpv_outerSize" format="dimension" />
+        <attr name="cpv_reachCapRound" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NumberProgressBar">
-        <attr name="npb_current" format="integer"/>
-        <attr name="npb_max" format="integer"/>
+        <attr name="npb_current" format="integer" />
+        <attr name="npb_max" format="integer" />
 
-        <attr name="npb_unreached_color" format="color"/>
-        <attr name="npb_reached_color" format="color"/>
+        <attr name="npb_unreached_color" format="color" />
+        <attr name="npb_reached_color" format="color" />
 
-        <attr name="npb_reached_bar_height" format="dimension"/>
-        <attr name="npb_unreached_bar_height" format="dimension"/>
+        <attr name="npb_reached_bar_height" format="dimension" />
+        <attr name="npb_unreached_bar_height" format="dimension" />
 
-        <attr name="npb_text_size" format="dimension"/>
-        <attr name="npb_text_color" format="color"/>
+        <attr name="npb_text_size" format="dimension" />
+        <attr name="npb_text_color" format="color" />
 
-        <attr name="npb_text_offset" format="dimension"/>
+        <attr name="npb_text_offset" format="dimension" />
 
         <attr name="npb_text_visibility" format="enum">
-            <enum name="visible" value="0"/>
-            <enum name="invisible" value="1"/>
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
         </attr>
     </declare-styleable>
 </resources>
