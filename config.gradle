@@ -13,7 +13,7 @@ ext {
             okhttp      : '4.9.0',
             leakcanary  : '2.5',
             lifecycle   : '2.2.0',
-            arouter     : '1.5.1',
+            arouter     : '1.5.2',
             immersionbar: '3.0.0',
             rxjava3     : '3.0.0',
             glide       : '4.12.0',
@@ -125,7 +125,8 @@ ext {
             // https://github.com/google/gson
             'gson'                   : 'com.google.code.gson:gson:2.8.6',
             // https://github.com/alibaba/fastjson
-            'fastjson'               : 'com.alibaba:fastjson:1.1.72.android',
+            // 'fastjson'               : 'com.alibaba:fastjson:1.1.72.android',
+            'fastjson'               : 'com.alibaba:fastjson:1.2.78',
             // https://github.com/gyf-dev/ImmersionBar  沉浸式状态栏
             'immersionbar'           : "com.gyf.immersionbar:immersionbar:${versions['immersionbar']}",
             'immersionbar-components': "com.gyf.immersionbar:immersionbar-components:${versions['immersionbar']}",
