@@ -13,5 +13,7 @@ annotation class ImmersionBar(
     /** 状态栏字体是否需要显示黑色 */
     val statusBarDarkFont: Boolean = false,
     /** paddingTop与status bar */
-    val fitsSystemWindows: Boolean = false
+    val fitsSystemWindows: Boolean = false,
+    /** 全屏 */
+    val fullScreen: Boolean = false,
 )

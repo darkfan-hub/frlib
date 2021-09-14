@@ -140,3 +140,47 @@ fun Fragment.record(callback: IPermissionCallback) {
             }
         })
 }
+
+fun Context.location(callback: IPermissionCallback) {
+    XXPermissions.with(this)
+        .permission(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
+        .request(object : OnPermissionCallback {
+            override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
+                if (all) {
+                    callback.onGranted()
+                } else {
+                    storage(callback)
+                }
+            }
+
+            override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
+                if (never) {
+                    callback.onDenied()
+                } else {
+                    storage(callback)
+                }
+            }
+        })
+}
+
+fun Fragment.location(callback: IPermissionCallback) {
+    XXPermissions.with(this)
+        .permission(Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION)
+        .request(object : OnPermissionCallback {
+            override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
+                if (all) {
+                    callback.onGranted()
+                } else {
+                    storage(callback)
+                }
+            }
+
+            override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
+                if (never) {
+                    callback.onDenied()
+                } else {
+                    storage(callback)
+                }
+            }
+        })
+}

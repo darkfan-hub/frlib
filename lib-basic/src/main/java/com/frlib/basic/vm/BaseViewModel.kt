@@ -94,6 +94,7 @@ open class BaseViewModel(
     open fun <T> launchOfResult(
         block: suspend CoroutineScope.() -> T,
         success: (T) -> Unit,
+        successNoResult: () -> Unit = {},
         error: (ResponseThrowable) -> Unit = { throwable ->
             Timber.e("${throwable.code} -------> ${throwable.errMsg}")
         },
@@ -116,6 +117,7 @@ open class BaseViewModel(
 
                     success(result)
                 },
+                { successNoResult() },
                 { error ->
                     if (error.code == ERROR.TIMEOUT_ERROR.getKey()) {
                         defaultPages(Pages.NET_ERROR)
@@ -139,6 +141,7 @@ open class BaseViewModel(
     open suspend fun <T> handlerResult(
         block: suspend CoroutineScope.() -> T,
         success: suspend CoroutineScope.(T) -> Unit,
+        successNoResult: suspend CoroutineScope.() -> Unit,
         error: suspend CoroutineScope.(ResponseThrowable) -> Unit,
         complete: suspend CoroutineScope.() -> Unit
     ) {
@@ -147,7 +150,11 @@ open class BaseViewModel(
                 val result = block()
                 if (result is BasicApiEntity<*>) {
                     if (result.status == AppConstants.api_state_success) {
-                        success(result)
+                        if (result.data != null) {
+                            success(result)
+                        } else {
+                            successNoResult()
+                        }
                     } else {
                         defUI.toast.postValue(result.message)
                         error(

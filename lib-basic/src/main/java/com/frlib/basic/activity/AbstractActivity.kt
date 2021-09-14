@@ -257,13 +257,19 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
         return sizeInDp()
     }*/
 
+    open fun resetResources(): Boolean {
+        return true
+    }
+
     open fun sizeInHeightDp(): Float {
         return 812f
     }
 
     override fun getResources(): Resources {
-        AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
-        AutoSizeCompat.autoConvertDensity(super.getResources(), sizeInHeightDp(), false)
+        if (resetResources()) {
+            AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources()))
+            AutoSizeCompat.autoConvertDensity(super.getResources(), sizeInHeightDp(), false)
+        }
         return super.getResources()
     }
 }

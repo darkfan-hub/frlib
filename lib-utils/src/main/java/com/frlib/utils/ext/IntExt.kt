@@ -19,6 +19,20 @@ fun Int.cent2Yuan(scale: Int = 0): String {
 }
 
 /**
+ * 价格换算, 元转分
+ */
+fun Double.yuan2Cent(): Int {
+    return BigDecimal(this.toString()).multiply(cent2YuanDecimal).toInt()
+}
+
+/**
+ * 价格换算, 元转分
+ */
+fun Int.yuan2Cent(): Int {
+    return BigDecimal(this.toString()).multiply(cent2YuanDecimal).toInt()
+}
+
+/**
  * long 判空
  */
 fun Long?.isNull(): Boolean {
@@ -34,4 +48,8 @@ fun Int.fansCountFormat(): String {
     } else {
         "${this / 10000}w+"
     }
+}
+
+fun Int.fixNumber(): String {
+    return if (this < 10) "0$this" else this.toString()
 }

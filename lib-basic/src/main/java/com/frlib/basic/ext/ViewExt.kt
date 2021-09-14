@@ -29,6 +29,7 @@ fun SmartRefreshLayout.init(
     this.setEnableRefresh(enableRefresh) // 启用下拉刷新功能
     this.setEnableOverScrollBounce(true) // 启用越界回弹
     this.setEnableOverScrollDrag(true) // 启用越界拖动
+    this.setEnableAutoLoadMore(false) // 是否启用列表惯性滑动到底部时自动加载更多
     this.setDisableContentWhenRefresh(true) // 在刷新的时候禁止列表的操作
     this.setDisableContentWhenLoading(true) // 在加载的时候禁止列表的操作
     this.setEnableLoadMore(enableLoadMore) // 是否启用上拉加载功能

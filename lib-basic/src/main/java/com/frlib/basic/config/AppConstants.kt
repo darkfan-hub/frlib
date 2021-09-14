@@ -19,6 +19,9 @@ object AppConstants {
 
     /** app 安装版本号 */
     const val KEY_INSTALL_CODE = "app_install_code"
+    
+    /** app 协议点击 */
+    const val KEY_PROTOCOL_CLICK = "protocol_click"
 
     /** 缓存key APP信息 */
     const val EXTRAS_KEY_APP_INFO = "app_info"

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import com.frlib.basic.app.AppManager
 import com.frlib.basic.app.IAppComponent
 import com.frlib.basic.config.ConfigModule
+import com.frlib.basic.ext.fullScreen
 import com.frlib.basic.ext.statusBarStyle
 import com.frlib.basic.fragment.FragmentLifecycle
 import com.frlib.basic.immersion.ImmersionBar
@@ -35,11 +36,15 @@ class ActivityLifecycle(
         if (activity.javaClass.isAnnotationPresent(ImmersionBar::class.java)) {
             val immersionBar = activity.javaClass.getAnnotation(ImmersionBar::class.java)
             if (immersionBar != null) {
-                activity.statusBarStyle(
-                    statusBarColor = immersionBar.statusBarColor,
-                    statusBarDarkFont = immersionBar.statusBarDarkFont,
-                    fitsSystemWindows = immersionBar.fitsSystemWindows
-                )
+                if (immersionBar.fullScreen) {
+                    activity.fullScreen()
+                } else {
+                    activity.statusBarStyle(
+                        statusBarColor = immersionBar.statusBarColor,
+                        statusBarDarkFont = immersionBar.statusBarDarkFont,
+                        fitsSystemWindows = immersionBar.fitsSystemWindows
+                    )
+                }
             }
         }
     }

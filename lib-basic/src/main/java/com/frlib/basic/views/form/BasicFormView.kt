@@ -111,7 +111,7 @@ class BasicFormView : AbstractFormView() {
                     ): CharSequence {
                         val charSequence = source.toString()
                         if (charSequence.length() > 0) {
-                            val isIdCard = RegexUtil.isMatch("^[1234567890X]$", charSequence)
+                            val isIdCard = RegexUtil.isMatch("^[1234567890X]+$", charSequence)
                             if (!Character.isLetterOrDigit(charSequence[start]) || !isIdCard) {
                                 return ""
                             }

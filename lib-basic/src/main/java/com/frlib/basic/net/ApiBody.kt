@@ -3,9 +3,12 @@ package com.frlib.basic.net
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
+import okhttp3.FormBody
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.util.*
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -65,7 +68,7 @@ inline fun getRequestBody(vararg params: Pair<String, Any>): RequestBody {
     return json.toRequestBody()
 }
 
-inline fun JSONObject.toRequestBody():RequestBody {
+inline fun JSONObject.toRequestBody(): RequestBody {
     return this.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
 }
 
@@ -75,4 +78,15 @@ inline fun JSONObject.toRequestBody():RequestBody {
 inline fun getRequestBody(params: Map<String, Any>): RequestBody {
     val json = JSONObject(params)
     return json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+}
+
+/**
+ * 请求参数 to RequestBody 表单
+ */
+inline fun requestBodyWithForm(params: Map<String, String>): RequestBody {
+    val builder = FormBody.Builder()
+    for ((key, value) in params.entries) {
+        builder.add(key, value)
+    }
+    return builder.build()
 }

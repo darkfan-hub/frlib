@@ -152,7 +152,7 @@ public class AgentWebView extends LollipopFixedWebView {
         } catch (Throwable e) {
             Pair<Boolean, String> pair = isWebViewPackageException(e);
             if (pair.first) {
-                FrToasty.normal(getContext(), pair.second);
+                FrToasty.normal(getContext(), pair.second).show();
                 destroy();
             } else {
                 throw e;

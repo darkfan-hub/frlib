@@ -90,7 +90,12 @@ abstract class AbstractListFragment<T, VM : BaseListViewModel<T>> :
             val lastSize = listAdapter.data.size
             listAdapter.addData(it)
             // 加上这个防止加载更多后, 最后一条item与新的第一条item间距小时问题
-            listAdapter.notifyItemChanged(lastSize - 1)
+            // 08.25 更新如果添加header, 则不需要-1
+            if (listAdapter.hasHeaderLayout()) {
+                listAdapter.notifyItemChanged(lastSize)
+            } else {
+                listAdapter.notifyItemChanged(lastSize - 1)
+            }
         })
 
         viewModel.emptyLiveData.observe(this, { emptyData() })

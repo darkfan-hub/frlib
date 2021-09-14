@@ -697,7 +697,7 @@ public class AgentWebUtil {
     private static Toast mToast = null;
 
     static void toastShowShort(Context context, String msg) {
-        FrToasty.normal(context, msg);
+        FrToasty.normal(context, msg).show();
     }
 
     @Deprecated

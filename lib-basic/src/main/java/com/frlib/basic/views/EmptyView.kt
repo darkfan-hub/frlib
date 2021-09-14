@@ -87,7 +87,7 @@ class EmptyView(
 
     class Builder {
         var icon: Int = R.drawable.frlib_icon_net_error
-        var text: String = "空空如也~"
+        var text: String = "暂无数据~"
         var iconMarginTop: Int = 0
         var textMarginTop: Int = 0
         var retryText: String = "重试"

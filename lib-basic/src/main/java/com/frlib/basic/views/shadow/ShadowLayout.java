@@ -85,13 +85,10 @@ public class ShadowLayout extends FrameLayout {
     private int textColor_true;
     private String text;
     private String text_true;
-    //解决xml设置clickable = false时。代码设置true时，点击事件无效的bug
-    private OnClickListener onClickListener;
 
     public ShadowLayout(Context context) {
         this(context, null);
     }
-
 
     public ShadowLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -102,17 +99,6 @@ public class ShadowLayout extends FrameLayout {
         initView(context, attrs);
     }
 
-    public static int convertToColorInt(String argb)
-            throws IllegalArgumentException {
-
-        if (!argb.startsWith("#")) {
-            argb = "#" + argb;
-        }
-
-        return Color.parseColor(argb);
-    }
-
-    @Override
     public void setClickable(boolean clickable) {
         super.setClickable(clickable);
         this.isClickable = clickable;
@@ -127,6 +113,10 @@ public class ShadowLayout extends FrameLayout {
             }
         }
     }
+
+
+    //解决xml设置clickable = false时。代码设置true时，点击事件无效的bug
+    private OnClickListener onClickListener;
 
     @Override
     public void setOnClickListener(@Nullable OnClickListener l) {
@@ -827,41 +817,41 @@ public class ShadowLayout extends FrameLayout {
         if (leftShow) {
             rect_left = shadowRadius;
         } else {
-//            rect_left = 0;
-            float maxLeftTop = Math.max(cornerRadius, mCornerRadius_leftTop);
-            float maxLeftBottom = Math.max(cornerRadius, mCornerRadius_leftBottom);
-            float maxLeft = Math.max(maxLeftTop, maxLeftBottom);
-            rect_left = maxLeft;
+            rect_left = 0;
+//            float maxLeftTop = Math.max(cornerRadius, mCornerRadius_leftTop);
+//            float maxLeftBottom = Math.max(cornerRadius, mCornerRadius_leftBottom);
+//            float maxLeft = Math.max(maxLeftTop, maxLeftBottom);
+//            rect_left = maxLeft;
         }
 
         if (topShow) {
             rect_top = shadowRadius;
         } else {
-//            rect_top = 0;
-            float maxLeftTop = Math.max(cornerRadius, mCornerRadius_leftTop);
-            float maxRightTop = Math.max(cornerRadius, mCornerRadius_rightTop);
-            float maxTop = Math.max(maxLeftTop, maxRightTop);
-            rect_top = maxTop;
+            rect_top = 0;
+//            float maxLeftTop = Math.max(cornerRadius, mCornerRadius_leftTop);
+//            float maxRightTop = Math.max(cornerRadius, mCornerRadius_rightTop);
+//            float maxTop = Math.max(maxLeftTop, maxRightTop);
+//            rect_top = maxTop;
         }
 
         if (rightShow) {
             rect_right = shadowWidth - shadowRadius;
         } else {
-//            rect_right = shadowWidth;
-            float maxRightTop = Math.max(cornerRadius, mCornerRadius_rightTop);
-            float maxRightBottom = Math.max(cornerRadius, mCornerRadius_rightBottom);
-            float maxRight = Math.max(maxRightTop, maxRightBottom);
-            rect_right = shadowWidth - maxRight;
+            rect_right = shadowWidth;
+//            float maxRightTop = Math.max(cornerRadius, mCornerRadius_rightTop);
+//            float maxRightBottom = Math.max(cornerRadius, mCornerRadius_rightBottom);
+//            float maxRight = Math.max(maxRightTop, maxRightBottom);
+//            rect_right = shadowWidth - maxRight;
         }
 
         if (bottomShow) {
             rect_bottom = shadowHeight - shadowRadius;
         } else {
-//            rect_bottom = shadowHeight;
-            float maxLeftBottom = Math.max(cornerRadius, mCornerRadius_leftBottom);
-            float maxRightBottom = Math.max(cornerRadius, mCornerRadius_rightBottom);
-            float maxBottom = Math.max(maxLeftBottom, maxRightBottom);
-            rect_bottom = shadowHeight - maxBottom;
+            rect_bottom = shadowHeight;
+//            float maxLeftBottom = Math.max(cornerRadius, mCornerRadius_leftBottom);
+//            float maxRightBottom = Math.max(cornerRadius, mCornerRadius_rightBottom);
+//            float maxBottom = Math.max(maxLeftBottom, maxRightBottom);
+//            rect_bottom = shadowHeight - maxBottom;
         }
 
         RectF shadowRect = new RectF(
@@ -1255,6 +1245,16 @@ public class ShadowLayout extends FrameLayout {
             String endColor = "#2a" + red + green + blue;
             mShadowColor = convertToColorInt(endColor);
         }
+    }
+
+    public static int convertToColorInt(String argb)
+            throws IllegalArgumentException {
+
+        if (!argb.startsWith("#")) {
+            argb = "#" + argb;
+        }
+
+        return Color.parseColor(argb);
     }
 
     @Override

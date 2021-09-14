@@ -22,6 +22,7 @@ import com.frlib.utils.UIUtil
 import com.frlib.utils.ext.color
 import com.frlib.utils.ext.dp2px
 import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,6 +41,7 @@ abstract class AbstractFrListView<T>(
         FrlibLayoutListBinding.inflate(LayoutInflater.from(context))
     }
 
+    lateinit var smartRefresh: SmartRefreshLayout
     lateinit var listAdapter: BaseAdapter<T, BaseViewHolder>
     lateinit var recyclerView: RecyclerView
     lateinit var titleBar: TitleBar
@@ -71,7 +73,8 @@ abstract class AbstractFrListView<T>(
      * 设置刷新layout
      */
     open fun setSmartRefreshLayout() {
-        binding.smartRefresh.init(
+        smartRefresh = binding.smartRefresh
+        smartRefresh.init(
             enableRefresh = enableRefresh(),
             enableLoadMore = enableLoadMore(),
             autoLoadMore = true,
@@ -115,7 +118,12 @@ abstract class AbstractFrListView<T>(
             val lastSize = listAdapter.data.size
             listAdapter.addData(it)
             // 加上这个防止加载更多后, 最后一条item与新的第一条item间距小时问题
-            listAdapter.notifyItemChanged(lastSize - 1)
+            // 08.25 更新如果添加header, 则不需要-1
+            if (listAdapter.hasHeaderLayout()) {
+                listAdapter.notifyItemChanged(lastSize)
+            } else {
+                listAdapter.notifyItemChanged(lastSize - 1)
+            }
         })
 
         viewModel().emptyLiveData.observe(owner, { emptyData() })

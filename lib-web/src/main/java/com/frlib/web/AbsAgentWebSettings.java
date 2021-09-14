@@ -49,7 +49,8 @@ public abstract class AbsAgentWebSettings implements IAgentWebSettings, WebListe
         // 设置可以支持缩放
         mWebSettings.setSupportZoom(true);
         // 设置出现缩放工具
-        mWebSettings.setBuiltInZoomControls(true);
+        mWebSettings.setBuiltInZoomControls(false);
+        mWebSettings.setDisplayZoomControls(false);
         mWebSettings.setSavePassword(false);
         if (AgentWebUtil.checkNetwork(webView.getContext())) {
             //根据cache-control获取数据。
