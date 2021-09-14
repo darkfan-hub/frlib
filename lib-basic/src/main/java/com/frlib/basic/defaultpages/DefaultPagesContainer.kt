@@ -63,6 +63,11 @@ class DefaultPagesContainer(
                     setOnClickListener {
                         onRetry?.onRetry()
                     }
+
+                    if (parent != null) {
+                        (parent as ViewGroup).removeView(this)
+                    }
+
                     addView(this)
                     doAnimator()
                 }

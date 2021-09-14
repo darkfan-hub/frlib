@@ -12,8 +12,20 @@ public class RefGenericSuperclass {
 
     public static boolean findActualType(Class<?> cls, Class<?> actualType) {
         Type superclass = cls.getGenericSuperclass();
+        Type[] actualTypes;
         if (superclass instanceof ParameterizedType) {
-            Type[] actualTypes = ((ParameterizedType) superclass).getActualTypeArguments();
+            actualTypes = ((ParameterizedType) superclass).getActualTypeArguments();
+            for (Type type : actualTypes) {
+                if (actualType.isAssignableFrom((Class<?>) type)) {
+                    return true;
+                }
+            }
+        }
+
+        superclass = cls.getSuperclass().getGenericSuperclass();
+
+        if (superclass instanceof ParameterizedType) {
+            actualTypes = ((ParameterizedType) superclass).getActualTypeArguments();
             for (Type type : actualTypes) {
                 if (actualType.isAssignableFrom((Class<?>) type)) {
                     return true;
