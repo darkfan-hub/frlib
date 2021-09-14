@@ -7,8 +7,11 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.frlib.basic.R;
 import com.frlib.utils.ext.ResourcesExtKt;
 
@@ -89,6 +92,15 @@ public class SuperFormView extends RelativeLayout {
      */
     public View formRightView() {
         return formRightView;
+    }
+
+    public @Nullable
+    AppCompatEditText formRightEditText() {
+        if (formView instanceof BasicFormView) {
+            return ((BasicFormView) formView).rightEditTextView();
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -26,6 +26,11 @@ fun bindImage(imageView: ImageView, imageUrl: String?, placeholder: Drawable) {
     imageView.displayImage(imageUrl.invalid(), placeholder = placeholder)
 }
 
+@BindingAdapter(value = ["imageUrl", "placeholderRes"])
+fun bindImage(imageView: ImageView, imageUrl: String?, placeholderRes: Int) {
+    imageView.displayImage(imageUrl.invalid(), placeholder = imageView.context.drawable(placeholderRes)!!)
+}
+
 @BindingAdapter(value = ["imageUrl", "radius", "placeholder"])
 fun bindRadiusImage(imageView: ImageView, imageUrl: String?, radius: Int, placeholder: Drawable) {
     imageView.displayRadiusImage(imageUrl.invalid(), imageView.context.dp2px(radius.toFloat()), placeholder = placeholder)

@@ -315,6 +315,14 @@
         <attr name="formRightHintTextColor" format="color" />
         <!-- 右侧文字右边距, 默认2dp -->
         <attr name="formRightTextMargin" format="dimension" />
+        <!-- 右侧占位文字 默认无 -->
+        <attr name="formRightPlaceText" format="string" />
+        <!-- 右侧占位文字 默认#333333 -->
+        <attr name="formRightPlaceTextColor" format="string" />
+        <!-- 右侧占位文字 默认17sp -->
+        <attr name="formRightPlaceTextSize" format="string" />
+        <!-- 右侧占位文字右边距, 默认2dp -->
+        <attr name="formRightPlaceTextMargin" format="dimension" />
         <!-- 右侧自定义视图 -->
         <attr name="formRightCustomView" format="reference" />
         <!-- 右侧自定义视图 宽 -->

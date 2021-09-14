@@ -69,9 +69,45 @@ class BasicFormView : AbstractFormView() {
                     R.styleable.SuperFormView_formRightIconMargin,
                     context.dp2px(10f)
                 )
-            rightIcon!!.layoutParams = iconParams
 
-            rightView.addView(rightIcon!!)
+            rightView.addView(rightIcon!!, iconParams)
+        }
+
+        var rightPlaceTextId = 0
+        if (ta.hasValue(R.styleable.SuperFormView_formRightPlaceText)) {
+            val rightPlaceText = createText(
+                context,
+                ta.getString(R.styleable.SuperFormView_formRightPlaceText).invalid(),
+                Gravity.START,
+                ta.getColor(
+                    R.styleable.SuperFormView_formRightPlaceTextColor,
+                    context.color(R.color.color_33)
+                ),
+                ta.getDimensionPixelSize(
+                    R.styleable.SuperFormView_formRightPlaceTextSize,
+                    context.sp2Px(17f)
+                )
+            )
+            rightPlaceTextId = rightPlaceText.id
+            val rightPlaceTextParams =
+                RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            rightPlaceTextParams.addRule(RelativeLayout.CENTER_VERTICAL)
+
+            if (iconId != 0) {
+                rightPlaceTextParams.addRule(RelativeLayout.START_OF, iconId)
+            } else {
+                rightPlaceTextParams.addRule(RelativeLayout.ALIGN_PARENT_END)
+            }
+
+            rightPlaceTextParams.marginEnd =
+                ta.getDimensionPixelSize(
+                    R.styleable.SuperFormView_formRightPlaceTextMargin,
+                    context.dp2px(10f)
+                )
+            rightView.addView(rightPlaceText, rightPlaceTextParams)
         }
 
         rightEditText = createEditText(
@@ -96,7 +132,7 @@ class BasicFormView : AbstractFormView() {
         // 文本输入类型
         when (ta.getInt(R.styleable.SuperFormView_formRightTextInputType, 4)) {
             0 -> rightEditText.inputType = InputType.TYPE_CLASS_TEXT
-            1 -> rightEditText.inputType = InputType.TYPE_CLASS_NUMBER
+            1 -> rightEditText.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_CLASS_NUMBER
             2 -> rightEditText.inputType = InputType.TYPE_CLASS_PHONE
             3 -> rightEditText.transformationMethod = PasswordTransformationMethod.getInstance()
             5 -> {
@@ -186,22 +222,26 @@ class BasicFormView : AbstractFormView() {
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
-        if (iconId != 0) {
-            rightEditParams.addRule(RelativeLayout.START_OF, iconId)
-        } else {
-            rightEditParams.addRule(RelativeLayout.ALIGN_PARENT_END)
+        when {
+            rightPlaceTextId != 0 -> {
+                rightEditParams.addRule(RelativeLayout.START_OF, rightPlaceTextId)
+            }
+            iconId != 0 -> {
+                rightEditParams.addRule(RelativeLayout.START_OF, iconId)
+            }
+            else -> {
+                rightEditParams.addRule(RelativeLayout.ALIGN_PARENT_END)
+            }
         }
         rightEditParams.marginEnd =
             ta.getDimensionPixelSize(
                 R.styleable.SuperFormView_formRightTextMargin,
                 context.dp2px(10f)
             )
-        rightEditText.layoutParams = rightEditParams
-        rightView.addView(rightEditText)
+        rightView.addView(rightEditText, rightEditParams)
 
         rightEditTopView = View(context)
-        rightEditTopView.layoutParams = rightEditParams
-        rightView.addView(rightEditTopView)
+        rightView.addView(rightEditTopView, rightEditParams)
         return rightView
     }
 
@@ -225,6 +265,10 @@ class BasicFormView : AbstractFormView() {
 
     fun setRightHintText(text: String) {
         rightEditText.hint = text
+    }
+
+    fun rightEditTextView(): AppCompatEditText? {
+        return rightEditText
     }
 
     /**

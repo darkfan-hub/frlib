@@ -39,7 +39,7 @@ abstract class AbstractActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppC
     lateinit var self: AppCompatActivity
 
     /** app 组件 */
-    private lateinit var appComponent: IAppComponent
+    lateinit var appComponent: IAppComponent
 
     /** 数据绑定 */
     lateinit var dataBinding: DB

@@ -68,7 +68,23 @@ inline fun getRequestBody(vararg params: Pair<String, Any>): RequestBody {
     return json.toRequestBody()
 }
 
-inline fun JSONObject.toRequestBody(): RequestBody {
+/**
+ * 请求参数 to String
+ */
+inline fun paramToJson(vararg params: Pair<String, Any>): String {
+    val json = JSONObject().apply {
+        params.forEach {
+            if (it.second is List<*>) {
+                put(it.first, JSONArray.parseArray(JSON.toJSONString(it.second)))
+            } else {
+                put(it.first, it.second)
+            }
+        }
+    }
+    return json.toString()
+}
+
+inline fun JSONObject.toRequestBody():RequestBody {
     return this.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
 }
 

@@ -13,15 +13,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+
 import com.frlib.basic.R;
 import com.frlib.basic.config.AppConstants;
 import com.frlib.basic.ext.ViewExtKt;
 import com.frlib.utils.StringUtil;
 import com.frlib.utils.UIUtil;
 import com.frlib.utils.ext.ResourcesExtKt;
+
 import timber.log.Timber;
 
 /**
@@ -760,8 +769,8 @@ public class TitleBar extends RelativeLayout {
     /**
      * 添加view到主view
      *
-     * @param view          需要添加的view
-     * @param params        需要添加view的布局参数
+     * @param view   需要添加的view
+     * @param params 需要添加view的布局参数
      */
     private void addViewToMain(View view, LayoutParams params) {
         if (null != view && null != params) {
@@ -796,6 +805,22 @@ public class TitleBar extends RelativeLayout {
     public void setLeftViewType(int type) {
         this.leftType = type;
         initLeftViews(getContext());
+    }
+
+    public void setLeftTextView(String text) {
+        leftType = BarType.TEXT.ordinal();
+        leftText = text;
+
+        initLeftViews(getContext());
+    }
+
+    public void setLeftTextView(String text, int textColor, int textSize) {
+        rightType = BarType.TEXT.ordinal();
+        rightText = text;
+        rightTextColor = textColor;
+        rightTextSize = textSize;
+
+        initRightViews(getContext());
     }
 
     public void setTitleText(String text) {

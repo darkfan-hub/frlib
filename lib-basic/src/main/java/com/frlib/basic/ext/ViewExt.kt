@@ -87,3 +87,15 @@ fun View.click(block: () -> Unit) {
         block()
     }
 }
+
+fun View.isFast(block: () -> Unit) {
+    val currentTag = this.id
+    val currentTimeMillis = System.currentTimeMillis()
+    if (currentTimeMillis - lastClickTime < AppConstants.double_click_time && lastClickTag == currentTag) {
+        Timber.i("%s 毫秒内发生快速点击：%d", AppConstants.double_click_time, currentTag)
+        return
+    }
+    lastClickTime = currentTimeMillis
+    lastClickTag = currentTag
+    block()
+}
