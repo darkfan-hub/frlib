@@ -180,7 +180,7 @@ inline fun FragmentActivity.multiplePictureSelector(
         .selectionMode(if (maxSize == 1) PictureConfig.SINGLE else PictureConfig.MULTIPLE)
         .isCompress(isCompress)
         .selectionData(selectionData)
-        .isEnableCrop(maxSize == 1)
+        // .isEnableCrop(maxSize == 1)
         // 裁剪质量, 默认90
         .cutOutQuality(85)
         .synOrAsy(false)
