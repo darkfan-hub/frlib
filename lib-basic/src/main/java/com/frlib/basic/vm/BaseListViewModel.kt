@@ -60,7 +60,7 @@ abstract class BaseListViewModel<T>(
     open val pageSize = 15
 
     /** 是否刷新中 */
-    private var isRefresh = false
+    open var isRefresh = false
 
     /**
      * 加载数据
@@ -105,7 +105,7 @@ abstract class BaseListViewModel<T>(
         )
     }
 
-    private suspend fun onRefresh(): List<T> {
+    open suspend fun onRefresh(): List<T> {
         isRefresh = true
         pageIndex = 1
         queryMap["pageRow"] = pageSize
@@ -140,7 +140,7 @@ abstract class BaseListViewModel<T>(
         )
     }
 
-    suspend fun onLoadMore(): List<T> {
+    open suspend fun onLoadMore(): List<T> {
         isRefresh = false
         pageIndex++
         queryMap["pageNo"] = pageIndex
