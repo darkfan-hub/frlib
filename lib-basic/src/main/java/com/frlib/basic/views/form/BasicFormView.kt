@@ -271,6 +271,10 @@ class BasicFormView : AbstractFormView() {
         return rightEditText
     }
 
+    fun rightIconView(): AppCompatImageView? {
+        return rightIcon
+    }
+
     /**
      * 添加右侧文字输入监听
      */

@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.frlib.basic.R;
 import com.frlib.utils.ext.ResourcesExtKt;
@@ -147,6 +148,17 @@ public class SuperFormView extends RelativeLayout {
         if (formView instanceof BasicFormView) {
             ((BasicFormView) formView).setRightText(text);
         }
+    }
+
+    /**
+     * 设置右侧图标
+     */
+    public AppCompatImageView formRightIconView() {
+        if (formView instanceof BasicFormView) {
+            return ((BasicFormView) formView).rightIconView();
+        }
+
+        return null;
     }
 
     /**
