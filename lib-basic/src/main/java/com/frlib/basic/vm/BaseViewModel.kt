@@ -101,7 +101,8 @@ open class BaseViewModel(
         complete: () -> Unit = {
             Timber.d("${block.hashCode()} completed! ")
         },
-        showLoading: Boolean = true
+        showLoading: Boolean = true,
+        showToast: Boolean = true,
     ) {
         if (showLoading) {
             showLoading()
@@ -123,7 +124,7 @@ open class BaseViewModel(
                         defaultPages(Pages.NET_ERROR)
                     }
 
-                    toast(error.errMsg)
+                    if (showToast) toast(error.errMsg)
                     error(error)
                 },
                 {
@@ -156,7 +157,6 @@ open class BaseViewModel(
                             successNoResult()
                         }
                     } else {
-                        defUI.toast.postValue(result.message)
                         error(
                             ResponseThrowable(
                                 ERROR.HTTP_API_ERROR.getKey(),

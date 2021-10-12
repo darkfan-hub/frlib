@@ -1,5 +1,6 @@
 package com.frlib.basic.gson
 
+import com.frlib.utils.ext.length
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
@@ -32,7 +33,11 @@ class IntegerTypeAdapter : TypeAdapter<Int>() {
                 return try {
                     result.toInt()
                 } catch (e: NumberFormatException) {
-                    BigDecimal(result).toFloat().toInt()
+                    if (result.length() == 0) {
+                        0
+                    } else {
+                        BigDecimal(result).toFloat().toInt()
+                    }
                 }
             }
             JsonToken.NULL -> {
