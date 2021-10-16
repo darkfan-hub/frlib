@@ -201,6 +201,7 @@ inline fun FragmentActivity.takePhoto(
 ) {
     PictureSelector.create(this)
         .openCamera(PictureMimeType.ofImage()) // 只显示图片
+        .imageEngine(GlideEngine.default())
         .isCompress(isCompress)
         .isEnableCrop(enableCrop)
         .cutOutQuality(85) // 裁剪质量, 默认90

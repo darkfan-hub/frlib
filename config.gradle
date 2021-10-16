@@ -170,7 +170,7 @@ ext {
             // 相关文章 https://yuanfentiank789.github.io/2017/08/30/漫谈AOP开发之初探AOP及AspectJ的用法; https://www.jianshu.com/p/f90e04bcb326
             'aspectjrt'              : 'org.aspectj:aspectjrt:1.9.5',
             // https://github.com/LuckSiege/PictureSelector 图片选择
-            'picture-selector'       : 'io.github.lucksiege:pictureselector:v2.7.3-rc03',
+            'picture-selector'       : 'io.github.lucksiege:pictureselector:v2.7.3-rc08',
             // https://github.com/venticake/CyberAgent-Android-GPUImage
             'gpuimage'               : 'jp.co.cyberagent.android:gpuimage:2.1.0',
             // https://github.com/zzhoujay/Markdown Android Markdown 已停止更新
