@@ -11,8 +11,7 @@
     <!-- 允许应用程序访问相机 -->
     <uses-permission android:name="android.permission.CAMERA"/>
 
-    <uses-feature android:name="android.hardware.Camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.Camera" android:required="true"/>
 
     <!-- 允许应用程序打开网络 -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -33,6 +32,7 @@
         android:maxSdkVersion="28"/>
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:networkSecurityConfig="@xml/network_security_config">
 
         <provider

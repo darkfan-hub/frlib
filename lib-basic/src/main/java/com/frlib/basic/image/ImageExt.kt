@@ -202,6 +202,13 @@ inline fun FragmentActivity.takePhoto(
     PictureSelector.create(this)
         .openCamera(PictureMimeType.ofImage()) // 只显示图片
         .imageEngine(GlideEngine.default())
+        .theme(R.style.picture_WeChat_style)
+        .isWeChatStyle(true)
+        .selectionMode(PictureConfig.SINGLE)
+        .maxSelectNum(1)
+        .minSelectNum(1)
+        .isCamera(true)
+        .isPreviewImage(true)
         .isCompress(isCompress)
         .isEnableCrop(enableCrop)
         .cutOutQuality(85) // 裁剪质量, 默认90
