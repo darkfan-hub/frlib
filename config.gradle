@@ -194,5 +194,12 @@ ext {
             'bga-qrcode'             : 'com.github.bingoogolapple.BGAQRCode-Android:zxing:1.3.8',
     ]
 
+    maps = [
+            // 高德定位
+            'amap-location' : 'com.amap.api:location:5.5.1',
+    ]
+
+    push = []
+
     kotlins = kotlin.values()
 }
