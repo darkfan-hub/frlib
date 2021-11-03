@@ -9,6 +9,7 @@ import com.frlib.basic.activity.AbstractActivity
 import com.frlib.basic.download.DownloadImageService
 import com.frlib.basic.ext.click
 import com.frlib.basic.image.displayRadiusImage
+import com.frlib.basic.image.takePhoto
 import com.frlib.basic.immersion.ImmersionBar
 import com.frlib.basic.vm.BaseViewModel
 import com.frlib.utils.SysUtil
@@ -37,7 +38,7 @@ class SplashActivity : AbstractActivity<FrlibActivitySplshBinding, SplashVM>() {
 
     override fun setClickListen() {
         super.setClickListen()
-        dataBinding.btTestClick.click { viewModel.downloadImage() }
+        dataBinding.btTestClick.click { self.takePhoto() }
     }
 
     override fun useDefaultPages(): Boolean = true

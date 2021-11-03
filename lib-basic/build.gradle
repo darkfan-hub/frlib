@@ -49,7 +49,8 @@ dependencies {
     // popup 弹窗
     implementation rootProject.ext.views['popup']
     // 图片选择
-    implementation rootProject.ext.libs['picture-selector']
+    // implementation rootProject.ext.libs['picture-selector']
+    api project(':picture_library')
     implementation rootProject.ext.libs['gpuimage']
     // 使用glide加载图片
     implementation rootProject.ext.libs['glide']

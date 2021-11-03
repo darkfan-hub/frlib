@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply from: '../common_build.gradle'
+
+android {
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    resourcePrefix 'ucrop_'
+}
+
+dependencies {
+    implementation rootProject.ext.androidx['concurrent-futures']
+    implementation rootProject.ext.androidx['exifinterface']
+    implementation rootProject.ext.androidx['annotation-experimental']
+    implementation rootProject.ext.androidx['transition']
+    implementation rootProject.ext.androidx['localbroadcastmanager']
+    implementation rootProject.ext.androidx['camera-view']
+    implementation rootProject.ext.androidx['camera-lifecycle']
+}

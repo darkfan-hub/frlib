@@ -19,8 +19,8 @@ open class DragAdapter<T>(
     var itemMove = false
 
     override fun onItemMove(source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder) {
-        val fromPosition = source.absoluteAdapterPosition
-        val toPosition = target.absoluteAdapterPosition
+        val fromPosition = source.adapterPosition
+        val toPosition = target.adapterPosition
 
         if (fromPosition < data.size && toPosition < data.size) {
             // 交换数据位置
@@ -32,7 +32,7 @@ open class DragAdapter<T>(
     }
 
     override fun onItemDismiss(source: RecyclerView.ViewHolder) {
-        val position = source.absoluteAdapterPosition
+        val position = source.adapterPosition
         // 移除数据
         data.removeAt(position)
         // 刷新数据移除

@@ -4,4 +4,5 @@ include ':resources'
 include ':lib-basic'
 include ':lib-picker'
 include ':lib-utils'
+include ':picture_library'
 rootProject.name = "FrLib"
