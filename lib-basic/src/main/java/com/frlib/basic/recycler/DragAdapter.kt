@@ -16,9 +16,12 @@ open class DragAdapter<T>(
 
     var onItemClearListener: OnItemClearListener? = null
 
+    var canItemMove = true
+
     var itemMove = false
 
     override fun onItemMove(source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder) {
+        if (!canItemMove) return
         val fromPosition = source.adapterPosition
         val toPosition = target.adapterPosition
 
@@ -32,6 +35,7 @@ open class DragAdapter<T>(
     }
 
     override fun onItemDismiss(source: RecyclerView.ViewHolder) {
+        if (!canItemMove) return
         val position = source.adapterPosition
         // 移除数据
         data.removeAt(position)
@@ -43,6 +47,7 @@ open class DragAdapter<T>(
     }
 
     override fun onItemClear(source: RecyclerView.ViewHolder?) {
+        if (!canItemMove) return
         if (itemMove) {
             onItemClearListener?.onItemClear(source)
         }
