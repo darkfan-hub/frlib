@@ -68,7 +68,7 @@ public abstract class AbsAgentWebSettings implements IAgentWebSettings, WebListe
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        mWebSettings.setTextZoom(80);
+        mWebSettings.setTextZoom(100);
         mWebSettings.setDatabaseEnabled(true);
         mWebSettings.setAppCacheEnabled(true);
         mWebSettings.setLoadsImagesAutomatically(true);
@@ -87,9 +87,9 @@ public abstract class AbsAgentWebSettings implements IAgentWebSettings, WebListe
         //自适应屏幕
         mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         //设置默认加载的可视范围是大视野范围
-        mWebSettings.setLoadWithOverviewMode(true);
+        // mWebSettings.setLoadWithOverviewMode(true);
         //设置可在大视野范围内上下左右拖动，并且可以任意比例缩放
-        mWebSettings.setUseWideViewPort(true);
+        // mWebSettings.setUseWideViewPort(true);
         mWebSettings.setDomStorageEnabled(true);
         mWebSettings.setNeedInitialFocus(true);
         //设置编码格式
