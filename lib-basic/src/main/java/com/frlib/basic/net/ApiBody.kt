@@ -41,7 +41,7 @@ inline fun paramToRequestBody(vararg params: Pair<String, Any>): RequestBody {
             }
         }
     }
-    return json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+    return json.toJSONString().toRequestBody("application/json; charset=utf-8".toMediaType())
 }
 
 /**
@@ -85,7 +85,7 @@ inline fun paramToJson(vararg params: Pair<String, Any>): String {
 }
 
 inline fun JSONObject.toRequestBody():RequestBody {
-    return this.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+    return this.toJSONString().toRequestBody("application/json; charset=utf-8".toMediaType())
 }
 
 /**
@@ -93,7 +93,7 @@ inline fun JSONObject.toRequestBody():RequestBody {
  */
 inline fun getRequestBody(params: Map<String, Any>): RequestBody {
     val json = JSONObject(params)
-    return json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+    return json.toJSONString().toRequestBody("application/json; charset=utf-8".toMediaType())
 }
 
 /**
